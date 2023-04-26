@@ -267,7 +267,7 @@ public static final int TIEMPO_ESPERA = 200;
         }
         System.out.println("]");
     }
-    public AnchorPane Pseudocodigo(AnchorPane Anchor, ArrayList <Caja> caja) {
+    public AnchorPane PseudocodigoInsercion(AnchorPane Anchor, ArrayList <Caja> caja) {
         ArrayList <Integer> arreglo = new ArrayList();
         
         for(int i=0;i<caja.size();i++){ 
@@ -360,7 +360,81 @@ public static final int TIEMPO_ESPERA = 200;
         Anchor.getChildren().add(root);
         return Anchor; 
     }
+    
+     public AnchorPane PseudocodigoBurbuja(AnchorPane Anchor, ArrayList <Caja> caja) {
+        ArrayList <Integer> arreglo = new ArrayList();
+        
+        for(int i=0;i<caja.size();i++){ 
+            arreglo.add(caja.get(i).peso);
+        }
+        
+        
+        Text[] etiquetasCodigo = {
+        new Text("1. Para i = 0 hasta n-1 hacer:"),
+        new Text("2.     Para j = 0 hasta n-i-1 hacer:"),
+        new Text("3.         Si A[j] > A[j+1] entonces intercambiar A[j] y A[j+1]")
+        };
+        
+        Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
+        for (Text t : etiquetasCodigo) {
+            t.setFont(font); // Establecer la fuente en cada instancia de Text
+        }
      
+        Text etiquetaArreglo = new Text(arreglo.toString());
+        
+        VBox root = new VBox(10);
+        root.getChildren().addAll(etiquetasCodigo);
+        root.getChildren().add(etiquetaArreglo);
+        
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                for (int i = 0; i < arreglo.size() - 1; i++) {
+
+            resaltarLineaCodigo(etiquetasCodigo, 0);
+            Thread.sleep(TIEMPO_ESPERA);
+            Thread.sleep(TIEMPO_ESPERA);
+
+            for (int j = 0; j < arreglo.size() - i - 1; j++) {
+                if (arreglo.get(j) > arreglo.get(j + 1)) {
+                    int temp = arreglo.get(j);
+                    arreglo.set(j, arreglo.get(j + 1));
+                    arreglo.set(j + 1, temp);
+
+                    resaltarLineaCodigo(etiquetasCodigo, 2);
+                    Thread.sleep(TIEMPO_ESPERA);
+                    Thread.sleep(TIEMPO_ESPERA);
+
+                    etiquetaArreglo.setText(arreglo.toString());
+                }
+            }
+        }
+        return null;
+    }
+            
+            
+        };
+        
+        task.setOnSucceeded(event -> {
+            resaltarLineaCodigo(etiquetasCodigo, -1);
+        });
+        
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        root.setStyle("-fx-background-color: #FFFFFF;"); 
+        root.setLayoutX(200); 
+        root.setLayoutY(210); 
+        root.setPrefSize(290,165); 
+        // Crear un borde con un ancho de 2 píxeles y un color rojo 
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
+        CornerRadii.EMPTY, BorderWidths.FULL)); 
+ 
+    // Establecer el borde en el VBox 
+    root.setBorder(border); 
+        Anchor.getChildren().add(root);
+        return Anchor; 
+    }
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -381,7 +455,8 @@ public static final int TIEMPO_ESPERA = 200;
         // apartir de aca OJO
         ArrayList <Integer> arreglo = new ArrayList();
         Almacen almacen = new Almacen(0,0);
-        
+        System.out.println("Probando la herencia");
+        System.out.println("la posicion x es: "+almacen.getPosicionx());
         int numerodecajas=this.aux;
         
         
@@ -427,7 +502,7 @@ public static final int TIEMPO_ESPERA = 200;
         
               
         Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
-        anchor=Pseudocodigo(anchor, almacen.cajas);
+        anchor=PseudocodigoBurbuja(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
         boton2.setLayoutX(60);
         boton3.setLayoutX(170);
