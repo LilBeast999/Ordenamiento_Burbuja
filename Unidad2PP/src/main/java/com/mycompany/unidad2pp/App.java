@@ -425,7 +425,7 @@ public static final int TIEMPO_ESPERA = 200;
         root.setStyle("-fx-background-color: #FFFFFF;"); 
         root.setLayoutX(200); 
         root.setLayoutY(210); 
-        root.setPrefSize(290,165); 
+        root.setPrefSize(290,120); 
         // Crear un borde con un ancho de 2 píxeles y un color rojo 
         Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
         CornerRadii.EMPTY, BorderWidths.FULL)); 
