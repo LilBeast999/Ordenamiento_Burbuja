@@ -435,6 +435,107 @@ public static final int TIEMPO_ESPERA = 200;
         Anchor.getChildren().add(root);
         return Anchor; 
     }
+     public AnchorPane PseudocodigoCocktail(AnchorPane Anchor, ArrayList <Caja> caja) {
+        ArrayList <Integer> arreglo = new ArrayList();
+        
+        for(int i=0;i<caja.size();i++){ 
+            arreglo.add(caja.get(i).peso);
+        }
+        
+        
+        Text[] etiquetasCodigo = {
+            new Text("1. Iniciar i en 0 y j en n-1"),
+            new Text("2. Mientras i < j, hacer:"),
+            new Text("3.     Para k = i hasta j-1 hacer:"),
+            new Text("4.         Si A[k] > A[k+1] entonces intercambiar A[k] y A[k+1]"),
+            new Text("5.     Decrementar j"),
+            new Text("6.     Para k = j-1 hasta i hacer:"),
+            new Text("7.         Si A[k] > A[k+1] entonces intercambiar A[k] y A[k+1]"),
+            new Text("8.     Incrementar i"),
+    };
+        
+        Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
+        for (Text t : etiquetasCodigo) {
+            t.setFont(font); // Establecer la fuente en cada instancia de Text
+        }
+     
+        Text etiquetaArreglo = new Text(arreglo.toString());
+        
+        VBox root = new VBox(10);
+        root.getChildren().addAll(etiquetasCodigo);
+        root.getChildren().add(etiquetaArreglo);
+        
+        Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            int i = 0;
+            int j = arreglo.size() - 1;
+
+            while (i < j) {
+                resaltarLineaCodigo(etiquetasCodigo, 1);
+                Thread.sleep(TIEMPO_ESPERA);
+
+                for (int k = i; k < j; k++) {
+                    if (arreglo.get(k) > arreglo.get(k + 1)) {
+                        int temp = arreglo.get(k);
+                        arreglo.set(k, arreglo.get(k + 1));
+                        arreglo.set(k + 1, temp);
+
+                        resaltarLineaCodigo(etiquetasCodigo, 3);
+                        Thread.sleep(TIEMPO_ESPERA);
+
+                        etiquetaArreglo.setText(arreglo.toString());
+                    }
+                }
+
+                resaltarLineaCodigo(etiquetasCodigo, 4);
+                Thread.sleep(TIEMPO_ESPERA);
+
+                j--;
+
+                for (int k = j - 1; k >= i; k--) {
+                    if (arreglo.get(k) > arreglo.get(k + 1)) {
+                        int temp = arreglo.get(k);
+                        arreglo.set(k, arreglo.get(k + 1));
+                        arreglo.set(k + 1, temp);
+
+                        resaltarLineaCodigo(etiquetasCodigo, 6);
+                        Thread.sleep(TIEMPO_ESPERA);
+
+                        etiquetaArreglo.setText(arreglo.toString());
+                    }
+                }
+
+                resaltarLineaCodigo(etiquetasCodigo, 7);
+                Thread.sleep(TIEMPO_ESPERA);
+
+                i++;
+            }
+
+            return null;
+        }
+    };
+
+    task.setOnSucceeded(event -> {
+        resaltarLineaCodigo(etiquetasCodigo, -1);
+    });
+        
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+        root.setStyle("-fx-background-color: #FFFFFF;"); 
+        root.setLayoutX(800); 
+        root.setLayoutY(115); 
+        root.setPrefSize(290,120); 
+        // Crear un borde con un ancho de 2 píxeles y un color rojo 
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
+        CornerRadii.EMPTY, BorderWidths.FULL)); 
+ 
+    // Establecer el borde en el VBox 
+    root.setBorder(border); 
+        Anchor.getChildren().add(root);
+        return Anchor; 
+    }
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -502,9 +603,9 @@ public static final int TIEMPO_ESPERA = 200;
         
               
         Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
-        anchor=PseudocodigoBurbuja(anchor, almacen.cajas);
+        anchor=PseudocodigoCocktail(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
-        boton2.setLayoutX(60);
+        boton2.setLayoutX(50);
         boton3.setLayoutX(170);
         anchor.getChildren().add(boton3);
         anchor.getChildren().add(boton2);
