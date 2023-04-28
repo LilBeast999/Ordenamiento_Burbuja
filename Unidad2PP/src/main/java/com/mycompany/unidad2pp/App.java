@@ -373,7 +373,8 @@ public static final int TIEMPO_ESPERA = 200;
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3){
         
         AnchorPane anchor = new AnchorPane(); 
-         
+        Ordenamientos ordenamientos = new Ordenamientos(); 
+        
         Scene scena = new Scene (anchor); 
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
@@ -427,6 +428,7 @@ public static final int TIEMPO_ESPERA = 200;
         
               
         Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
+        ordenamientos.Burbuja(arreglo);
         anchor=Pseudocodigo(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
         boton2.setLayoutX(60);
