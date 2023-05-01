@@ -19,7 +19,7 @@ public static final int TIEMPO_ESPERA = 200;
     @Override
     public void start(Stage stage) {
        AnchorPane anchor = new AnchorPane();
-       Scene scena1 = new Scene (anchor); 
+       Scene scena1 = new Scene (anchor,500,500); 
        Stage stage1 = new Stage();
        
        stage1.setScene(scena1);
@@ -27,19 +27,21 @@ public static final int TIEMPO_ESPERA = 200;
        Ordenamientos ordenamientos = new Ordenamientos();
         
        
-       Button boton = new Button("reiniciar");
-       Button retroceder = new Button("disminuye cajas");
-       Button avanzar = new Button("aumenta cajas");
+       Button boton = new Button("Reiniciar");
+       Button retroceder = new Button("Disminuye cajas");
+       Button avanzar = new Button("Aumenta cajas");
+       Button Insercion = new Button ("Algoritmo por insercion");
+       Button Menu = new Button("Menu");
        
        boton.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux);
          
         });
        
         retroceder.setOnAction(e -> {
          if (aux>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux);
          disminuir();
          }
         });
@@ -48,16 +50,34 @@ public static final int TIEMPO_ESPERA = 200;
         
             
          if (aux<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux);
          aumentar();
          }
         });
+        
+        Menu.setOnAction(e -> {
+            
+            stage.hide();
+            stage1.show();
+            
+            
+         
+        });
        
+        Insercion.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux);  
+            
+   
+        });
        
-       
-       ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+        Insercion.setLayoutX(200);
+        Insercion.setLayoutY(200);
+        anchor.getChildren().add(Insercion);
+        
       
-       anchor.getChildren().addAll(avanzar,retroceder,boton);
+        
         stage1.show();
 
         

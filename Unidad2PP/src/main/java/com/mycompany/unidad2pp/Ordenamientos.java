@@ -59,7 +59,7 @@ public class Ordenamientos {
     
     }
     
-    public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,int aux){
+    public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux){
         
         AnchorPane anchor = new AnchorPane(); 
         Ordenamientos ordenamientos = new Ordenamientos(); 
@@ -117,13 +117,25 @@ public class Ordenamientos {
         
               
         Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
-        ordenamientos.Burbuja(arreglo);
+
         anchor=Pseudocodigo(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
-        boton2.setLayoutX(60);
-        boton3.setLayoutX(170);
+        boton.setLayoutX(830);
+        boton2.setLayoutX(900);
+        boton3.setLayoutX(1010);
+        boton4.setLayoutX(1120);
+        boton.setLayoutY(20);
+        boton2.setLayoutY(20);
+        boton3.setLayoutY(20);
+        boton4.setLayoutY(20);
         anchor.getChildren().add(boton3);
         anchor.getChildren().add(boton2);
+        anchor.getChildren().add(boton4);
+        
+        boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         stage.setScene(scena);
         stage.show();
     
