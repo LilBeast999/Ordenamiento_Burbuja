@@ -5,6 +5,7 @@
 package com.mycompany.unidad2pp;
 
 import static com.mycompany.unidad2pp.App.TIEMPO_ESPERA;
+import java.util.Scanner;
 import java.util.ArrayList;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
@@ -43,9 +44,7 @@ public class Ordenamientos {
             
             }
             
-            }
-        
-        
+            }  
         
         }
     
@@ -101,23 +100,53 @@ public class Ordenamientos {
             System.out.print(arreglo.get(i)+ " ");
         }
         
+        Scanner lectura = new Scanner(System.in);
+        System.out.println("\n\nORDENAMIENTO A UTILIZAR:");
+        System.out.println("1) Insercion");
+        System.out.println("2) Burbuja\n");
+        System.out.print("Alternativa: "); int alternativa = lectura.nextInt();
         
-        AnchorPane gancho1 = new AnchorPane();
-        gancho1 = almacen.dibujargancho(anchor,210,462);
-        AnchorPane cuerda1 = new AnchorPane();
-        cuerda1 = lapiz.dibujarcuerda(210,442);
-        anchor.getChildren().add(cuerda1);
+        switch (alternativa){
+            //ORDENAMIENTO POR INSERCION
+            case 1:
+                AnchorPane gancho1 = new AnchorPane();
+                gancho1 = almacen.dibujargancho(anchor,210,462);
+                AnchorPane cuerda1 = new AnchorPane();
+                cuerda1 = lapiz.dibujarcuerda(210,442);
+                anchor.getChildren().add(cuerda1);
         
-        AnchorPane gancho2 = new AnchorPane ();
-        gancho2 = almacen.dibujargancho(anchor, 350, 442);
-        AnchorPane cuerda2 = new AnchorPane();
-        cuerda2 = lapiz.dibujarcuerda(350,422);
-        anchor.getChildren().add(cuerda2);
+                AnchorPane gancho2 = new AnchorPane ();
+                gancho2 = almacen.dibujargancho(anchor, 350, 442);
+                AnchorPane cuerda2 = new AnchorPane();
+                cuerda2 = lapiz.dibujarcuerda(350,422);
+                anchor.getChildren().add(cuerda2);
+                
+                Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
+                
+                anchor=Pseudocodigo(anchor, almacen.cajas);
+                break;
+                
+            //ORDENAMIENTO POR BURBUJA
+            case 2: 
+                AnchorPane ganchoBurbuja = new AnchorPane();
+                ganchoBurbuja = almacen.dibujargancho(anchor,210,462);
+                AnchorPane cuerdaBurbuja = new AnchorPane();
+                cuerdaBurbuja = lapiz.dibujarcuerda(210,442);
+                anchor.getChildren().add(cuerdaBurbuja);
+                
+                ordenamientos.Burbuja(arreglo);
+                break;
+                
+            default:
+                System.out.println("Opción no válida...");
+                break;
+        }
+        
+        
+        
         
         
               
-        Ordenamiento(numerodecajas,arreglo,cajasAnchor,gancho1, cuerda1, gancho2, cuerda2);
-        ordenamientos.Burbuja(arreglo);
         anchor=Pseudocodigo(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
         boton2.setLayoutX(60);

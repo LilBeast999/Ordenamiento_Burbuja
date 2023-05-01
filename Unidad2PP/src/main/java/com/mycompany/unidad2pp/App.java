@@ -68,8 +68,6 @@ public static final int TIEMPO_ESPERA = 200;
        
        ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
        
-       
-
         
     }
 
