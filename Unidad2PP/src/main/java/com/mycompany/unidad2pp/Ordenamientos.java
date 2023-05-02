@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.unidad2pp;
 
 import static com.mycompany.unidad2pp.App.TIEMPO_ESPERA;
@@ -32,30 +28,62 @@ import javafx.util.Duration;
 public class Ordenamientos {
     
     
-    
-    public void Burbuja (ArrayList<Integer> numerodecajas){
+    //public void Ordenamiento (int numerodecajas, ArrayList<Integer> arreglo, ArrayList<AnchorPane>cajasAnchor,AnchorPane gancho1, AnchorPane cuerda1, AnchorPane gancho2, AnchorPane cuerda2)
+    //ordenamientos.Burbuja(arreglo,numerodecajas,cajasAnchor,ganchoBurbuja,cuerdaBurbuja);
+    public void Burbuja (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor, AnchorPane gancho, AnchorPane cuerda){
+        
+        int velocidad = TIEMPO_ESPERA;
+        SequentialTransition movCajas = new SequentialTransition();
+        SequentialTransition movGancho = new SequentialTransition();
+        SequentialTransition movCuerda = new SequentialTransition();
+        
+        AnchorPane cajaAux = new AnchorPane();
         int aux;
-        for (int i=0; i<numerodecajas.size();i++){
-            for (int j=i;j<numerodecajas.size()-1;j++){
-            if (numerodecajas.get(j)>numerodecajas.get(j+1)){
-                aux=numerodecajas.get(j);
-                numerodecajas.set(j, numerodecajas.get(j+1));
-                numerodecajas.set(j+1, aux);
+        for (int i=0; i<arreglo.size();i++){
+            cajaAux=cajasAnchor.get(0);
             
-            }
+            for (int j=i;j<arreglo.size()-1;j++){
+                
+                if (arreglo.get(j)>arreglo.get(j+1)){
+                    
+                    TranslateTransition trasCaja1 = new TranslateTransition(Duration.millis(velocidad),cajasAnchor.get(j));
+                    trasCaja1.setByY(-50);
+                    movCajas.getChildren().add(trasCaja1);
+                    
+                    TranslateTransition trasCaja2 = new TranslateTransition(Duration.millis(velocidad),cajasAnchor.get(j));
+                    trasCaja2.setByX(1500/numerodecajas);
+                    movCajas.getChildren().add(trasCaja2);
+                    
+                    TranslateTransition trasCaja3 = new TranslateTransition(Duration.millis(velocidad), cajasAnchor.get(j+1));
+                    trasCaja3.setByX(-(1500/numerodecajas));
+                    movCajas.getChildren().add(trasCaja3);
+                    
+                    TranslateTransition trasCaja4 = new TranslateTransition(Duration.millis(velocidad), cajasAnchor.get(j));
+                    trasCaja4.setByY(50);
+                    movCajas.getChildren().add(trasCaja4);
+                    
+                    
+                    cajaAux = cajasAnchor.get(j);
+                    cajasAnchor.set(j, cajasAnchor.get(j+1));
+                    cajasAnchor.set(j+1,cajaAux);
+                    
+
+                    aux = arreglo.get(j);
+                    arreglo.set(j, arreglo.get(j+1));
+                    arreglo.set(j+1, aux);
+                }
             
             }  
         
         }
-    
-         for (int i=0; i<numerodecajas.size();i++){
-             System.out.print(numerodecajas.get(i)+" -> ");
-         
-         
-         }
-    
-    
-    
+            
+        for (int i=0; i<arreglo.size();i++){
+            System.out.print(arreglo.get(i)+" -> ");   
+        }
+        
+        movCajas.play();
+        movGancho.play();
+        movCuerda.play();
     }
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,int aux){
@@ -134,7 +162,7 @@ public class Ordenamientos {
                 cuerdaBurbuja = lapiz.dibujarcuerda(210,442);
                 anchor.getChildren().add(cuerdaBurbuja);
                 
-                ordenamientos.Burbuja(arreglo);
+                ordenamientos.Burbuja(arreglo,numerodecajas,cajasAnchor,ganchoBurbuja,cuerdaBurbuja);
                 break;
                 
             default:
