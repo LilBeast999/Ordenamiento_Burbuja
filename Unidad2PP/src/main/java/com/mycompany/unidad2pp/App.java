@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
  * JavaFX App
  */
 public class App extends Application {
-    public int aux=32;
+    public int aux=20;
    
 public static final int TIEMPO_ESPERA = 200; 
     @Override
