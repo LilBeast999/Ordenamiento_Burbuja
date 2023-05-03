@@ -81,7 +81,7 @@ public class Ordenamientos {
                 break;
                 
             case 2:
-                Burbuja(arreglo, opcion, cajasAnchor, anchor);
+                Burbuja(arreglo, aux, cajasAnchor, anchor);
                 break;
             default:
                 throw new AssertionError();
