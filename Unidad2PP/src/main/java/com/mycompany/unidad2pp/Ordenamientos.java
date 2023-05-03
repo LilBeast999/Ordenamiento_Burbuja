@@ -34,7 +34,7 @@ public class Ordenamientos {
         
         AnchorPane anchor = new AnchorPane(); 
         Ordenamientos ordenamientos = new Ordenamientos(); 
-        
+        System.out.println("o");
         Scene scena = new Scene (anchor); 
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
@@ -78,17 +78,20 @@ public class Ordenamientos {
         switch (opcion) {
             case 1:
                 Insercion(numerodecajas,arreglo,cajasAnchor,anchor);
+                
+                anchor=PseudocodigoInsercion(anchor, almacen.cajas);
                 break;
                 
             case 2:
                 Burbuja(arreglo, aux, cajasAnchor, anchor);
+                anchor=PseudocodigoBurbuja(anchor, almacen.cajas);
                 break;
             default:
                 throw new AssertionError();
         }
        
         
-        anchor=Pseudocodigo(anchor, almacen.cajas);
+        
         anchor.getChildren().add(boton);
         boton.setLayoutX(830);
         boton2.setLayoutX(900);
