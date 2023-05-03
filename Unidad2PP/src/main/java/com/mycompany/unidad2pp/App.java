@@ -3,54 +3,47 @@ package com.mycompany.unidad2pp;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.shape.*;
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
-import javafx.animation.SequentialTransition;
 import static javafx.application.Application.launch;
-import javafx.concurrent.Task;
-import javafx.scene.layout.VBox;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.text.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
     public int aux=20;
+    public int opcion;
    
 public static final int TIEMPO_ESPERA = 200; 
     @Override
     public void start(Stage stage) {
+       AnchorPane anchor = new AnchorPane();
+       Scene scena1 = new Scene (anchor,600,500); 
+       Stage stage1 = new Stage();
        
-        Ordenamientos ordenamientos = new Ordenamientos();
+       stage1.setScene(scena1);
+       
+       Ordenamientos ordenamientos = new Ordenamientos();
         
        
-       Button boton = new Button("reiniciar");
-       Button retroceder = new Button("disminuye cajas");
-       Button avanzar = new Button("aumenta cajas");
+       Button boton = new Button("Reiniciar");
+       Button retroceder = new Button("Disminuye cajas");
+       Button avanzar = new Button("Aumenta cajas");
+       Button Insercion = new Button ("Ordenamiento por insercion");
+       Button Menu = new Button("Menu");
+       Button Burbuja = new Button("Ordenamiento Burbuja");
        
        boton.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
          
         });
        
         retroceder.setOnAction(e -> {
          if (aux>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
          disminuir();
          }
         });
@@ -59,15 +52,49 @@ public static final int TIEMPO_ESPERA = 200;
         
             
          if (aux<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
          aumentar();
          }
         });
+        
+        Menu.setOnAction(e -> {
+            
+            stage.hide();
+            stage1.show();
+            
+            
+         
+        });
        
+        Insercion.setOnAction(e -> {
+           
+            stage1.hide();
+            insercion();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            
+   
+        });
+        
+        Burbuja.setOnAction(e -> {
+           
+            stage1.hide();
+            burbuja();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            
+   
+        });
        
-       
-       ordenamientos.miCodigo(stage,boton,retroceder,avanzar,this.aux);
-       
+        Insercion.setLayoutX(100);
+        Insercion.setLayoutY(200);
+        Burbuja.setLayoutX(300);
+        Burbuja.setLayoutY(200);
+        anchor.getChildren().add(Insercion);
+        anchor.getChildren().add(Burbuja);
+        
+      
+        
+        stage1.show();
+
         
     }
 
@@ -84,12 +111,25 @@ public static final int TIEMPO_ESPERA = 200;
         this.aux++;
     }
     
-
-public static void main(String[] args) {
-    launch(args);
-}
-    
+    public void insercion(){
+        this.opcion=1;
+                
     
     
     }
+    
+    public void burbuja(){
+        this.opcion=2;
+    }
+    
+    
+  
+    
+
+    public static void main(String[] args) {
+       launch(args);
+     }
+    
+    
+}
     
