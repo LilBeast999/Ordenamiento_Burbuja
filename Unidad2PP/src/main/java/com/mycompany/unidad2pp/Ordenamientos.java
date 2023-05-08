@@ -348,9 +348,9 @@ public class Ordenamientos {
         
         AnchorPane cajaAux = new AnchorPane();
         int aux;
-        for (int i=0; i<arreglo.size();i++){
+        for (int i=0; i<arreglo.size()-i;i++){
             
-            for (int j=i;j<arreglo.size()-1;j++){
+            for (int j=0;j<arreglo.size()-1;j++){
                 
                 if (arreglo.get(j)>arreglo.get(j+1)){
                     

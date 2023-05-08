@@ -19,7 +19,6 @@ public class App extends Application {
        AnchorPane anchor = new AnchorPane();
        Scene scena1 = new Scene (anchor,600,500); 
        Stage stage1 = new Stage();
-       
        stage1.setScene(scena1);
        
        Ordenamientos ordenamientos = new Ordenamientos();
@@ -31,8 +30,7 @@ public class App extends Application {
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
-    
-       
+ 
        
        boton.setOnAction(e -> {
         
@@ -89,20 +87,12 @@ public class App extends Application {
         Burbuja.setLayoutY(200);
         anchor.getChildren().add(Insercion);
         anchor.getChildren().add(Burbuja);
-        
-      
-        
         stage1.show();
 
         
     }
 
  
-    
-    
-    
-  
-    
 
     public static void main(String[] args) {
        launch(args);
