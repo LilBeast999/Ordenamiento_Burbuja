@@ -13,10 +13,7 @@ import javafx.scene.layout.AnchorPane;
  * JavaFX App
  */
 public class App extends Application {
-    public int aux=20;
-    public int opcion;
    
-public static final int TIEMPO_ESPERA = 200; 
     @Override
     public void start(Stage stage) {
        AnchorPane anchor = new AnchorPane();
@@ -34,26 +31,28 @@ public static final int TIEMPO_ESPERA = 200;
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
+    
+       
        
        boton.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          
         });
        
         retroceder.setOnAction(e -> {
-         if (aux>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         disminuir();
+         if (ordenamientos.getAux()>17){  
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.disminuir();
          }
         });
         
         avanzar.setOnAction(e -> {
         
             
-         if (aux<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         aumentar();
+         if (ordenamientos.getAux()<=63){   
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.aumentar();
          }
         });
         
@@ -69,8 +68,8 @@ public static final int TIEMPO_ESPERA = 200;
         Insercion.setOnAction(e -> {
            
             stage1.hide();
-            insercion();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.insercion();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -78,8 +77,8 @@ public static final int TIEMPO_ESPERA = 200;
         Burbuja.setOnAction(e -> {
            
             stage1.hide();
-            burbuja();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.burbuja();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -100,27 +99,6 @@ public static final int TIEMPO_ESPERA = 200;
 
  
     
-    public void disminuir(){
-        this.aux--;
-                
-    
-    
-    }
-    
-    public void aumentar(){
-        this.aux++;
-    }
-    
-    public void insercion(){
-        this.opcion=1;
-                
-    
-    
-    }
-    
-    public void burbuja(){
-        this.opcion=2;
-    }
     
     
   

@@ -1,6 +1,6 @@
 package com.mycompany.unidad2pp;
 
-import static com.mycompany.unidad2pp.App.TIEMPO_ESPERA;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import javafx.animation.SequentialTransition;
@@ -27,8 +27,9 @@ import javafx.util.Duration;
  * @author gusta
  */
 public class Ordenamientos {
-    
-   
+     public int aux=20;
+     public int opcion;
+     public static final int TIEMPO_ESPERA = 200; 
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
         
@@ -802,5 +803,44 @@ public class Ordenamientos {
             System.out.print(arreglo.get(i)+" "); 
         }
         System.out.println("]");
+    }
+
+    public int getAux() {
+        return aux;
+    }
+
+    public void setAux(int aux) {
+        this.aux = aux;
+    }
+
+    public int getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(int opcion) {
+        this.opcion = opcion;
+    }
+    
+    
+    public void disminuir(){
+        this.aux--;
+                
+    
+    
+    }
+    
+    public void aumentar(){
+        this.aux++;
+    }
+    
+    public void insercion(){
+        this.opcion=1;
+                
+    
+    
+    }
+    
+    public void burbuja(){
+        this.opcion=2;
     }
 }
