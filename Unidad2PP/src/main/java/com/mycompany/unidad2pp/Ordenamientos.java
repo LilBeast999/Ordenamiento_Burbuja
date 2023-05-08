@@ -3,6 +3,7 @@ package com.mycompany.unidad2pp;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
@@ -29,10 +30,11 @@ import javafx.util.Duration;
 public class Ordenamientos {
      public int aux=20;
      public int opcion;
-     public static final int TIEMPO_ESPERA = 200; 
+     public int TIEMPO_ESPERA = 200; 
+     public double rate=0.7;
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
-        
+        this.rate=0.7;
         AnchorPane anchor = new AnchorPane(); 
         Ordenamientos ordenamientos = new Ordenamientos(); 
         System.out.println("o");
@@ -90,6 +92,8 @@ public class Ordenamientos {
             default:
                 throw new AssertionError();
         }
+        
+        
        
         
         
@@ -316,11 +320,48 @@ public class Ordenamientos {
             System.out.print("--->  ");
             imprimeArreglo(arreglo);
             
+            
+            
             movCajas.play();
             movCuerda1.play();
             movGancho1.play();
             movCuerda2.play();
             movGancho2.play();
+            
+            Button masvelocidad = new Button ("+ velocidad");
+            Button menosvelocidad = new Button ("- velocidad");
+      
+            masvelocidad.setOnAction(e -> {
+             aumentarRate();
+             movCajas.setRate(this.rate);
+             movCuerda1.setRate(this.rate);
+             movGancho1.setRate(this.rate);
+             movCuerda2.setRate(this.rate);
+             movGancho2.setRate(this.rate);
+             
+         
+            });
+            
+            menosvelocidad.setOnAction(e -> {
+             disminuirRate();
+             movCajas.setRate(this.rate);
+             movCuerda1.setRate(this.rate);
+             movGancho1.setRate(this.rate);
+             movCuerda2.setRate(this.rate);
+             movGancho2.setRate(this.rate);
+             
+             
+         
+            });
+            
+            anchor.getChildren().add(masvelocidad);
+            menosvelocidad.setLayoutX(1180);
+            masvelocidad.setLayoutX(1270);
+            
+            masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+            menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+            anchor.getChildren().add(menosvelocidad);
+            
         }
     
     public void Burbuja (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
@@ -843,4 +884,20 @@ public class Ordenamientos {
     public void burbuja(){
         this.opcion=2;
     }
+    
+    public void aumentarRate(){
+        if ((int)(this.TIEMPO_ESPERA*0.75)!=0){
+        this.rate=rate*1.25;
+        this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*0.75);
+       }
+    }
+    
+    public void disminuirRate(){
+        if ((int)(this.TIEMPO_ESPERA*1.25)!=0){
+        this.rate=rate*0.75;
+        this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*1.25);
+        }
+    }
+    
+    
 }
