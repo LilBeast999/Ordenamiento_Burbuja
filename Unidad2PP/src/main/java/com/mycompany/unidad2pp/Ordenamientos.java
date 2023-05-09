@@ -514,38 +514,39 @@ public class Ordenamientos {
         movCuerda.play();
     }
     public void Cocktail (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
-        boolean swapped = true;
-    int start = 0;
-    int end = arreglo.size() - 1;
+        System.out.println("Arreglo sin ordenar: " + arreglo);
+        boolean intercambio = true;
+    int inicio = 0;
+    int fin = arreglo.size() - 1;
 
-    while (swapped) {
-        swapped = false;
+    while (intercambio) {
+        intercambio = false;
 
         // Mover elementos grandes al final
-        for (int i = start; i < end; i++) {
+        for (int i = inicio; i < fin; i++) {
             if (arreglo.get(i) > arreglo.get(i + 1)) {
                 int temp = arreglo.get(i);
                 arreglo.set(i, arreglo.get(i + 1));
                 arreglo.set(i + 1, temp);
-                swapped = true;
+                intercambio = true;
             }
         }
-        end--;
+        fin--;
 
         // Mover elementos pequeños al inicio
-        for (int i = end; i > start; i--) {
+        for (int i = fin; i > inicio; i--) {
             if (arreglo.get(i) < arreglo.get(i - 1)) {
                 int temp = arreglo.get(i);
                 arreglo.set(i, arreglo.get(i - 1));
                 arreglo.set(i - 1, temp);
-                swapped = true;
+                intercambio = true;
             }
         }
-        start++;
+        inicio++;
     }
+     System.out.println("Arreglo ordenado: " + arreglo);  //Para testear si esta bien implementado
     }
         
-    }
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
