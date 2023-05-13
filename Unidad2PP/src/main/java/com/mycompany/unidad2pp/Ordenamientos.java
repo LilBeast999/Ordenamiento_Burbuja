@@ -274,7 +274,7 @@ public class Ordenamientos {
         }
         
         
-        
+        Cocktail(arreglo, numerodecajas, cajasAnchor, anchor);
         
         switch (opcion) {
             case 1:
@@ -292,6 +292,7 @@ public class Ordenamientos {
             default:
                 throw new AssertionError();
         }
+        
        
         
         
@@ -530,9 +531,11 @@ public class Ordenamientos {
         boolean intercambio = true;
     int inicio = 0;
     int fin = arreglo.size() - 1;
+    imprimeArreglo(arreglo);
 
     while (intercambio) {
         intercambio = false;
+        System.out.println("MUEVE EL MAYOR AL FINAL:");
 
         // Mover elementos grandes al final
         for (int i = inicio; i < fin; i++) {
@@ -544,6 +547,10 @@ public class Ordenamientos {
             }
         }
         fin--;
+        imprimeArreglo(arreglo);
+        System.out.println("");
+        
+        System.out.println("MUEVE EL MENOR AL INICIO:");
 
         // Mover elementos pequeños al inicio
         for (int i = fin; i > inicio; i--) {
@@ -555,8 +562,13 @@ public class Ordenamientos {
             }
         }
         inicio++;
+        imprimeArreglo(arreglo);
+        System.out.println("");
+        
+        
     }
-     System.out.println("Arreglo ordenado: " + arreglo);  //Para testear si esta bien implementado
+        System.out.println("ARREGLO ORDENADO:");
+        imprimeArreglo(arreglo);
     }
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
