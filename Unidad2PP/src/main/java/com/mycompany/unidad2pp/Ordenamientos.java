@@ -525,6 +525,39 @@ public class Ordenamientos {
             movGancho2.play();
         }
         
+    public void Cocktail (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
+        System.out.println("Arreglo sin ordenar: " + arreglo);
+        boolean intercambio = true;
+    int inicio = 0;
+    int fin = arreglo.size() - 1;
+
+    while (intercambio) {
+        intercambio = false;
+
+        // Mover elementos grandes al final
+        for (int i = inicio; i < fin; i++) {
+            if (arreglo.get(i) > arreglo.get(i + 1)) {
+                int temp = arreglo.get(i);
+                arreglo.set(i, arreglo.get(i + 1));
+                arreglo.set(i + 1, temp);
+                intercambio = true;
+            }
+        }
+        fin--;
+
+        // Mover elementos pequeños al inicio
+        for (int i = fin; i > inicio; i--) {
+            if (arreglo.get(i) < arreglo.get(i - 1)) {
+                int temp = arreglo.get(i);
+                arreglo.set(i, arreglo.get(i - 1));
+                arreglo.set(i - 1, temp);
+                intercambio = true;
+            }
+        }
+        inicio++;
+    }
+     System.out.println("Arreglo ordenado: " + arreglo);  //Para testear si esta bien implementado
+    }
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -791,7 +824,7 @@ public class Ordenamientos {
         thread.start();
         root.setStyle("-fx-background-color: #FFFFFF;"); 
         root.setLayoutX(200); 
-        root.setLayoutY(210); 
+        root.setLayoutY(115); 
         root.setPrefSize(290,120); 
         // Crear un borde con un ancho de 2 píxeles y un color rojo 
         Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
