@@ -586,7 +586,7 @@ public class Ordenamientos {
         repisa1.setStroke(Color.BLACK);
         anchor.getChildren().add(repisa1);
         
-        int velocidad = 500;
+        int velocidad = 200;
         SequentialTransition movCajas = new SequentialTransition();
         SequentialTransition movGancho = new SequentialTransition();
         SequentialTransition movCuerda = new SequentialTransition();
@@ -604,7 +604,7 @@ public class Ordenamientos {
         
         boolean intercambio = true;
         int inicio = 0;
-        int fin = arreglo.size()-1 ;
+        int fin = arreglo.size() - 1;
         imprimeArreglo(arreglo);
 
         while (intercambio) {
@@ -614,10 +614,9 @@ public class Ordenamientos {
             // Mover elementos grandes al final
             for (int i = inicio; i < fin; i++) {
                 
-            System.out.println("valor de i: "+i);
-                if (arreglo.get(i) > arreglo.get(i + 1)) {
-                    System.out.println("baja el gancho: ");                   
                 
+                if (arreglo.get(i) > arreglo.get(i + 1)) {
+                    
                     //Gancho y cuerda van a la caja pivote(NADA MAS SE MUEVE)
                     TranslateTransition trasCuerda1 = new TranslateTransition(Duration.millis(velocidad),cuerda);
                     trasCuerda1.setToX(coordenadasX.get(i) - 200 );
@@ -628,7 +627,8 @@ public class Ordenamientos {
                     
                     TranslateTransition trasVacioCaja1 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja1);
-                                        
+                    
+                    
                     
                     //Baja gancho(NADA MAS SE MUEVE)
                     TranslateTransition trasGancho2 = new TranslateTransition(Duration.millis(velocidad),gancho);
@@ -756,7 +756,15 @@ public class Ordenamientos {
                     movCuerda.getChildren().add(trasVacioCuerda6);
                     TranslateTransition trasVacioCaja7 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja7);
-  
+                    
+                    
+                                        
+                    cajaAux = cajasAnchor.get(i);
+                    cajasAnchor.set(i, cajasAnchor.get(i+1));
+                    cajasAnchor.set(i+1,cajaAux);
+                    
+                    
+                    
                     //Gancho y cuerda van a la caja pivote(Caja no se mueve)          
                     //Baja el gancho(Cuerda y caja no se mueven)                
                     //Sube gancho y caja (Cuerda no se mueve)                
@@ -774,7 +782,6 @@ public class Ordenamientos {
                    arreglo.set(i, arreglo.get(i + 1));
                    arreglo.set(i + 1, temp);
                    intercambio = true;
-                   
               }
            }
            fin--;
