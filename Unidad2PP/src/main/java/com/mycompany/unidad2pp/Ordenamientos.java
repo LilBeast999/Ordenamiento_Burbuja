@@ -8,6 +8,8 @@ import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -88,7 +90,7 @@ public class Ordenamientos {
         }
        
         
-        anchor=Pseudocodigo(anchor, almacen.cajas);
+        anchor=PseudocodigoInsercion(anchor, almacen.cajas);
         anchor.getChildren().add(boton);
         boton.setLayoutX(830);
         boton2.setLayoutX(900);
@@ -635,20 +637,28 @@ public class Ordenamientos {
         });
         
         Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
-        root.setStyle("-fx-background-color: #FFFFFF;"); 
-        root.setLayoutX(200); 
-        root.setLayoutY(210); 
-        root.setPrefSize(290,165); 
-        // Crear un borde con un ancho de 2 píxeles y un color rojo 
-        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
-        CornerRadii.EMPTY, BorderWidths.FULL)); 
- 
-    // Establecer el borde en el VBox 
-    root.setBorder(border); 
-        Anchor.getChildren().add(root);
-        return Anchor; 
+thread.setDaemon(true);
+thread.start();
+root.setStyle("-fx-background-color: #FFFFFF;"); 
+root.setLayoutX(200); 
+root.setLayoutY(210); 
+root.setPrefSize(290,165); 
+// Crear un borde con un ancho de 2 píxeles y un color rojo 
+Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,  
+CornerRadii.EMPTY, BorderWidths.FULL)); 
+
+// Establecer el borde en el VBox 
+root.setBorder(border); 
+
+// Crear un objeto ImageView con la imagen deseada
+ImageView imageView = new ImageView(new Image("C:\\Users\\Usuario\\Downloads\\fondo-plateado.jpg")); 
+
+
+// Agregar el objeto ImageView como un nodo hijo del VBox
+root.getChildren().add(imageView);
+
+Anchor.getChildren().add(root);
+return Anchor;
     }
     
      public AnchorPane PseudocodigoBurbuja(AnchorPane Anchor, ArrayList <Caja> caja) {
