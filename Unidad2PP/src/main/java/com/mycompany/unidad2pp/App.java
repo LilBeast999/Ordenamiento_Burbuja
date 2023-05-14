@@ -30,6 +30,7 @@ public class App extends Application {
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
+       Button Cocktail = new Button("Ordenamiento Cocktail");
  
        
        boton.setOnAction(e -> {
@@ -80,13 +81,25 @@ public class App extends Application {
             
    
         });
+        
+        Cocktail.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.cocktail();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
        
         Insercion.setLayoutX(100);
-        Insercion.setLayoutY(200);
-        Burbuja.setLayoutX(300);
-        Burbuja.setLayoutY(200);
+        Insercion.setLayoutY(230);
+        Burbuja.setLayoutX(100);
+        Burbuja.setLayoutY(260);
+        Cocktail.setLayoutX(100);
+        Cocktail.setLayoutY(290);
         anchor.getChildren().add(Insercion);
         anchor.getChildren().add(Burbuja);
+        anchor.getChildren().add(Cocktail);
         stage1.show();
 
         
