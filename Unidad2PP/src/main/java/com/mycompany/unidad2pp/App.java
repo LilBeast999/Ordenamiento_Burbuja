@@ -13,16 +13,12 @@ import javafx.scene.layout.AnchorPane;
  * JavaFX App
  */
 public class App extends Application {
-    public int aux=20;
-    public int opcion;
    
-public static final int TIEMPO_ESPERA = 200; 
     @Override
     public void start(Stage stage) {
        AnchorPane anchor = new AnchorPane();
        Scene scena1 = new Scene (anchor,600,500); 
        Stage stage1 = new Stage();
-       
        stage1.setScene(scena1);
        
        Ordenamientos ordenamientos = new Ordenamientos();
@@ -34,26 +30,28 @@ public static final int TIEMPO_ESPERA = 200;
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
+       Button Cocktail = new Button("Ordenamiento Cocktail");
+ 
        
        boton.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          
         });
        
         retroceder.setOnAction(e -> {
-         if (aux>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         disminuir();
+         if (ordenamientos.getAux()>17){  
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.disminuir();
          }
         });
         
         avanzar.setOnAction(e -> {
         
             
-         if (aux<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         aumentar();
+         if (ordenamientos.getAux()<=63){   
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.aumentar();
          }
         });
         
@@ -69,8 +67,8 @@ public static final int TIEMPO_ESPERA = 200;
         Insercion.setOnAction(e -> {
            
             stage1.hide();
-            insercion();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.insercion();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -78,53 +76,36 @@ public static final int TIEMPO_ESPERA = 200;
         Burbuja.setOnAction(e -> {
            
             stage1.hide();
-            burbuja();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.burbuja();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
+        
+        Cocktail.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.cocktail();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
        
         Insercion.setLayoutX(100);
-        Insercion.setLayoutY(200);
-        Burbuja.setLayoutX(300);
-        Burbuja.setLayoutY(200);
+        Insercion.setLayoutY(230);
+        Burbuja.setLayoutX(100);
+        Burbuja.setLayoutY(260);
+        Cocktail.setLayoutX(100);
+        Cocktail.setLayoutY(290);
         anchor.getChildren().add(Insercion);
         anchor.getChildren().add(Burbuja);
-        
-      
-        
+        anchor.getChildren().add(Cocktail);
         stage1.show();
 
         
     }
 
  
-    
-    public void disminuir(){
-        this.aux--;
-                
-    
-    
-    }
-    
-    public void aumentar(){
-        this.aux++;
-    }
-    
-    public void insercion(){
-        this.opcion=1;
-                
-    
-    
-    }
-    
-    public void burbuja(){
-        this.opcion=2;
-    }
-    
-    
-  
-    
 
     public static void main(String[] args) {
        launch(args);
