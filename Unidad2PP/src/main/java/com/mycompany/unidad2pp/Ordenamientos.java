@@ -933,7 +933,7 @@ public class Ordenamientos {
                     movCajas.getChildren().add(trasVacioCaja7);
                     
                     
-                                        
+                    //guarda coordenadas de la caja movida                    
                     cajaAux = cajasAnchor.get(i);
                     cajasAnchor.set(i, cajasAnchor.get(i-1));
                     cajasAnchor.set(i-1,cajaAux);    

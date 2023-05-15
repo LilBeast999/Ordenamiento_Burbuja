@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import static javafx.application.Application.launch;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  * JavaFX App
@@ -16,13 +18,15 @@ public class App extends Application {
    
     @Override
     public void start(Stage stage) {
+
        AnchorPane anchor = new AnchorPane();
-       Scene scena1 = new Scene (anchor,600,500); 
+       anchor.setPrefSize(400, 250);
+       Scene scena1 = new Scene (anchor); 
        Stage stage1 = new Stage();
        stage1.setScene(scena1);
-       
+       stage1.setTitle("Algoritmos de ordenamiento");
        Ordenamientos ordenamientos = new Ordenamientos();
-        
+       Text titulo= new Text("¡Bienvenido!");
        
        Button boton = new Button("Reiniciar");
        Button retroceder = new Button("Disminuye cajas");
@@ -31,7 +35,7 @@ public class App extends Application {
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
        Button Cocktail = new Button("Ordenamiento Cocktail");
- 
+   
        
        boton.setOnAction(e -> {
         
@@ -90,17 +94,30 @@ public class App extends Application {
             
    
         });
+        stage1.show();
        
-        Insercion.setLayoutX(100);
-        Insercion.setLayoutY(230);
-        Burbuja.setLayoutX(100);
-        Burbuja.setLayoutY(260);
-        Cocktail.setLayoutX(100);
-        Cocktail.setLayoutY(290);
+        Insercion.setPrefSize(200, 40);
+        Burbuja.setPrefSize(200, 40);
+        Cocktail.setPrefSize(200, 40);
+
         anchor.getChildren().add(Insercion);
         anchor.getChildren().add(Burbuja);
         anchor.getChildren().add(Cocktail);
-        stage1.show();
+        anchor.getChildren().add(titulo);
+        titulo.setLayoutX(165);
+        titulo.setLayoutY(30);
+        titulo.setScaleX(3);
+        titulo.setScaleY(3);
+        Insercion.setLayoutX((anchor.getWidth()-Insercion.getPrefWidth())/2);
+        Insercion.setLayoutY(65);
+        Insercion.setFont(Font.font("Times New Roman",15));
+        Burbuja.setLayoutX((anchor.getWidth()-Burbuja.getPrefWidth())/2);
+        Burbuja.setLayoutY(115);
+        Burbuja.setFont(Font.font("Times New Roman",15));
+        Cocktail.setLayoutX((anchor.getWidth()-Cocktail.getPrefWidth())/2);
+        Cocktail.setLayoutY(165);
+        Cocktail.setFont(Font.font("Times New Roman",15));
+
 
         
     }
