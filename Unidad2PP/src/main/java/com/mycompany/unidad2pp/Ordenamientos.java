@@ -88,7 +88,8 @@ public class Ordenamientos {
             case 1:
                 Insercion(numerodecajas,arreglo,cajasAnchor,anchor);
                 
-                anchor=PseudocodigoInsercion(anchor, almacen.cajas);
+                
+                
                 break;
                 
             //ORDENAMIENTO POR BURBUJA
@@ -140,7 +141,14 @@ public class Ordenamientos {
     }
     
     public void Insercion (int numerodecajas, ArrayList<Integer> arreglo, ArrayList<AnchorPane>cajasAnchor,AnchorPane anchor){
+            
+            Rectangle pintalinea = new Rectangle(0,0,200,20);
+            pintalinea.setFill(Color.ORANGE);
+            anchor=PseudocodigoInsercion(anchor, arreglo,pintalinea);
+        
             imprimeArreglo(arreglo);
+            
+            
             int velocidad = TIEMPO_ESPERA ;
             boolean bajoGancho2;
             SequentialTransition movCajas = new SequentialTransition();
@@ -975,6 +983,7 @@ public class Ordenamientos {
         System.out.println("ARREGLO ORDENADO:");
         imprimeArreglo(arreglo);
     }
+    
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -985,11 +994,13 @@ public class Ordenamientos {
         }
     }
     
-    public AnchorPane PseudocodigoInsercion(AnchorPane Anchor, ArrayList <Caja> caja) {
+    public AnchorPane PseudocodigoInsercion(AnchorPane Anchor, ArrayList <Integer> caja, Rectangle rectangulo) {
         ArrayList <Integer> arreglo = new ArrayList();
         
+        
+        
         for(int i=0;i<caja.size();i++){ 
-            arreglo.add(caja.get(i).peso);
+            arreglo.add(caja.get(i));
         }
         
         
@@ -1001,14 +1012,24 @@ public class Ordenamientos {
                 new Text("5.         j = j - 1")
         };
         
+        for (int i = 1; i <= 5; i++) {
+            etiquetasCodigo[i-1].setLayoutY(i*25);
+        }
+        
         Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
         for (Text t : etiquetasCodigo) {
             t.setFont(font); // Establecer la fuente en cada instancia de Text
         }
-     
+        
         Text etiquetaArreglo = new Text(arreglo.toString());
         
-        VBox root = new VBox(10);
+        etiquetaArreglo.setLayoutY(155);
+        
+        AnchorPane root = new AnchorPane();
+        
+        
+        
+        root.getChildren().add(rectangulo);
         root.getChildren().addAll(etiquetasCodigo);
         root.getChildren().add(etiquetaArreglo);
         
@@ -1038,11 +1059,7 @@ public class Ordenamientos {
                         
                         resaltarLineaCodigo(etiquetasCodigo, 3);
                         Thread.sleep(TIEMPO_ESPERA);
-                        
-                        
-                        
-                        
-                        
+    
                     }
                     resaltarLineaCodigo(etiquetasCodigo, 4);
                     Thread.sleep(TIEMPO_ESPERA);
@@ -1078,6 +1095,7 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
+    
     public AnchorPane PseudocodigoBurbuja(AnchorPane Anchor, ArrayList <Caja> caja) {
         ArrayList <Integer> arreglo = new ArrayList();
         
