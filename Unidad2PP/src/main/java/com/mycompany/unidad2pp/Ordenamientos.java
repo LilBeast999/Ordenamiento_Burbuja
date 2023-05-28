@@ -137,7 +137,7 @@ public class Ordenamientos {
     public void Insercion (int numerodecajas, ArrayList<Integer> arreglo, ArrayList<AnchorPane>cajasAnchor,AnchorPane anchor){
             
             Rectangle pintalinea = new Rectangle(0,0,250,20);
-            pintalinea.setFill(Color.ORANGE);
+            pintalinea.setFill(Color.WHITE);
             anchor=PseudocodigoInsercion(anchor, arreglo,pintalinea);
             
             ArrayList<Integer> alturasLineas = new ArrayList();
@@ -408,8 +408,8 @@ public class Ordenamientos {
         cuerda = lapiz.dibujarcuerda(210,442);
         anchor.getChildren().add(cuerda);
         
-        Rectangle pintalinea = new Rectangle(0,0,380,20);
-        pintalinea.setFill(Color.ORANGE);
+        Rectangle pintalinea = new Rectangle();
+        pintalinea.setFill(Color.WHITE);
         anchor=PseudocodigoBurbuja(anchor, arreglo,pintalinea);
             
         ArrayList<Integer> alturasLineas = new ArrayList();
