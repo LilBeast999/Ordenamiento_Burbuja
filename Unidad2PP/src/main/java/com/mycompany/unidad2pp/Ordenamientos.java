@@ -384,6 +384,8 @@ public class Ordenamientos {
             anchor.getChildren().add(masvelocidad);
             menosvelocidad.setLayoutX(1180);
             masvelocidad.setLayoutX(1270);
+            menosvelocidad.setLayoutY(20);
+            masvelocidad.setLayoutY(20);
             
             masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
             menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
@@ -668,6 +670,32 @@ public class Ordenamientos {
         for (int i=0; i<arreglo.size();i++){
             System.out.print(arreglo.get(i)+" -> ");   
         }
+        
+        
+        Button masvelocidad = new Button ("+ velocidad");
+        Button menosvelocidad = new Button ("- velocidad");
+        masvelocidad.setOnAction(e -> {
+            aumentarRate();
+            movPintalineas.setRate(this.rate);
+            movCajas.setRate(this.rate);
+            movCuerda.setRate(this.rate);
+            movGancho.setRate(this.rate);
+        });
+        menosvelocidad.setOnAction(e -> {
+            disminuirRate();
+            movPintalineas.setRate(this.rate);
+            movCajas.setRate(this.rate);
+            movCuerda.setRate(this.rate);
+            movGancho.setRate(this.rate);
+        });
+        anchor.getChildren().add(masvelocidad);
+        menosvelocidad.setLayoutX(1180);
+        masvelocidad.setLayoutX(1270);
+        menosvelocidad.setLayoutY(20);
+        masvelocidad.setLayoutY(20);
+        masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        anchor.getChildren().add(menosvelocidad);
 
         movPintalineas.play();
         movCajas.play();
@@ -1206,6 +1234,8 @@ public class Ordenamientos {
         anchor.getChildren().add(masvelocidad);
         menosvelocidad.setLayoutX(1180);
         masvelocidad.setLayoutX(1270);
+        menosvelocidad.setLayoutY(20);
+        masvelocidad.setLayoutY(20);
         masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         anchor.getChildren().add(menosvelocidad);
@@ -1377,7 +1407,7 @@ public class Ordenamientos {
                     Thread.sleep(TIEMPO_ESPERA*7);
 
 
-                    etiquetaArreglo.setText(arreglo.toString());
+                   
                 }
             }
         }
@@ -1461,7 +1491,7 @@ public class Ordenamientos {
 
                         Thread.sleep(TIEMPO_ESPERA);
 
-                        etiquetaArreglo.setText(arreglo.toString());
+                        
                     }
                 }
 
@@ -1477,7 +1507,7 @@ public class Ordenamientos {
 
                         Thread.sleep(TIEMPO_ESPERA);
 
-                        etiquetaArreglo.setText(arreglo.toString());
+                       
                     }
                 }
 
@@ -1559,14 +1589,14 @@ public class Ordenamientos {
     }
     
     public void aumentarRate(){
-        if ((int)(this.TIEMPO_ESPERA*0.75)!=0){
+        
         this.rate=rate*1.25;
         this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*0.75);
-       }
+
     }
     
     public void disminuirRate(){
-        if ((int)(this.TIEMPO_ESPERA*1.25)!=0){
+        if ((this.TIEMPO_ESPERA*1.25)!=0){
         this.rate=rate*0.75;
         this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*1.25);
         }
