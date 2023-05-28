@@ -97,7 +97,6 @@ public class Ordenamientos {
                 
                 
                 Burbuja(arreglo,numerodecajas,cajasAnchor,anchor,coordenadasX);
-                anchor=PseudocodigoBurbuja(anchor, almacen.cajas);
                 break;
                 
             case 3:
@@ -142,15 +141,22 @@ public class Ordenamientos {
     
     public void Insercion (int numerodecajas, ArrayList<Integer> arreglo, ArrayList<AnchorPane>cajasAnchor,AnchorPane anchor){
             
-            Rectangle pintalinea = new Rectangle(0,0,200,20);
+            Rectangle pintalinea = new Rectangle(0,0,250,20);
             pintalinea.setFill(Color.ORANGE);
             anchor=PseudocodigoInsercion(anchor, arreglo,pintalinea);
-        
+            
+            ArrayList<Integer> alturasLineas = new ArrayList();
+            for (int i = 1; i <= 5; i++) {
+                alturasLineas.add(i*25);
+            }
             imprimeArreglo(arreglo);
             
             
-            int velocidad = TIEMPO_ESPERA ;
+            int velocidad = TIEMPO_ESPERA;
             boolean bajoGancho2;
+            
+            
+            SequentialTransition movPintalinea = new SequentialTransition();
             SequentialTransition movCajas = new SequentialTransition();
             SequentialTransition movGancho1 = new SequentialTransition();
             SequentialTransition movCuerda1 = new SequentialTransition();
@@ -192,6 +198,9 @@ public class Ordenamientos {
                 TranslateTransition trasGancho1_1 = new TranslateTransition(Duration.millis(velocidad),gancho1);
                 trasGancho1_1.setToX(cajaAux.getLayoutX()-200);
                 movGancho1.getChildren().add(trasGancho1_1);
+                TranslateTransition trasPinta1 = new TranslateTransition(Duration.millis(500),pintalinea);
+                trasPinta1.setToY(alturasLineas.get(0)-15);
+                movPintalinea.getChildren().add(trasPinta1);
                                                                                                                             //LINEA 2
                 TranslateTransition trasVacioGancho2_2 = new TranslateTransition(Duration.millis(velocidad));
                 movGancho2.getChildren().add(trasVacioGancho2_2);
@@ -343,8 +352,8 @@ public class Ordenamientos {
             System.out.print("--->  ");
             imprimeArreglo(arreglo);
             
-            
-            
+            System.out.println(movPintalinea);
+            movPintalinea.play();
             movCajas.play();
             movCuerda1.play();
             movGancho1.play();
@@ -404,22 +413,69 @@ public class Ordenamientos {
         cuerda = lapiz.dibujarcuerda(210,442);
         anchor.getChildren().add(cuerda);
         
+        Rectangle pintalinea = new Rectangle(0,0,380,20);
+        pintalinea.setFill(Color.ORANGE);
+        anchor=PseudocodigoBurbuja(anchor, arreglo,pintalinea);
+            
+        ArrayList<Integer> alturasLineas = new ArrayList();
+        for (int i = 1; i <= 3; i++) {
+            alturasLineas.add((i*25)-15);
+        }
+        
+        System.out.println("Alturas de las lineas: "+alturasLineas.get(0)+", "+alturasLineas.get(1)+", "+alturasLineas.get(2));
+        
+        TranslateTransition movaux= new TranslateTransition(Duration.millis(5000),pintalinea);
+        movaux.setToY(100);
+   
+        
         
         int velocidad = 200;
+        SequentialTransition movPintalineas = new SequentialTransition();
         SequentialTransition movCajas = new SequentialTransition();
         SequentialTransition movGancho = new SequentialTransition();
         SequentialTransition movCuerda = new SequentialTransition();
         
+        
         AnchorPane cajaAux = new AnchorPane();
         int aux;
         for (int i=0; i<arreglo.size();i++){
+            TranslateTransition trasPinta1 = new TranslateTransition(Duration.millis(velocidad),pintalinea);
+            trasPinta1.setToY(alturasLineas.get(0) );
+            movPintalineas.getChildren().add(trasPinta1);
+            
+            TranslateTransition trasVacioCaja71 = new TranslateTransition(Duration.millis(velocidad));
+            movCajas.getChildren().add(trasVacioCaja71);
+            TranslateTransition trasVacioCuerda61 = new TranslateTransition(Duration.millis(velocidad));
+            movCuerda.getChildren().add(trasVacioCuerda61);
+            TranslateTransition trasVacioGancho01 = new TranslateTransition(Duration.millis(velocidad));
+            movGancho.getChildren().add(trasVacioGancho01);
             
             for (int j=0, contador=0;j<arreglo.size()-(i+1);j++,contador++){
                 
+                TranslateTransition trasPinta2 = new TranslateTransition(Duration.millis(velocidad),pintalinea);
+                trasPinta2.setToY(alturasLineas.get(1) );
+                movPintalineas.getChildren().add(trasPinta2);
+                
+                TranslateTransition trasVacioCaja70 = new TranslateTransition(Duration.millis(velocidad));
+                movCajas.getChildren().add(trasVacioCaja70);
+                TranslateTransition trasVacioCuerda60 = new TranslateTransition(Duration.millis(velocidad));
+                movCuerda.getChildren().add(trasVacioCuerda60);
+                TranslateTransition trasVacioGancho0 = new TranslateTransition(Duration.millis(velocidad));
+                movGancho.getChildren().add(trasVacioGancho0);
+                
                 if (arreglo.get(j)>arreglo.get(j+1)){
                     
+                    TranslateTransition trasPinta3 = new TranslateTransition(Duration.millis(velocidad),pintalinea);
+                    trasPinta3.setToY(alturasLineas.get(2) );
+                    movPintalineas.getChildren().add(trasPinta3);
                     
-                    
+                    TranslateTransition trasVacioCaja72 = new TranslateTransition(Duration.millis(velocidad));
+                    movCajas.getChildren().add(trasVacioCaja72);
+                    TranslateTransition trasVacioCuerda62 = new TranslateTransition(Duration.millis(velocidad));
+                    movCuerda.getChildren().add(trasVacioCuerda62);
+                    TranslateTransition trasVacioGancho02 = new TranslateTransition(Duration.millis(velocidad));
+                    movGancho.getChildren().add(trasVacioGancho02);
+                                       
                     //Gancho y cuerda van a la caja pivote(NADA MAS SE MUEVE)
                     TranslateTransition trasCuerda1 = new TranslateTransition(Duration.millis(velocidad),cuerda);
                     trasCuerda1.setToX(coordenadasX.get(j) - 200 );
@@ -427,9 +483,13 @@ public class Ordenamientos {
                     TranslateTransition trasGancho1 = new TranslateTransition(Duration.millis(velocidad),gancho);
                     trasGancho1.setToX(coordenadasX.get(j) - 200);
                     movGancho.getChildren().add(trasGancho1);
+
                     
                     TranslateTransition trasVacioCaja1 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja1);
+                    TranslateTransition trasVacioPinta1 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta1);
+                    
                     
                     
                     
@@ -442,6 +502,8 @@ public class Ordenamientos {
                     movCuerda.getChildren().add(trasVacioCuerda1);
                     TranslateTransition trasVacioCaja2 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja2);
+                    TranslateTransition trasVacioPinta2 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta2);
                     
                     
                     //Sube gancho (CUERDA NO SE MUEVE)
@@ -454,6 +516,8 @@ public class Ordenamientos {
                     
                     TranslateTransition trasVacioCuerda2 = new TranslateTransition(Duration.millis(velocidad));
                     movCuerda.getChildren().add(trasVacioCuerda2);
+                    TranslateTransition trasVacioPinta3 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta3);
                     
                     
                     //Gancho y cuerda se mueven a la derecha lo mismo que la caja
@@ -467,6 +531,9 @@ public class Ordenamientos {
                     trasCaja2.setByX( ((1500 - ((1500/numerodecajas)*j))+60)- ((1500/numerodecajas)) );
                     movCajas.getChildren().add(trasCaja2);
                     
+                    TranslateTransition trasVacioPinta4 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta4);
+                    
                     //Gancho y cuerda se devuelven a mover a la caja a la izquierda una posición (NADA MAS SE MUEVE)
                     TranslateTransition trasGancho5 = new TranslateTransition(Duration.millis(velocidad),gancho);
                     trasGancho5.setByX( (-(((1500 - ((1500/numerodecajas)*j))+60)-((1500/numerodecajas)))) + (1500/numerodecajas) );
@@ -477,6 +544,8 @@ public class Ordenamientos {
                     
                     TranslateTransition trasVacioCaja3 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja3);
+                    TranslateTransition trasVacioPinta5 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta5);
                     
                     
                     //Baja gancho(NADA MAS SE MUEVE)
@@ -488,6 +557,8 @@ public class Ordenamientos {
                     movCuerda.getChildren().add(trasVacioCuerda3);
                     TranslateTransition trasVacioCaja4 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja4);
+                    TranslateTransition trasVacioPinta6 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta6);
                     
                     
                     //Gancho y cuerda se mueven a la izquierda lo mismo que la caja
@@ -501,6 +572,9 @@ public class Ordenamientos {
                     trasCaja3.setByX(-(1500/numerodecajas));
                     movCajas.getChildren().add(trasCaja3);
                     
+                    TranslateTransition trasVacioPinta7 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta7);
+                    
                     //Sube gancho (NADA MAS SE MUEVE)
                     TranslateTransition trasGancho8 = new TranslateTransition(Duration.millis(velocidad),gancho);
                     trasGancho8.setByY(-165);
@@ -510,6 +584,8 @@ public class Ordenamientos {
                     movCuerda.getChildren().add(trasVacioCuerda4);
                     TranslateTransition trasVacioCaja5 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja5);
+                    TranslateTransition trasVacioPinta8 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta8);
                     
                     
                     //Gancho y cuerda van a buscar la caja que dejo antes en la repisa(se mueven a la derecha lo mismo que se movieron antes para dejar la caja en la repisa)(NADA MAS SE MUEVE)
@@ -522,6 +598,8 @@ public class Ordenamientos {
                     
                     TranslateTransition trasVacioCaja6 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja6);
+                    TranslateTransition trasVacioPinta9 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta9);
                     
                     
                     //Gancho y cuerda se mueven a la izquierda lo mismo que la caja
@@ -532,10 +610,11 @@ public class Ordenamientos {
                     trasCuerda6.setByX( (-(((1500 - ((1500/numerodecajas)*j))+60)- ((1500/numerodecajas))))+(1500/numerodecajas) );
                     movCuerda.getChildren().add(trasCuerda6);
                     
-                    
                     TranslateTransition trasCaja4 = new TranslateTransition(Duration.millis(velocidad), cajasAnchor.get(j));
                     trasCaja4.setByX((-(((1500 - ((1500/numerodecajas)*j))+60)- ((1500/numerodecajas))))+(1500/numerodecajas));
                     movCajas.getChildren().add(trasCaja4);
+                    TranslateTransition trasVacioPinta10 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta10);
                     
                     //Baja gancho (CUERDA NO SE MUEVE)
                     TranslateTransition trasGancho11 = new TranslateTransition(Duration.millis(velocidad),gancho);
@@ -547,6 +626,8 @@ public class Ordenamientos {
                     
                     TranslateTransition trasVacioCuerda5 = new TranslateTransition(Duration.millis(velocidad));
                     movCuerda.getChildren().add(trasVacioCuerda5);
+                    TranslateTransition trasVacioPinta11 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta11);
                     
                     
                     
@@ -559,6 +640,8 @@ public class Ordenamientos {
                     movCuerda.getChildren().add(trasVacioCuerda6);
                     TranslateTransition trasVacioCaja7 = new TranslateTransition(Duration.millis(velocidad));
                     movCajas.getChildren().add(trasVacioCaja7);
+                    TranslateTransition trasVacioPinta12 = new TranslateTransition(Duration.millis(velocidad));
+                    movPintalineas.getChildren().add(trasVacioPinta12);
                     
                     
                                         
@@ -569,6 +652,18 @@ public class Ordenamientos {
                     aux = arreglo.get(j);
                     arreglo.set(j, arreglo.get(j+1));
                     arreglo.set(j+1, aux);
+                }else{
+                    TranslateTransition trasPinta4 = new TranslateTransition(Duration.millis(velocidad),pintalinea);
+                    trasPinta4.setToY(alturasLineas.get(1) );
+                    movPintalineas.getChildren().add(trasPinta4);
+                    
+                    TranslateTransition trasVacioCaja7 = new TranslateTransition(Duration.millis(velocidad));
+                    movCajas.getChildren().add(trasVacioCaja7);
+                    TranslateTransition trasVacioCuerda6 = new TranslateTransition(Duration.millis(velocidad));
+                    movCuerda.getChildren().add(trasVacioCuerda6);
+                    TranslateTransition trasVacioGancho = new TranslateTransition(Duration.millis(velocidad));
+                    movGancho.getChildren().add(trasVacioGancho);
+                
                 }
             
             }  
@@ -578,7 +673,11 @@ public class Ordenamientos {
         for (int i=0; i<arreglo.size();i++){
             System.out.print(arreglo.get(i)+" -> ");   
         }
-        
+        System.out.println("\n"+movPintalineas.getChildren().size());
+        System.out.println("\n"+movCajas.getChildren().size());
+        System.out.println("\n"+movGancho.getChildren().size());
+        System.out.println("\n"+movCuerda.getChildren().size());
+        movPintalineas.play();
         movCajas.play();
         movGancho.play();
         movCuerda.play();
@@ -1005,11 +1104,11 @@ public class Ordenamientos {
         
         
         Text[] etiquetasCodigo = {
-                new Text("1. Para i = 1 hasta n-1 hacer:"),
-                new Text("2.     j = i"),
-                new Text("3.     mientras j > 0 y A[j-1] > A[j] hacer:"),
-                new Text("4.         intercambiar A[j] y A[j-1]"),
-                new Text("5.         j = j - 1")
+                new Text(" Para i = 1 hasta n-1 hacer:"),
+                new Text("     j = i"),
+                new Text("     mientras j > 0 y A[j-1] > A[j] hacer:"),
+                new Text("         intercambiar A[j] y A[j-1]"),
+                new Text("         j = j - 1")
         };
         
         for (int i = 1; i <= 5; i++) {
@@ -1096,19 +1195,24 @@ public class Ordenamientos {
         return Anchor; 
     }
     
-    public AnchorPane PseudocodigoBurbuja(AnchorPane Anchor, ArrayList <Caja> caja) {
+    public AnchorPane PseudocodigoBurbuja(AnchorPane Anchor, ArrayList <Integer> caja,Rectangle pintalinea) {
         ArrayList <Integer> arreglo = new ArrayList();
         
         for(int i=0;i<caja.size();i++){ 
-            arreglo.add(caja.get(i).peso);
+            arreglo.add(caja.get(i));
         }
         
         
         Text[] etiquetasCodigo = {
-        new Text("1. Para i = 0 hasta n-1 hacer:"),
-        new Text("2.     Para j = 0 hasta n-i-1 hacer:"),
-        new Text("3.         Si A[j] > A[j+1] entonces intercambiar A[j] y A[j+1]")
+        new Text(" Para i = 0 hasta n-1 hacer:"),
+        new Text("     Para j = 0 hasta n-i-1 hacer:"),
+        new Text("         Si A[j] > A[j+1] entonces intercambiar A[j] y A[j+1]")
         };
+        
+        for (int i = 1; i <= 3; i++) {
+            etiquetasCodigo[i-1].setLayoutY(i*25);
+        }
+        
         
         Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
         for (Text t : etiquetasCodigo) {
@@ -1116,8 +1220,10 @@ public class Ordenamientos {
         }
      
         Text etiquetaArreglo = new Text(arreglo.toString());
+        etiquetaArreglo.setLayoutY(100);
         
-        VBox root = new VBox(10);
+        AnchorPane root = new AnchorPane();
+        root.getChildren().addAll(pintalinea);
         root.getChildren().addAll(etiquetasCodigo);
         root.getChildren().add(etiquetaArreglo);
         
@@ -1126,9 +1232,8 @@ public class Ordenamientos {
             protected Void call() throws Exception {
                 for (int i = 0; i < arreglo.size() - 1; i++) {
 
-            resaltarLineaCodigo(etiquetasCodigo, 0);
-            Thread.sleep(TIEMPO_ESPERA);
-            Thread.sleep(TIEMPO_ESPERA);
+            
+            Thread.sleep(TIEMPO_ESPERA*7);
 
             for (int j = 0; j < arreglo.size() - i - 1; j++) {
                 if (arreglo.get(j) > arreglo.get(j + 1)) {
@@ -1136,9 +1241,9 @@ public class Ordenamientos {
                     arreglo.set(j, arreglo.get(j + 1));
                     arreglo.set(j + 1, temp);
 
-                    resaltarLineaCodigo(etiquetasCodigo, 2);
-                    Thread.sleep(TIEMPO_ESPERA);
-                    Thread.sleep(TIEMPO_ESPERA);
+                    
+                    Thread.sleep(TIEMPO_ESPERA*7);
+
 
                     etiquetaArreglo.setText(arreglo.toString());
                 }
