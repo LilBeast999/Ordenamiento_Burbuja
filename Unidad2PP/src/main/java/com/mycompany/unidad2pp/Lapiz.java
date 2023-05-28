@@ -844,10 +844,8 @@ public class Lapiz {
      return this.anchor;
      
     }
-    
-   
-    
-     public AnchorPane dibujargrua(){
+        
+    public AnchorPane dibujargrua(){
 
          
          Rectangle rectangulo1= new Rectangle(25,460,100,450);

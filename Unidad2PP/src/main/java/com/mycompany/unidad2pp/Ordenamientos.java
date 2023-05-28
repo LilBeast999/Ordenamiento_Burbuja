@@ -28,10 +28,10 @@ import javafx.util.Duration;
  * @author gusta
  */
 public class Ordenamientos {
-     public int aux=20;
-     public int opcion;
-     public int TIEMPO_ESPERA = 200; 
-     public double rate=0.7;
+    public int aux=20;
+    public int opcion;
+    public int TIEMPO_ESPERA = 200; 
+    public double rate=0.7;
     
 
     
@@ -408,8 +408,8 @@ public class Ordenamientos {
         cuerda = lapiz.dibujarcuerda(210,442);
         anchor.getChildren().add(cuerda);
         
-        Rectangle pintalinea = new Rectangle();
-        pintalinea.setFill(Color.WHITE);
+        Rectangle pintalinea = new Rectangle(0,0,380,20);
+        pintalinea.setFill(Color.ORANGE);
         anchor=PseudocodigoBurbuja(anchor, arreglo,pintalinea);
             
         ArrayList<Integer> alturasLineas = new ArrayList();
@@ -419,8 +419,8 @@ public class Ordenamientos {
         
         System.out.println("Alturas de las lineas: "+alturasLineas.get(0)+", "+alturasLineas.get(1)+", "+alturasLineas.get(2));
         
-        TranslateTransition movaux= new TranslateTransition(Duration.millis(5000),pintalinea);
-        movaux.setToY(100);
+
+
    
         
         
