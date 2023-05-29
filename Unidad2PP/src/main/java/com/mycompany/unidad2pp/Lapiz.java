@@ -52,6 +52,7 @@ public class Lapiz {
      line.setEndY(300);
      line.setStrokeWidth(5);
      
+     
      Line line1= new Line();
      line1.setStartX(300);
      line1.setStartY(400);
