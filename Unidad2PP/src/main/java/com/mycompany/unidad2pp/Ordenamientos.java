@@ -31,12 +31,13 @@ public class Ordenamientos {
     public int aux=20;
     public int opcion;
     public int TIEMPO_ESPERA = 200; 
-    public double rate=0.7;
+    public double rate=1;
     
 
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
-        this.rate=0.7;
+        this.rate=1;
+        this.TIEMPO_ESPERA=200;
         AnchorPane anchor = new AnchorPane(); 
         System.out.println("o");
         Scene scena = new Scene (anchor); 
@@ -146,7 +147,7 @@ public class Ordenamientos {
             }
             imprimeArreglo(arreglo);
             
-            
+             this.rate=1;
             int velocidad = TIEMPO_ESPERA;
             boolean bajoGancho2;
             
@@ -425,7 +426,7 @@ public class Ordenamientos {
 
    
         
-        
+        this.rate=1;
         int velocidad = 200;
         SequentialTransition movPintalineas = new SequentialTransition();
         SequentialTransition movCajas = new SequentialTransition();
@@ -713,6 +714,7 @@ public class Ordenamientos {
         repisa1.setStroke(Color.BLACK);
         anchor.getChildren().add(repisa1);
         
+        this.rate=1;
         int velocidad = 200;
         
         Rectangle pintalinea = new Rectangle(0,0,400,20);
@@ -1589,16 +1591,16 @@ public class Ordenamientos {
     }
     
     public void aumentarRate(){
-        
-        this.rate=rate*1.25;
-        this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*0.75);
+       
+        this.rate=rate+0.25;
+        this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
 
     }
     
     public void disminuirRate(){
-        if ((this.TIEMPO_ESPERA*1.25)!=0){
-        this.rate=rate*0.75;
-        this.TIEMPO_ESPERA=(int)(TIEMPO_ESPERA*1.25);
+        if (this.rate>0.25){
+        this.rate=rate-0.25;
+        this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
         }
     }
     
