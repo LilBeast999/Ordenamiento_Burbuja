@@ -95,6 +95,15 @@ public class App extends Application {
             
    
         });
+        
+        Selection.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.selection();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
         stage1.show();
        
         Insercion.setPrefSize(200, 40);

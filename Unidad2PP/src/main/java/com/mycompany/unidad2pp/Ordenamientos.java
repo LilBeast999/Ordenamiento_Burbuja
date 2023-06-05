@@ -53,7 +53,11 @@ public class Ordenamientos {
         
         Lapiz lapiz= new Lapiz(anchor);
         lapiz.dibujarfondo();
-        lapiz.dibujargrua();
+        if(opcion!=4){
+            lapiz.dibujargrua();
+        
+        }
+       
         
         ArrayList<Double> escalas = new ArrayList();      
         for (int i = 1; i <= 49 ; i++) {
@@ -100,6 +104,9 @@ public class Ordenamientos {
             case 3:
                 Cocktail(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX);
                 break;
+                
+            case 4:
+                System.out.println(" ----- EN DESARROLLO ----");
              
             default:
                 throw new AssertionError();
@@ -1588,6 +1595,10 @@ public class Ordenamientos {
     
     public void cocktail(){
         this.opcion=3;
+    }
+    
+    public void selection(){
+        this.opcion=4;
     }
     
     public void aumentarRate(){
