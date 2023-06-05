@@ -73,7 +73,9 @@ public class Ordenamientos {
             Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
             almacen.cajas.add(caja1);
             xAux = 150+((1500/numerodecajas)*i);
-            cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
+            if(opcion!=4){
+                cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
+             }
             
             coordenadasX.add(xAux);
             
@@ -107,6 +109,8 @@ public class Ordenamientos {
                 
             case 4:
                 System.out.println(" ----- EN DESARROLLO ----");
+                Seleccion(arreglo, numerodecajas, cajasAnchor, anchor);
+                break;
              
             default:
                 throw new AssertionError();
@@ -1253,8 +1257,11 @@ public class Ordenamientos {
         System.out.println("ARREGLO ORDENADO:");
         imprimeArreglo(arreglo);
     }
+    
     public void Seleccion (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
-    System.out.println("Arreglo sin ordenar: " + arreglo);
+   
+        System.out.println("Arreglo sin ordenar: " + arreglo);
+    
 
     for (int i = 0; i < arreglo.size() - 1; i++) {
         int minIndex = i;
@@ -1273,6 +1280,8 @@ public class Ordenamientos {
     }
 
     System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
+    
+    
     }
     
         
