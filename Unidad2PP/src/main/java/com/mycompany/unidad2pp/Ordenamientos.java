@@ -1253,7 +1253,29 @@ public class Ordenamientos {
         System.out.println("ARREGLO ORDENADO:");
         imprimeArreglo(arreglo);
     }
+    public void Seleccion (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
+    System.out.println("Arreglo sin ordenar: " + arreglo);
+
+    for (int i = 0; i < arreglo.size() - 1; i++) {
+        int minIndex = i;
+
+        // Encuentra el índice del elemento mínimo en el subarreglo restante
+        for (int j = i + 1; j < arreglo.size(); j++) {
+            if (arreglo.get(j) < arreglo.get(minIndex)) {
+                minIndex = j;
+            }
+        }
+
+        // Intercambia el elemento mínimo con el elemento actual
+        int temp = arreglo.get(i);
+        arreglo.set(i, arreglo.get(minIndex));
+        arreglo.set(minIndex, temp);
+    }
+
+    System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
+    }
     
+        
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
