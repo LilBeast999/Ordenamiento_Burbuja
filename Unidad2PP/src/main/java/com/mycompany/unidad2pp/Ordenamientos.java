@@ -52,11 +52,18 @@ public class Ordenamientos {
         
         
         Lapiz lapiz= new Lapiz(anchor);
-        lapiz.dibujarfondo();
+        
         if(opcion!=4){
+            lapiz.dibujarfondo();
             lapiz.dibujargrua();
         
         }
+        else if(opcion==4){
+            lapiz.dibujarfondo2();
+
+        }
+
+        
        
         
         ArrayList<Double> escalas = new ArrayList();      
@@ -76,10 +83,16 @@ public class Ordenamientos {
             if(opcion!=4){
                 cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
              }
+            else if(opcion==4){ // ordenamiento de seleccion 
+                
+            
+            }
             
             coordenadasX.add(xAux);
             
         }
+        
+       anchor.getChildren().add(almacen.dibujarvagon(500, 300, anchor, 0, 150+((1500/numerodecajas)*0)));
 
         
         

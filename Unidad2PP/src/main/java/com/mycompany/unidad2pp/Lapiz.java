@@ -845,6 +845,37 @@ public class Lapiz {
      return this.anchor;
      
     }
+    
+    public AnchorPane dibujarfondo2(){
+        
+ 
+        
+     Rectangle rectangulo1= new Rectangle(-5000,500,10000,50);
+     rectangulo1.setFill(Color.GRAY);
+     rectangulo1.setStroke(Color.BLACK);
+     rectangulo1.setStrokeWidth(2);
+     
+     Rectangle rectangulo2= new Rectangle(400,-1611,10000,50);
+     rectangulo2.setFill(Color.GRAY);
+     rectangulo2.setStroke(Color.BLACK);
+     rectangulo2.setStrokeWidth(2);
+     rectangulo2.setRotate(-25);
+     
+     Rectangle rectangulo3= new Rectangle(0,0,10000,10000);
+     rectangulo3.setFill(Color.GREEN);
+     
+
+     
+     
+     
+     this.anchor.getChildren().add(rectangulo3);
+     this.anchor.getChildren().add(rectangulo2);
+     this.anchor.getChildren().add(rectangulo1);
+     
+     
+     
+     return this.anchor;
+    }
         
     public AnchorPane dibujargrua(){
 
