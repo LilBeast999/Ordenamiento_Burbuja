@@ -61,7 +61,7 @@ public class Ordenamientos {
         for(int i=0;i<numerodecajas;i++){       
             Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
             almacen.cajas.add(caja1);
-            cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
+            cajasAnchor.add(almacen.dibujarVagon(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
         }
 
         
