@@ -39,8 +39,7 @@ public class Ordenamientos {
         this.rate=1;
         this.TIEMPO_ESPERA=200;
         AnchorPane anchor = new AnchorPane(); 
-        System.out.println("o");
-        Scene scena = new Scene (anchor); 
+        Scene scena = new Scene (anchor,1920,1080); 
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
         
@@ -113,7 +112,8 @@ public class Ordenamientos {
             System.out.print(arreglo.get(i)+ " ");
         }
         
-        
+        anchor.setScaleX(1);
+        anchor.setScaleY(1);
         
         switch (opcion) {
             //ORDENAMIENTO POR INSERCION
@@ -1583,7 +1583,7 @@ public class Ordenamientos {
             return null;
         }
     };
-
+     
     task.setOnSucceeded(event -> {
         resaltarLineaCodigo(etiquetasCodigo, -1);
     });
@@ -1603,7 +1603,89 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
-     
+    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Caja> caja){
+        ArrayList<Integer> arreglo = new ArrayList();
+
+    for (int i = 0; i < caja.size(); i++) {
+        arreglo.add(caja.get(i).peso);
+    }
+
+    Text[] etiquetasCodigo = {
+        new Text("1. Para i = 0 hasta n-1 hacer:"),
+        new Text("2.     Encontrar el índice del mínimo elemento en el subarreglo no ordenado"),
+        new Text("3.     Intercambiar el elemento mínimo con el elemento en la posición i"),
+    };
+
+    Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
+    for (Text t : etiquetasCodigo) {
+        t.setFont(font); // Establecer la fuente en cada instancia de Text
+    }
+
+    Text etiquetaArreglo = new Text(arreglo.toString());
+
+    VBox root = new VBox(10);
+    root.getChildren().addAll(etiquetasCodigo);
+    root.getChildren().add(etiquetaArreglo);
+
+    Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            int n = arreglo.size();
+
+            for (int i = 0; i < n - 1; i++) {
+                int minIndex = i;
+
+                resaltarLineaCodigo(etiquetasCodigo, 1);
+                Thread.sleep(TIEMPO_ESPERA);
+
+                for (int j = i + 1; j < n; j++) {
+                    if (arreglo.get(j) < arreglo.get(minIndex)) {
+                        minIndex = j;
+                    }
+                }
+
+                resaltarLineaCodigo(etiquetasCodigo, 2);
+                Thread.sleep(TIEMPO_ESPERA);
+
+                if (minIndex != i) {
+                    int temp = arreglo.get(i);
+                    arreglo.set(i, arreglo.get(minIndex));
+                    arreglo.set(minIndex, temp);
+
+                    resaltarLineaCodigo(etiquetasCodigo, 3);
+                    Thread.sleep(TIEMPO_ESPERA);
+
+                    etiquetaArreglo.setText(arreglo.toString());
+                }
+            }
+
+            return null;
+        }
+    };
+
+    task.setOnSucceeded(event -> {
+        resaltarLineaCodigo(etiquetasCodigo, -1);
+    });
+
+    Thread thread = new Thread(task);
+    thread.setDaemon(true);
+    thread.start();
+
+    root.setStyle("-fx-background-color: #FFFFFF;");
+    root.setLayoutX(200);
+    root.setLayoutY(115);
+    root.setPrefSize(290, 120);
+
+    // Crear un borde con un ancho de 2 píxeles y un color rojo
+    Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+            CornerRadii.EMPTY, BorderWidths.FULL));
+
+    // Establecer el borde en el VBox
+    root.setBorder(border);
+
+    Anchor.getChildren().add(root);
+    return Anchor;
+    } 
     public void imprimeArreglo(ArrayList <Integer> arreglo){
         System.out.print("[ ");
         for (int i = 0; i < arreglo.size(); i++) {
