@@ -76,23 +76,34 @@ public class Ordenamientos {
         double xAux;
                 
         //Crea las cajas AnchorPane y las añade al arreglo de cajas de tipo Anchor y al arreglo de cajas de Almacén
+        
+        if (opcion!=4){
         for(int i=0;i<numerodecajas;i++){       
             Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
             almacen.cajas.add(caja1);
             xAux = 150+((1500/numerodecajas)*i);
-            if(opcion!=4){
-                cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
-             }
-            else if(opcion==4){ // ordenamiento de seleccion 
-                
-            
-            }
-            
+            cajasAnchor.add(almacen.dibujarcaja(150+((1500/numerodecajas)*i),850, anchor,i,escalas.get(numerodecajas-16)));
             coordenadasX.add(xAux);
             
+         }
         }
+        else{
+         for(int i=0;i<numerodecajas;i++){       
+            Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
+            almacen.cajas.add(caja1);
+            xAux = ((1000/numerodecajas)*i);
+            cajasAnchor.add(almacen.dibujarvagon(((1000/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
+            coordenadasX.add(xAux);
+            
+         }
         
-       anchor.getChildren().add(almacen.dibujarvagon(500, 300, anchor, 0, 150+((1500/numerodecajas)*0)));
+        
+        
+        
+        }
+       
+        
+       
 
         
         

@@ -82,11 +82,11 @@ public class Almacen extends Lapiz {
       numeros=AlmacenarNumeros();
   
       numeros=AlmacenarNumeros();
-      Rectangle rectangulo= new Rectangle(60,30);
+      Rectangle rectangulo= new Rectangle(40,40);
       rectangulo.setFill(Color.web("#784A32"));
       rectangulo.setStroke(Color.BLACK);
       rectangulo.setStrokeWidth(2);
-      Rectangle rectangulo1= new Rectangle(7.5,7.5,45,45);
+      Rectangle rectangulo1= new Rectangle(2.5,2.5,35,35);
       rectangulo1.setFill(Color.web("#A46644"));
       rectangulo1.setStroke(Color.BLACK);
       rectangulo1.setStrokeWidth(1);
@@ -96,7 +96,7 @@ public class Almacen extends Lapiz {
       caja.setScaleX(escala);
       caja.setScaleY(escala);
       
-      DibujarNumeros(caja, cajas.get(indiceCaja).peso, numeros);
+      DibujarNumeros2(caja, cajas.get(indiceCaja).peso, numeros);
    
        
      
