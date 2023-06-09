@@ -52,6 +52,7 @@ public class Lapiz {
      line.setEndY(300);
      line.setStrokeWidth(5);
      
+     
      Line line1= new Line();
      line1.setStartX(300);
      line1.setStartY(400);
@@ -845,9 +846,48 @@ public class Lapiz {
      
     }
     
-   
-    
-     public AnchorPane dibujargrua(){
+    public AnchorPane dibujarfondo2(){
+        
+ 
+     //rail principal
+     Rectangle rectangulo1= new Rectangle(-5000,500,10000,20); //sujeta a formula
+     rectangulo1.setFill(Color.GRAY);
+     rectangulo1.setStroke(Color.BLACK);
+     rectangulo1.setStrokeWidth(1);
+     
+     //rail auxiliar
+     Rectangle rectangulo2= new Rectangle(400,-1612,10000,20); //sujeta a formula
+     rectangulo2.setFill(Color.GRAY);
+     rectangulo2.setStroke(Color.BLACK);
+     rectangulo2.setStrokeWidth(1);
+     rectangulo2.setRotate(-25);
+     
+     
+     Rectangle rectangulo3= new Rectangle(0,0,10000,10000);
+     rectangulo3.setFill(Color.GREEN);
+     
+
+     Group Railes = new Group ();
+     Railes.getChildren().addAll(rectangulo2,rectangulo1);
+     
+     
+        
+        
+     
+     this.anchor.getChildren().add(rectangulo3);
+     this.anchor.getChildren().add(Railes);
+     for (int i = 0; i < 50; i++) {
+            Rectangle rectangulo = new Rectangle(10*(i+1),500,5,20); // sujeto a formula o a usar un scale por que funciona la wea
+            rectangulo.setScaleX(0.5);
+            rectangulo.setScaleY(0.5);
+            this.anchor.getChildren().add(rectangulo);
+        }
+     
+     
+     return this.anchor;
+    }
+        
+    public AnchorPane dibujargrua(){
 
          
          Rectangle rectangulo1= new Rectangle(25,460,100,450);
@@ -1231,6 +1271,71 @@ public class Lapiz {
             }
             else{
                 caja.getChildren().add(numeros.get(numero));
+            }
+        }
+        
+    return caja;
+    }
+    
+    public AnchorPane DibujarNumeros2(AnchorPane caja, int numero, ArrayList <Group> numeros){
+        
+        if (numero>9){
+            //agregar excepcion cuando los numeros sean iguales
+            if ((numero/10) == (numero%10)){
+                
+                if (numero/10==1){
+                    
+                    numeros.get(numero/10).setLayoutX(-20);
+                    numeros.get(numero/10).setLayoutY(-10);
+                    numeros.get(numero/10).setScaleX(0.4);
+                    numeros.get(numero/10).setScaleY(0.9);
+                    caja.getChildren().add(numeros.get(numero/10));
+                    numeros.get((numero%10)+10).setLayoutX(0);
+                    numeros.get((numero%10)+10).setLayoutY(-10);
+                    numeros.get((numero%10)+10).setScaleX(0.4);
+                    numeros.get((numero%10)+10).setScaleY(0.9);
+                     caja.getChildren().add(numeros.get((numero%10)+10));
+                }
+                else{
+                   numeros.get(numero/10).setLayoutX(-20);
+                   numeros.get(numero/10).setLayoutY(-10);
+                   numeros.get(numero/10).setScaleX(0.4);
+                   numeros.get(numero/10).setScaleY(0.45);
+                   caja.getChildren().add(numeros.get(numero/10));
+                   numeros.get((numero%10)+10).setLayoutX(0);
+                   numeros.get((numero%10)+10).setLayoutY(-10);
+                   numeros.get((numero%10)+10).setScaleX(0.5);
+                   numeros.get((numero%10)+10).setScaleY(0.45);
+                  caja.getChildren().add(numeros.get((numero%10)+10));
+
+                }
+                
+  
+                
+            }else{
+                numeros.get(numero/10).setLayoutX(-20);
+                numeros.get(numero/10).setScaleX(0.4);
+                 numeros.get(numero/10).setLayoutY(-10);
+                caja.getChildren().add(numeros.get(numero/10));
+                numeros.get(numero%10).setLayoutX(0);
+                numeros.get((numero%10)).setLayoutY(-10);
+                numeros.get(numero%10).setScaleX(0.4);
+                caja.getChildren().add(numeros.get(numero%10));       
+            } 
+            
+        }else{
+             
+            if (numero==1){
+                numeros.get(numero).setScaleX(0.5);             
+                 numeros.get(numero).setLayoutX(-5); 
+                caja.getChildren().add(numeros.get(numero));
+            }
+            else{
+                numeros.get(numero).setLayoutX(-10);
+                numeros.get(numero).setLayoutY(-10);
+                numeros.get(numero).setScaleY(0.5);
+                caja.getChildren().add(numeros.get(numero));
+                
             }
         }
         

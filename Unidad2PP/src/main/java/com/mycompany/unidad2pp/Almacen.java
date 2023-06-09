@@ -74,34 +74,36 @@ public class Almacen extends Lapiz {
        
    }
     
-   public AnchorPane dibujarVagon(int posx, int posy, AnchorPane anchor, int indiceVagon, double escala) {
-    AnchorPane vagon = new AnchorPane();
-    vagon.setLayoutX(posx);
-    vagon.setLayoutY(posy);
-    ArrayList<Group> numeros = new ArrayList<>();
-    numeros = AlmacenarNumeros();
-
-    Rectangle rectangulo = new Rectangle(100, 60);
-    rectangulo.setFill(Color.web("#784A32"));
-    rectangulo.setStroke(Color.BLACK);
-    rectangulo.setStrokeWidth(2);
-
-    Rectangle rectangulo1 = new Rectangle(25, 25, 50, 10);
-    rectangulo1.setFill(Color.web("#A46644"));
-    rectangulo1.setStroke(Color.BLACK);
-    rectangulo1.setStrokeWidth(1);
-
-    vagon.getChildren().add(rectangulo);
-    vagon.getChildren().add(rectangulo1);
-
-    vagon.setScaleX(escala);
-    vagon.setScaleY(escala);
-
-    DibujarNumeros(vagon, cajas.get(indiceVagon).peso, numeros);
-
-    anchor.getChildren().add(vagon);
-    return vagon;
-}
+   public AnchorPane dibujarvagon (int posx,int posy, AnchorPane anchor, int indiceCaja,double escala){
+      AnchorPane caja= new AnchorPane();
+      caja.setLayoutX(posx);
+      caja.setLayoutY(posy);
+      ArrayList <Group> numeros = new ArrayList();
+      numeros=AlmacenarNumeros();
+  
+      numeros=AlmacenarNumeros();
+      Rectangle rectangulo= new Rectangle(40,40);
+      rectangulo.setFill(Color.web("#784A32"));
+      rectangulo.setStroke(Color.BLACK);
+      rectangulo.setStrokeWidth(2);
+      Rectangle rectangulo1= new Rectangle(2.5,2.5,35,35);
+      rectangulo1.setFill(Color.web("#A46644"));
+      rectangulo1.setStroke(Color.BLACK);
+      rectangulo1.setStrokeWidth(1);
+      caja.getChildren().add(rectangulo);
+      caja.getChildren().add(rectangulo1);
+      
+      caja.setScaleX(escala);
+      caja.setScaleY(escala);
+      
+      DibujarNumeros2(caja, cajas.get(indiceCaja).peso, numeros);
+   
+       
+     
+      anchor.getChildren().add(caja);
+      return caja;
+       
+   }
     
    
     

@@ -8,25 +8,25 @@ import javafx.stage.Stage;
 import static javafx.application.Application.launch;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-    public int aux=20;
-    public int opcion;
    
-public static final int TIEMPO_ESPERA = 200; 
     @Override
     public void start(Stage stage) {
+
        AnchorPane anchor = new AnchorPane();
-       Scene scena1 = new Scene (anchor,600,500); 
+       anchor.setPrefSize(400, 300);
+       Scene scena1 = new Scene (anchor); 
        Stage stage1 = new Stage();
-       
        stage1.setScene(scena1);
-       
+       stage1.setTitle("Algoritmos de ordenamiento");
        Ordenamientos ordenamientos = new Ordenamientos();
-        
+       Text titulo= new Text("¡Bienvenido!");
        
        Button boton = new Button("Reiniciar");
        Button retroceder = new Button("Disminuye cajas");
@@ -34,26 +34,29 @@ public static final int TIEMPO_ESPERA = 200;
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
+       Button Cocktail = new Button("Ordenamiento Cocktail");
+       Button Selection = new Button("Ordenamiento por seleccion");
+   
        
        boton.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          
         });
        
         retroceder.setOnAction(e -> {
-         if (aux>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         disminuir();
+         if (ordenamientos.getAux()>17){  
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.disminuir();
          }
         });
         
         avanzar.setOnAction(e -> {
         
             
-         if (aux<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);
-         aumentar();
+         if (ordenamientos.getAux()<=63){   
+         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.aumentar();
          }
         });
         
@@ -69,8 +72,8 @@ public static final int TIEMPO_ESPERA = 200;
         Insercion.setOnAction(e -> {
            
             stage1.hide();
-            insercion();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.insercion();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -78,53 +81,64 @@ public static final int TIEMPO_ESPERA = 200;
         Burbuja.setOnAction(e -> {
            
             stage1.hide();
-            burbuja();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,this.aux,this.opcion);  
+            ordenamientos.burbuja();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
-       
-        Insercion.setLayoutX(100);
-        Insercion.setLayoutY(200);
-        Burbuja.setLayoutX(300);
-        Burbuja.setLayoutY(200);
-        anchor.getChildren().add(Insercion);
-        anchor.getChildren().add(Burbuja);
         
-      
+        Cocktail.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.cocktail();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
         
+        Selection.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.selection();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
         stage1.show();
+       
+        Insercion.setPrefSize(200, 40);
+        Burbuja.setPrefSize(200, 40);
+        Cocktail.setPrefSize(200, 40);
+        Selection.setPrefSize(200, 40);
+
+        anchor.getChildren().add(Insercion);
+        
+        anchor.getChildren().add(Burbuja);
+        anchor.getChildren().add(Cocktail);
+        anchor.getChildren().add(Selection);
+        anchor.getChildren().add(titulo);
+        titulo.setLayoutX(165);
+        titulo.setLayoutY(30);
+        titulo.setScaleX(3);
+        titulo.setScaleY(3);
+        Insercion.setLayoutX((anchor.getWidth()-Insercion.getPrefWidth())/2);
+        Insercion.setLayoutY(65);
+        Insercion.setFont(Font.font("Times New Roman",15));
+        Burbuja.setLayoutX((anchor.getWidth()-Burbuja.getPrefWidth())/2);
+        Burbuja.setLayoutY(115);
+        Burbuja.setFont(Font.font("Times New Roman",15));
+        Cocktail.setLayoutX((anchor.getWidth()-Cocktail.getPrefWidth())/2);
+        Cocktail.setLayoutY(165);
+        Cocktail.setFont(Font.font("Times New Roman",15));
+        Selection.setLayoutX((anchor.getWidth()-Cocktail.getPrefWidth())/2);
+        Selection.setLayoutY(215);
+        Selection.setFont(Font.font("Times New Roman",15));
+
 
         
     }
 
  
-    
-    public void disminuir(){
-        this.aux--;
-                
-    
-    
-    }
-    
-    public void aumentar(){
-        this.aux++;
-    }
-    
-    public void insercion(){
-        this.opcion=1;
-                
-    
-    
-    }
-    
-    public void burbuja(){
-        this.opcion=2;
-    }
-    
-    
-  
-    
 
     public static void main(String[] args) {
        launch(args);
