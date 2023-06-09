@@ -43,6 +43,8 @@ public class Ordenamientos {
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
         
+     
+        
         // apartir de aca OJO
         ArrayList <Integer> arreglo = new ArrayList();
         Almacen almacen = new Almacen(0,0);

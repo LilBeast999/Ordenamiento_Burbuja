@@ -877,7 +877,18 @@ public class Lapiz {
      this.anchor.getChildren().add(rectangulo3);
      this.anchor.getChildren().add(Railes);
      for (int i = 0; i < 10000; i++) {
-            Rectangle rectangulo = new Rectangle(20*(i+1),485,10,50); // sujeto a formula o a usar un scale por que funciona la wea
+            Rectangle rectangulo = new Rectangle(-5000+(20*(i+1)),485,10,50); // sujeto a formula o a usar un scale por que funciona la wea
+            rectangulo.setFill(Color.web("#6A4502"));
+            rectangulo.setStroke(Color.BLACK);
+            rectangulo2.setStrokeWidth(1);
+            rectangulo.setScaleX(0.5);
+            rectangulo.setScaleY(0.5);
+            this.anchor.getChildren().add(rectangulo);
+        }
+     
+     for (int i = 0; i < 5000; i++) {
+            Rectangle rectangulo = new Rectangle(877.5+(20*(i+1)),470-(i*9.33),10,50); // sujeto a formula o a usar un scale por que funciona la wea
+            rectangulo.setRotate(-25);
             rectangulo.setFill(Color.web("#6A4502"));
             rectangulo.setStroke(Color.BLACK);
             rectangulo2.setStrokeWidth(1);

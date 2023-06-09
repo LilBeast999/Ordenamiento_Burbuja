@@ -49,7 +49,7 @@ public class Almacen extends Lapiz {
       caja.setLayoutY(posy);
       ArrayList <Group> numeros = new ArrayList();
       numeros=AlmacenarNumeros();
-  
+      
       numeros=AlmacenarNumeros();
       Rectangle rectangulo= new Rectangle(60,60);
       rectangulo.setFill(Color.web("#784A32"));
