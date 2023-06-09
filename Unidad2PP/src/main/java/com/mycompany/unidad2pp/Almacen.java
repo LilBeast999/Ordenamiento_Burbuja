@@ -96,7 +96,7 @@ public class Almacen extends Lapiz {
       caja.setScaleX(escala);
       caja.setScaleY(escala);
       
-      DibujarNumeros2(caja, cajas.get(indiceCaja).peso, numeros);
+      //DibujarNumeros2(caja, cajas.get(indiceCaja).peso, numeros);
    
        
      
