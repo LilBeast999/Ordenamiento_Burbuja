@@ -827,7 +827,7 @@ public class Ordenamientos {
             return null;
         }
     };
-
+     
     task.setOnSucceeded(event -> {
         resaltarLineaCodigo(etiquetasCodigo, -1);
     });
@@ -847,7 +847,9 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
-     
+    public AnchorPane PseudocodigoCocktail(AnchorPane Anchor, ArrayList <Caja> caja){
+        sdfasdf
+    } 
     public void imprimeArreglo(ArrayList <Integer> arreglo){
         System.out.print("[ ");
         for (int i = 0; i < arreglo.size(); i++) {
