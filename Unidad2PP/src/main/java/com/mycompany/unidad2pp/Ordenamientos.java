@@ -1291,7 +1291,6 @@ public class Ordenamientos {
     public void Seleccion (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
    
         System.out.println("Arreglo sin ordenar: " + arreglo);
-    
 
     for (int i = 0; i < arreglo.size() - 1; i++) {
         int minIndex = i;
