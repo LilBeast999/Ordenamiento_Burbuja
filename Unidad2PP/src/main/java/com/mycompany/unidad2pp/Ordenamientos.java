@@ -1307,6 +1307,7 @@ public class Ordenamientos {
         arreglo.set(i, arreglo.get(minIndex));
         arreglo.set(minIndex, temp);
     }
+    anchor=PseudocodigoSeleccion(anchor, arreglo);
 
     System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
     
@@ -1608,13 +1609,8 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
-    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Caja> caja){
-        ArrayList<Integer> arreglo = new ArrayList();
-
-    for (int i = 0; i < caja.size(); i++) {
-        arreglo.add(caja.get(i).peso);
-    }
-
+    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo){
+    
     Text[] etiquetasCodigo = {
         new Text("1. Para i = 0 hasta n-1 hacer:"),
         new Text("2.     Encontrar el índice del mínimo elemento en el subarreglo no ordenado"),
