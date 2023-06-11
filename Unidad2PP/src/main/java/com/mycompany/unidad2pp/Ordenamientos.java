@@ -61,6 +61,8 @@ public class Ordenamientos {
         }
         else if(opcion==4){
             lapiz.dibujarfondo2();
+            anchor=lapiz.dibujarLocomotora(anchor, 1000, 492);
+        
 
         }
 
@@ -71,6 +73,7 @@ public class Ordenamientos {
         for (int i = 1; i <= 49 ; i++) {
             escalas.add(0, (double)((i * 100) / 48)/100);
         }
+        System.out.println("numero de cajas/vagones: "+this.aux);
   
         ArrayList<AnchorPane> cajasAnchor = new ArrayList();
         ArrayList<Double> coordenadasX = new ArrayList();
@@ -92,11 +95,12 @@ public class Ordenamientos {
          for(int i=0;i<numerodecajas;i++){       
             Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
             almacen.cajas.add(caja1);
-            xAux = ((1000/numerodecajas)*i);
-            cajasAnchor.add(almacen.dibujarvagon(((1000/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
+            xAux = ((800/numerodecajas)*i);
+            cajasAnchor.add(almacen.dibujarvagon(((850/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
             coordenadasX.add(xAux);
             
          }
+         
         
         
         
