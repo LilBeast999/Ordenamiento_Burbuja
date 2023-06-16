@@ -17,6 +17,9 @@ import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 
 /**
@@ -846,46 +849,52 @@ public class Lapiz {
      
     }
     
-    public AnchorPane dibujarfondo2(){
-        
- 
-     //rail principal
-     Rectangle rectangulo1= new Rectangle(-5000,500,10000,20); //sujeta a formula
-     rectangulo1.setFill(Color.GRAY);
-     rectangulo1.setStroke(Color.BLACK);
-     rectangulo1.setStrokeWidth(1);
-     
-     //rail auxiliar
-     Rectangle rectangulo2= new Rectangle(400,-1612,10000,20); //sujeta a formula
-     rectangulo2.setFill(Color.GRAY);
-     rectangulo2.setStroke(Color.BLACK);
-     rectangulo2.setStrokeWidth(1);
-     rectangulo2.setRotate(-25);
-     
-     
-     Rectangle rectangulo3= new Rectangle(0,0,10000,10000);
-     rectangulo3.setFill(Color.GREEN);
-     
+    public AnchorPane dibujarFondo2() {
+    // Rail principal
+    Rectangle rectangulo1 = new Rectangle(-5000, 500, 10000, 20);
+    rectangulo1.setFill(Color.GRAY);
+    rectangulo1.setStroke(Color.BLACK);
+    rectangulo1.setStrokeWidth(1);
 
-     Group Railes = new Group ();
-     Railes.getChildren().addAll(rectangulo2,rectangulo1);
-     
-     
-        
-        
-     
-     this.anchor.getChildren().add(rectangulo3);
-     this.anchor.getChildren().add(Railes);
-     for (int i = 0; i < 50; i++) {
-            Rectangle rectangulo = new Rectangle(10*(i+1),500,5,20); // sujeto a formula o a usar un scale por que funciona la wea
-            rectangulo.setScaleX(0.5);
-            rectangulo.setScaleY(0.5);
-            this.anchor.getChildren().add(rectangulo);
-        }
-     
-     
-     return this.anchor;
+    // Rail auxiliar
+    Rectangle rectangulo2 = new Rectangle(400, -1612, 10000, 20);
+    rectangulo2.setFill(Color.GRAY);
+    rectangulo2.setStroke(Color.BLACK);
+    rectangulo2.setStrokeWidth(1);
+    rectangulo2.setRotate(-25);
+
+    Rectangle rectangulo3 = new Rectangle(0, 0, 10000, 10000);
+    rectangulo3.setFill(Color.GREEN);
+
+    Group railes = new Group();
+    railes.getChildren().addAll(rectangulo2, rectangulo1);
+
+    // Estación de tren
+    Rectangle estacion = new Rectangle(250, 475, 500, 50);
+    estacion.setFill(Color.LIGHTGRAY);
+    estacion.setStroke(Color.BLACK);
+    estacion.setStrokeWidth(1);
+
+    Text textoEstacion = new Text(275, 500, "Estación de tren");
+    textoEstacion.setFill(Color.BLACK);
+    textoEstacion.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
+    Group estacionTren = new Group();
+    estacionTren.getChildren().addAll(estacion, textoEstacion);
+
+    AnchorPane anchorPane = new AnchorPane();
+    anchorPane.getChildren().addAll(rectangulo3, railes, estacionTren);
+
+    for (int i = 0; i < 50; i++) {
+        Rectangle rectangulo = new Rectangle(10 * (i + 1), 500, 5, 20);
+        rectangulo.setScaleX(0.5);
+        rectangulo.setScaleY(0.5);
+        anchorPane.getChildren().add(rectangulo);
     }
+
+    return anchorPane;
+}
+
         
     public AnchorPane dibujargrua(){
 
