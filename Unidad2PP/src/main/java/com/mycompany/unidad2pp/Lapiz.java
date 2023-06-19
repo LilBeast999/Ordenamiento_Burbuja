@@ -17,9 +17,6 @@ import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.scene.shape.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 
 /**
@@ -849,7 +846,7 @@ public class Lapiz {
      
     }
     
-    public AnchorPane dibujarFondo2() {
+    public AnchorPane dibujarfondo2(){
     // Rail principal
     Rectangle rectangulo1 = new Rectangle(-5000, 500, 10000, 20);
     rectangulo1.setFill(Color.GRAY);
@@ -869,32 +866,39 @@ public class Lapiz {
     Group railes = new Group();
     railes.getChildren().addAll(rectangulo2, rectangulo1);
 
-    // Estación de tren
-    Rectangle estacion = new Rectangle(250, 475, 500, 50);
-    estacion.setFill(Color.LIGHTGRAY);
-    estacion.setStroke(Color.BLACK);
-    estacion.setStrokeWidth(1);
+    this.anchor.getChildren().add(rectangulo3);
+    this.anchor.getChildren().add(railes);
 
-    Text textoEstacion = new Text(275, 500, "Estación de tren");
-    textoEstacion.setFill(Color.BLACK);
-    textoEstacion.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-
-    Group estacionTren = new Group();
-    estacionTren.getChildren().addAll(estacion, textoEstacion);
-
-    AnchorPane anchorPane = new AnchorPane();
-    anchorPane.getChildren().addAll(rectangulo3, railes, estacionTren);
-
+    // Añadir líneas decorativas
     for (int i = 0; i < 50; i++) {
         Rectangle rectangulo = new Rectangle(10 * (i + 1), 500, 5, 20);
         rectangulo.setScaleX(0.5);
         rectangulo.setScaleY(0.5);
-        anchorPane.getChildren().add(rectangulo);
+        rectangulo.setFill(Color.WHITE); // Color de las líneas
+        rectangulo.setStroke(Color.DARKGRAY); // Color del borde
+        rectangulo.setStrokeWidth(0.5); // Grosor del borde
+        rectangulo.setOpacity(0.8); // Opacidad de las líneas
+        rectangulo.setArcHeight(2); // Redondear esquinas
+        rectangulo.setArcWidth(2);
+        this.anchor.getChildren().add(rectangulo);
     }
-
-    return anchorPane;
-}
-
+    
+    // Agregar estación de tren
+    Rectangle estacion = new Rectangle(150, 370, 200, 40);
+    estacion.setFill(Color.LIGHTGRAY); // Color de la estación
+    estacion.setStroke(Color.BLACK); // Color del borde
+    estacion.setStrokeWidth(1); // Grosor del borde
+    this.anchor.getChildren().add(estacion);
+    
+    // Agregar plataforma de embarque
+    Rectangle plataforma = new Rectangle(150, 410, 200, 10);
+    plataforma.setFill(Color.DARKGRAY); // Color de la plataforma
+    plataforma.setStroke(Color.BLACK); // Color del borde
+    plataforma.setStrokeWidth(1); // Grosor del borde
+    this.anchor.getChildren().add(plataforma);
+    
+    return this.anchor;
+    }
         
     public AnchorPane dibujargrua(){
 
