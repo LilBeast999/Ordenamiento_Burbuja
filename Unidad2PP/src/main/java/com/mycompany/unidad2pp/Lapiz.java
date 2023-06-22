@@ -52,6 +52,7 @@ public class Lapiz {
      line.setEndY(300);
      line.setStrokeWidth(5);
      
+     
      Line line1= new Line();
      line1.setStartX(300);
      line1.setStartY(400);
@@ -844,6 +845,60 @@ public class Lapiz {
      return this.anchor;
      
     }
+    
+    public AnchorPane dibujarfondo2(){
+    // Rail principal
+    Rectangle rectangulo1 = new Rectangle(-5000, 500, 10000, 20);
+    rectangulo1.setFill(Color.GRAY);
+    rectangulo1.setStroke(Color.BLACK);
+    rectangulo1.setStrokeWidth(1);
+
+    // Rail auxiliar
+    Rectangle rectangulo2 = new Rectangle(400, -1612, 10000, 20);
+    rectangulo2.setFill(Color.GRAY);
+    rectangulo2.setStroke(Color.BLACK);
+    rectangulo2.setStrokeWidth(1);
+    rectangulo2.setRotate(-25);
+
+    Rectangle rectangulo3 = new Rectangle(0, 0, 10000, 10000);
+    rectangulo3.setFill(Color.GREEN);
+
+    Group railes = new Group();
+    railes.getChildren().addAll(rectangulo2, rectangulo1);
+
+    this.anchor.getChildren().add(rectangulo3);
+    this.anchor.getChildren().add(railes);
+
+    // Añadir líneas decorativas
+    for (int i = 0; i < 50; i++) {
+        Rectangle rectangulo = new Rectangle(10 * (i + 1), 500, 5, 20);
+        rectangulo.setScaleX(0.5);
+        rectangulo.setScaleY(0.5);
+        rectangulo.setFill(Color.WHITE); // Color de las líneas
+        rectangulo.setStroke(Color.DARKGRAY); // Color del borde
+        rectangulo.setStrokeWidth(0.5); // Grosor del borde
+        rectangulo.setOpacity(0.8); // Opacidad de las líneas
+        rectangulo.setArcHeight(2); // Redondear esquinas
+        rectangulo.setArcWidth(2);
+        this.anchor.getChildren().add(rectangulo);
+    }
+    
+    // Agregar estación de tren
+    Rectangle estacion = new Rectangle(150, 370, 200, 40);
+    estacion.setFill(Color.LIGHTGRAY); // Color de la estación
+    estacion.setStroke(Color.BLACK); // Color del borde
+    estacion.setStrokeWidth(1); // Grosor del borde
+    this.anchor.getChildren().add(estacion);
+    
+    // Agregar plataforma de embarque
+    Rectangle plataforma = new Rectangle(150, 410, 200, 10);
+    plataforma.setFill(Color.DARKGRAY); // Color de la plataforma
+    plataforma.setStroke(Color.BLACK); // Color del borde
+    plataforma.setStrokeWidth(1); // Grosor del borde
+    this.anchor.getChildren().add(plataforma);
+    
+    return this.anchor;
+    }
         
     public AnchorPane dibujargrua(){
 
@@ -1229,6 +1284,71 @@ public class Lapiz {
             }
             else{
                 caja.getChildren().add(numeros.get(numero));
+            }
+        }
+        
+    return caja;
+    }
+    
+    public AnchorPane DibujarNumeros2(AnchorPane caja, int numero, ArrayList <Group> numeros){
+        
+        if (numero>9){
+            //agregar excepcion cuando los numeros sean iguales
+            if ((numero/10) == (numero%10)){
+                
+                if (numero/10==1){
+                    
+                    numeros.get(numero/10).setLayoutX(-20);
+                    numeros.get(numero/10).setLayoutY(-10);
+                    numeros.get(numero/10).setScaleX(0.4);
+                    numeros.get(numero/10).setScaleY(0.9);
+                    caja.getChildren().add(numeros.get(numero/10));
+                    numeros.get((numero%10)+10).setLayoutX(0);
+                    numeros.get((numero%10)+10).setLayoutY(-10);
+                    numeros.get((numero%10)+10).setScaleX(0.4);
+                    numeros.get((numero%10)+10).setScaleY(0.9);
+                     caja.getChildren().add(numeros.get((numero%10)+10));
+                }
+                else{
+                   numeros.get(numero/10).setLayoutX(-20);
+                   numeros.get(numero/10).setLayoutY(-10);
+                   numeros.get(numero/10).setScaleX(0.4);
+                   numeros.get(numero/10).setScaleY(0.45);
+                   caja.getChildren().add(numeros.get(numero/10));
+                   numeros.get((numero%10)+10).setLayoutX(0);
+                   numeros.get((numero%10)+10).setLayoutY(-10);
+                   numeros.get((numero%10)+10).setScaleX(0.5);
+                   numeros.get((numero%10)+10).setScaleY(0.45);
+                  caja.getChildren().add(numeros.get((numero%10)+10));
+
+                }
+                
+  
+                
+            }else{
+                numeros.get(numero/10).setLayoutX(-20);
+                numeros.get(numero/10).setScaleX(0.4);
+                 numeros.get(numero/10).setLayoutY(-10);
+                caja.getChildren().add(numeros.get(numero/10));
+                numeros.get(numero%10).setLayoutX(0);
+                numeros.get((numero%10)).setLayoutY(-10);
+                numeros.get(numero%10).setScaleX(0.4);
+                caja.getChildren().add(numeros.get(numero%10));       
+            } 
+            
+        }else{
+             
+            if (numero==1){
+                numeros.get(numero).setScaleX(0.5);             
+                 numeros.get(numero).setLayoutX(-5); 
+                caja.getChildren().add(numeros.get(numero));
+            }
+            else{
+                numeros.get(numero).setLayoutX(-10);
+                numeros.get(numero).setLayoutY(-10);
+                numeros.get(numero).setScaleY(0.5);
+                caja.getChildren().add(numeros.get(numero));
+                
             }
         }
         

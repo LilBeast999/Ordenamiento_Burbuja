@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) {
 
        AnchorPane anchor = new AnchorPane();
-       anchor.setPrefSize(400, 250);
+       anchor.setPrefSize(400, 300);
        Scene scena1 = new Scene (anchor); 
        Stage stage1 = new Stage();
        stage1.setScene(scena1);
@@ -35,6 +35,7 @@ public class App extends Application {
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
        Button Cocktail = new Button("Ordenamiento Cocktail");
+       Button Selection = new Button("Ordenamiento por seleccion");
    
        
        boton.setOnAction(e -> {
@@ -94,15 +95,27 @@ public class App extends Application {
             
    
         });
+        
+        Selection.setOnAction(e -> {
+           
+            stage1.hide();
+            ordenamientos.selection();
+            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            
+   
+        });
         stage1.show();
        
         Insercion.setPrefSize(200, 40);
         Burbuja.setPrefSize(200, 40);
         Cocktail.setPrefSize(200, 40);
+        Selection.setPrefSize(200, 40);
 
         anchor.getChildren().add(Insercion);
+        
         anchor.getChildren().add(Burbuja);
         anchor.getChildren().add(Cocktail);
+        anchor.getChildren().add(Selection);
         anchor.getChildren().add(titulo);
         titulo.setLayoutX(165);
         titulo.setLayoutY(30);
@@ -117,6 +130,9 @@ public class App extends Application {
         Cocktail.setLayoutX((anchor.getWidth()-Cocktail.getPrefWidth())/2);
         Cocktail.setLayoutY(165);
         Cocktail.setFont(Font.font("Times New Roman",15));
+        Selection.setLayoutX((anchor.getWidth()-Cocktail.getPrefWidth())/2);
+        Selection.setLayoutY(215);
+        Selection.setFont(Font.font("Times New Roman",15));
 
 
         
