@@ -33,16 +33,17 @@ public class Ordenamientos {
     public int TIEMPO_ESPERA = 200; 
     public double rate=1;
     
-
+    
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
         this.rate=1;
         this.TIEMPO_ESPERA=200;
         AnchorPane anchor = new AnchorPane(); 
-        System.out.println("o");
-        Scene scena = new Scene (anchor); 
+        Scene scena = new Scene (anchor,1920,1080); 
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
+        
+     
         
         // apartir de aca OJO
         ArrayList <Integer> arreglo = new ArrayList();
@@ -60,6 +61,8 @@ public class Ordenamientos {
         }
         else if(opcion==4){
             lapiz.dibujarfondo2();
+            anchor=lapiz.dibujarLocomotora(anchor, 1000, 492);
+        
 
         }
 
@@ -70,6 +73,7 @@ public class Ordenamientos {
         for (int i = 1; i <= 49 ; i++) {
             escalas.add(0, (double)((i * 100) / 48)/100);
         }
+        System.out.println("numero de cajas/vagones: "+this.aux);
   
         ArrayList<AnchorPane> cajasAnchor = new ArrayList();
         ArrayList<Double> coordenadasX = new ArrayList();
@@ -91,11 +95,12 @@ public class Ordenamientos {
          for(int i=0;i<numerodecajas;i++){       
             Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
             almacen.cajas.add(caja1);
-            xAux = ((1000/numerodecajas)*i);
-            cajasAnchor.add(almacen.dibujarvagon(((1000/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
+            xAux = ((800/numerodecajas)*i);
+            cajasAnchor.add(almacen.dibujarvagon(((850/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
             coordenadasX.add(xAux);
             
          }
+         
         
         
         
@@ -113,7 +118,8 @@ public class Ordenamientos {
             System.out.print(arreglo.get(i)+ " ");
         }
         
-        
+        anchor.setScaleX(1);
+        anchor.setScaleY(1);
         
         switch (opcion) {
             //ORDENAMIENTO POR INSERCION
@@ -1282,9 +1288,9 @@ public class Ordenamientos {
         imprimeArreglo(arreglo);
     }
     
-    public void Seleccion (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
-   
-        System.out.println("Arreglo sin ordenar: " + arreglo);
+    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor){
+
+    System.out.println("Arreglo sin ordenar: " + arreglo);
 
     for (int i = 0; i < arreglo.size() - 1; i++) {
         int minIndex = i;
@@ -1301,13 +1307,13 @@ public class Ordenamientos {
         arreglo.set(i, arreglo.get(minIndex));
         arreglo.set(minIndex, temp);
     }
+    PseudocodigoSeleccion(anchor, arreglo);
 
     System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
     
     
     }
     
-        
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -1602,13 +1608,9 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
-    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Caja> caja){
-        ArrayList<Integer> arreglo = new ArrayList();
-
-    for (int i = 0; i < caja.size(); i++) {
-        arreglo.add(caja.get(i).peso);
-    }
-
+    
+    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo){
+    
     Text[] etiquetasCodigo = {
         new Text("1. Para i = 0 hasta n-1 hacer:"),
         new Text("2.     Encontrar el índice del mínimo elemento en el subarreglo no ordenado"),
@@ -1685,6 +1687,7 @@ public class Ordenamientos {
     Anchor.getChildren().add(root);
     return Anchor;
     } 
+    
     public void imprimeArreglo(ArrayList <Integer> arreglo){
         System.out.print("[ ");
         for (int i = 0; i < arreglo.size(); i++) {
@@ -1693,63 +1696,35 @@ public class Ordenamientos {
         System.out.println("]");
     }
 
-    public int getAux() {
-        return aux;
-    }
+    public int getAux() {return aux;}
 
-    public void setAux(int aux) {
-        this.aux = aux;
-    }
+    public void setAux(int aux) {this.aux = aux;}
 
-    public int getOpcion() {
-        return opcion;
-    }
+    public int getOpcion() {return opcion;}
 
-    public void setOpcion(int opcion) {
-        this.opcion = opcion;
-    } 
+    public void setOpcion(int opcion) {this.opcion = opcion;} 
     
-    public void disminuir(){
-        this.aux--;
-                
+    public void disminuir(){this.aux--;}
     
+    public void aumentar(){this.aux++;}
     
-    }
+    public void insercion(){this.opcion=1;}
     
-    public void aumentar(){
-        this.aux++;
-    }
+    public void burbuja(){this.opcion=2;}
     
-    public void insercion(){
-        this.opcion=1;
-                
-    }
+    public void cocktail(){this.opcion=3;}
     
-    public void burbuja(){
-        this.opcion=2;
-    }
-    
-    public void cocktail(){
-        this.opcion=3;
-    }
-    
-    public void selection(){
-        this.opcion=4;
-    }
+    public void selection(){this.opcion=4;}
     
     public void aumentarRate(){
-       
         this.rate=rate+0.25;
         this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
-
     }
     
     public void disminuirRate(){
         if (this.rate>0.25){
-        this.rate=rate-0.25;
-        this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
+            this.rate=rate-0.25;
+            this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
         }
     }
-    
-    
 }
