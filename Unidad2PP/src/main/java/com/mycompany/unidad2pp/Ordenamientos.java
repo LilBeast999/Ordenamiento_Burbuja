@@ -33,7 +33,7 @@ public class Ordenamientos {
     public int TIEMPO_ESPERA = 200; 
     public double rate=1;
     
-
+    
     
     public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
         this.rate=1;
@@ -1288,9 +1288,9 @@ public class Ordenamientos {
         imprimeArreglo(arreglo);
     }
     
-    public void Seleccion (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor){
-   
-        System.out.println("Arreglo sin ordenar: " + arreglo);
+    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor){
+
+    System.out.println("Arreglo sin ordenar: " + arreglo);
 
     for (int i = 0; i < arreglo.size() - 1; i++) {
         int minIndex = i;
@@ -1307,14 +1307,13 @@ public class Ordenamientos {
         arreglo.set(i, arreglo.get(minIndex));
         arreglo.set(minIndex, temp);
     }
-    anchor=PseudocodigoSeleccion(anchor, arreglo);
+    PseudocodigoSeleccion(anchor, arreglo);
 
     System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
     
     
     }
     
-        
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
@@ -1609,6 +1608,7 @@ public class Ordenamientos {
         Anchor.getChildren().add(root);
         return Anchor; 
     }
+    
     public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo){
     
     Text[] etiquetasCodigo = {
@@ -1687,6 +1687,7 @@ public class Ordenamientos {
     Anchor.getChildren().add(root);
     return Anchor;
     } 
+    
     public void imprimeArreglo(ArrayList <Integer> arreglo){
         System.out.print("[ ");
         for (int i = 0; i < arreglo.size(); i++) {
@@ -1695,63 +1696,35 @@ public class Ordenamientos {
         System.out.println("]");
     }
 
-    public int getAux() {
-        return aux;
-    }
+    public int getAux() {return aux;}
 
-    public void setAux(int aux) {
-        this.aux = aux;
-    }
+    public void setAux(int aux) {this.aux = aux;}
 
-    public int getOpcion() {
-        return opcion;
-    }
+    public int getOpcion() {return opcion;}
 
-    public void setOpcion(int opcion) {
-        this.opcion = opcion;
-    } 
+    public void setOpcion(int opcion) {this.opcion = opcion;} 
     
-    public void disminuir(){
-        this.aux--;
-                
+    public void disminuir(){this.aux--;}
     
+    public void aumentar(){this.aux++;}
     
-    }
+    public void insercion(){this.opcion=1;}
     
-    public void aumentar(){
-        this.aux++;
-    }
+    public void burbuja(){this.opcion=2;}
     
-    public void insercion(){
-        this.opcion=1;
-                
-    }
+    public void cocktail(){this.opcion=3;}
     
-    public void burbuja(){
-        this.opcion=2;
-    }
-    
-    public void cocktail(){
-        this.opcion=3;
-    }
-    
-    public void selection(){
-        this.opcion=4;
-    }
+    public void selection(){this.opcion=4;}
     
     public void aumentarRate(){
-       
         this.rate=rate+0.25;
         this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
-
     }
     
     public void disminuirRate(){
         if (this.rate>0.25){
-        this.rate=rate-0.25;
-        this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
+            this.rate=rate-0.25;
+            this.TIEMPO_ESPERA=(int)(this.TIEMPO_ESPERA-25);
         }
     }
-    
-    
 }
