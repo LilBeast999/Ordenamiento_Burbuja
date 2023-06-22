@@ -1312,6 +1312,52 @@ public class Ordenamientos {
     System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
     
     
+    /*DESCRIPCIÓN DE NODOS DE LAS ANIMACIONES
+        locomotoraIzq: locomotora que esta a la izquierda en la vía principal
+        locomotoraDer: locomotora que esta a la derecha en la vía principal
+        locomotoraAux: locomotora auxiliar que esta en la vía auxiliar
+        vagonI: vagón a intercambiar que se encuentra a la izquierda (o primera posición) al incio del intercambio
+        vagonR: vagón a intercambiar que se encuentre a la derecha al incio del intercambio (el vagón de número menor que se encontró)
+    */
+    //INTERCAMBIO DE VAGONES
+    
+    //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
+    
+    //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
+    
+    //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
+    
+    //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
+    
+    //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
+    
+    //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
+    
+    //7.- locomotoraAux trae de vuelta a vagonR hasta la primera posición(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
+    
+    //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
+    
+    //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
+    
+    //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
+    
+    //11.-locomotoraAux viene a buscar a vagonI(locomotoraAux se mueve en curva descendiente a la izquierda, nada más se mueve)
+    
+    //12.-locomotoraAux se lleva a vagonI(locomotoraAux junto con vagon I se mueven en curva ascendente a la derecha)
+    
+    //13.-locomotoraDer trae de vuelta a todos los vagones(se mueve a la izquierda locomotoraDer junto con todos los vagones que tenga en ese momento(excluye a vagonI y vagonR))
+    
+    //14.-locomotoraDer se devuelve a su posición junto con los vagones que estuvieran a la derecha de vagonR al principio del intercambio(se mueve a la derecha locomotoraDer junto con los vagones mencionados)
+    
+    //15.-locomotorAux viene a dejar a vagonI en la poscicion donde estaba vagonR en un principio(locomotoraAux se mueve en curva descendente a la izquierda junto con vagonI)
+    
+    //16.-locomotoraAux se devuelve a su posición(locomotoraAux se mueve en curva ascendente a la derecha, nada más se mueve)
+    
+    //17.-locomotoraDer trae de vuelta a los vagones que tenía hasta ese momento(se mueve a la izquierda junto con los vagones que estaban a la derecha de vagonR en un principio)
+    
+    //18.-locomotoraDer se devuelve a su posición incial (locomotoraDer se mueve a la derecha, nada mas se mueve)
+    
+    
     }
     
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
