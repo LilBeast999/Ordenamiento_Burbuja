@@ -899,26 +899,29 @@ public class Lapiz {
             this.anchor.getChildren().add(rectangulo);
         }
      
-     
-     return this.anchor;
-    }
-    
-    // Agregar estación de tren
-    Rectangle estacion = new Rectangle(150, 370, 200, 40);
+     Rectangle estacion = new Rectangle(150, 340, 200, 40);
     estacion.setFill(Color.LIGHTGRAY); // Color de la estación
     estacion.setStroke(Color.BLACK); // Color del borde
     estacion.setStrokeWidth(1); // Grosor del borde
     this.anchor.getChildren().add(estacion);
     
     // Agregar plataforma de embarque
-    Rectangle plataforma = new Rectangle(150, 410, 200, 10);
+    Rectangle plataforma = new Rectangle(150, 380, 200, 14);
     plataforma.setFill(Color.DARKGRAY); // Color de la plataforma
     plataforma.setStroke(Color.BLACK); // Color del borde
     plataforma.setStrokeWidth(1); // Grosor del borde
     this.anchor.getChildren().add(plataforma);
     
-    return this.anchor;
+     Rectangle autopista = new Rectangle(-5000, 700, 10000, 80);
+     Rectangle autopista2 = new Rectangle(-7000, 700, 10000, 80);
+    autopista.setFill(Color.LIGHTGRAY); // Color de la autopista
+    autopista2.setFill(Color.LIGHTGRAY); // Color de la autopista
+    this.anchor.getChildren().add(autopista);
+
+     return this.anchor;
     }
+    
+ 
         
     public AnchorPane dibujargrua(){
 
