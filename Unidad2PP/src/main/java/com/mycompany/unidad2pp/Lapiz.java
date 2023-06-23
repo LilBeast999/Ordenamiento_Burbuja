@@ -37,14 +37,9 @@ public class Lapiz {
     public Lapiz(AnchorPane anchor) {
         this.anchor= anchor;
     }
+
     
-    
-    
-    public  AnchorPane dibujarfondo(){
-        
-     
-        
-        
+    public  AnchorPane dibujarfondo(){ 
         
      //lineas de las montanas   
      Line line= new Line();
@@ -856,7 +851,7 @@ public class Lapiz {
     rectangulo1.setStrokeWidth(1);
 
     // Rail auxiliar
-    Rectangle rectangulo2 = new Rectangle(400, -1612, 10000, 20);
+    Rectangle rectangulo2 = new Rectangle(500, -1612, 10000, 20);
     rectangulo2.setFill(Color.GRAY);
     rectangulo2.setStroke(Color.BLACK);
     rectangulo2.setStrokeWidth(1);
@@ -1357,88 +1352,87 @@ public class Lapiz {
         
     return caja;
     }
-    
-    
-    public AnchorPane dibujarLocomotora(AnchorPane anchor, int x, int y){
-    AnchorPane locomotora = new AnchorPane();
-    
-    Rectangle rectangulo1 = new Rectangle(0,0,80,35);
-    rectangulo1.setFill(Color.web("#FEF300"));
-    rectangulo1.setStroke(Color.BLACK);
-    
-    Rectangle rectangulo2 = new Rectangle(0,0,5,25);
-    rectangulo2.setFill(Color.web("#C9F5F0"));
-    rectangulo2.setStroke(Color.BLACK);
-    rectangulo2.setLayoutX(75);
-    rectangulo2.setLayoutY(5);
-    
-    Line linea1= new Line();
-    linea1.setStartX(80);
-    linea1.setStartY(0);
-    linea1.setEndX(90);
-    linea1.setEndY(17.5);
-     linea1.setStrokeWidth(3);
 
-    Line linea2= new Line();
-    linea2.setStartX(90);
-    linea2.setStartY(17.5);
-    linea2.setEndX(80);
-    linea2.setEndY(35);
-    linea2.setStrokeWidth(3); 
-    
-    Line linea3= new Line();
-    linea3.setStartX(81);
-    linea3.setStartY(11.5);
-    linea3.setEndX(84);
-    linea3.setEndY(11.5);
-    linea3.setStrokeWidth(3); 
-    
-    Line linea4= new Line();
-    linea4.setStartX(81);
-    linea4.setStartY(23);
-    linea4.setEndX(84);
-    linea4.setEndY(23);
-    linea4.setStrokeWidth(3); 
-    
-    Line linea5= new Line();
-    linea5.setStartX(81);
-    linea5.setStartY(17.5);
-    linea5.setEndX(88);
-    linea5.setEndY(17.5);
-    linea5.setStrokeWidth(3); 
-     
-    Circle circulo= new Circle(20,17.5,10);
-    circulo.setFill(Color.web("#5C5D5D"));
-    
-    Circle circulo2= new Circle(20,17.5,5);
-    circulo2.setFill(Color.BLACK);
-    
-    Circle circulo4= new Circle(50,17.5,10);
-    circulo4.setFill(Color.web("#5C5D5D"));
-    
-    Circle circulo5= new Circle(50,17.5,5);
-    circulo5.setFill(Color.BLACK);
-    
-    
-    locomotora.getChildren().add(rectangulo1);
-    locomotora.getChildren().add(rectangulo2);
-    locomotora.getChildren().add(linea1);
-    locomotora.getChildren().add(linea2);
-    locomotora.getChildren().add(linea3);
-    locomotora.getChildren().add(linea4);
-    locomotora.getChildren().add(linea5);
-    locomotora.getChildren().add(circulo);
-    locomotora.getChildren().add(circulo2);
-    locomotora.getChildren().add(circulo4);
-    locomotora.getChildren().add(circulo5);
-    locomotora.setLayoutX(x);
-    locomotora.setLayoutY(y);
-    
-    
-    
-    anchor.getChildren().add(locomotora);
-    
-    return anchor;
+    public AnchorPane dibujarLocomotora(AnchorPane anchor, int x, int y){
+        AnchorPane locomotora = new AnchorPane();
+
+        Rectangle rectangulo1 = new Rectangle(0,0,80,35);
+        rectangulo1.setFill(Color.web("#FEF300"));
+        rectangulo1.setStroke(Color.BLACK);
+
+        Rectangle rectangulo2 = new Rectangle(0,0,5,25);
+        rectangulo2.setFill(Color.web("#C9F5F0"));
+        rectangulo2.setStroke(Color.BLACK);
+        rectangulo2.setLayoutX(75);
+        rectangulo2.setLayoutY(5);
+
+        Line linea1= new Line();
+        linea1.setStartX(80);
+        linea1.setStartY(0);
+        linea1.setEndX(90);
+        linea1.setEndY(17.5);
+         linea1.setStrokeWidth(3);
+
+        Line linea2= new Line();
+        linea2.setStartX(90);
+        linea2.setStartY(17.5);
+        linea2.setEndX(80);
+        linea2.setEndY(35);
+        linea2.setStrokeWidth(3); 
+
+        Line linea3= new Line();
+        linea3.setStartX(81);
+        linea3.setStartY(11.5);
+        linea3.setEndX(84);
+        linea3.setEndY(11.5);
+        linea3.setStrokeWidth(3); 
+
+        Line linea4= new Line();
+        linea4.setStartX(81);
+        linea4.setStartY(23);
+        linea4.setEndX(84);
+        linea4.setEndY(23);
+        linea4.setStrokeWidth(3); 
+
+        Line linea5= new Line();
+        linea5.setStartX(81);
+        linea5.setStartY(17.5);
+        linea5.setEndX(88);
+        linea5.setEndY(17.5);
+        linea5.setStrokeWidth(3); 
+
+        Circle circulo= new Circle(20,17.5,10);
+        circulo.setFill(Color.web("#5C5D5D"));
+
+        Circle circulo2= new Circle(20,17.5,5);
+        circulo2.setFill(Color.BLACK);
+
+        Circle circulo4= new Circle(50,17.5,10);
+        circulo4.setFill(Color.web("#5C5D5D"));
+
+        Circle circulo5= new Circle(50,17.5,5);
+        circulo5.setFill(Color.BLACK);
+
+
+        locomotora.getChildren().add(rectangulo1);
+        locomotora.getChildren().add(rectangulo2);
+        locomotora.getChildren().add(linea1);
+        locomotora.getChildren().add(linea2);
+        locomotora.getChildren().add(linea3);
+        locomotora.getChildren().add(linea4);
+        locomotora.getChildren().add(linea5);
+        locomotora.getChildren().add(circulo);
+        locomotora.getChildren().add(circulo2);
+        locomotora.getChildren().add(circulo4);
+        locomotora.getChildren().add(circulo5);
+        locomotora.setLayoutX(x);
+        locomotora.setLayoutY(y);
+
+
+
+        anchor.getChildren().add(locomotora);
+
+        return locomotora;
     } 
     
     public AnchorPane dibujargancho(AnchorPane anchor, int posx, int posy){
