@@ -913,10 +913,34 @@ public class Lapiz {
     this.anchor.getChildren().add(plataforma);
     
      Rectangle autopista = new Rectangle(-5000, 700, 10000, 80);
-     Rectangle autopista2 = new Rectangle(-7000, 700, 10000, 80);
-    autopista.setFill(Color.LIGHTGRAY); // Color de la autopista
-    autopista2.setFill(Color.LIGHTGRAY); // Color de la autopista
-    this.anchor.getChildren().add(autopista);
+autopista.setFill(Color.LIGHTGRAY); // Color de la autopista
+this.anchor.getChildren().add(autopista);
+
+// Añadir líneas divisoras de la autopista
+for (int i = 0; i < 100; i++) {
+    Rectangle lineaDivisora = new Rectangle(-5000 + (100 * i), 730, 60, 5);
+    lineaDivisora.setFill(Color.WHITE);
+    this.anchor.getChildren().add(lineaDivisora);
+}
+// Añadir arcenes a la autopista
+Rectangle arcenIzquierdo = new Rectangle(-5000, 700, 200, 80);
+arcenIzquierdo.setFill(Color.GRAY); // Color del arcén izquierdo
+this.anchor.getChildren().add(arcenIzquierdo);
+
+Rectangle arcenDerecho = new Rectangle(-4800, 700, 200, 80);
+arcenDerecho.setFill(Color.GRAY); // Color del arcén derecho
+this.anchor.getChildren().add(arcenDerecho);
+Rectangle autopista2 = new Rectangle(-5000, 850, 20000, 80);
+autopista2.setFill(Color.LIGHTGRAY); // Color de la autopista
+this.anchor.getChildren().add(autopista2);
+
+// Añadir líneas divisoras de la autopista 2
+for (int i = 0; i < 200; i++) {
+    Rectangle lineaDivisora = new Rectangle(-5000 + (100 * i), 880, 60, 5);
+    lineaDivisora.setFill(Color.WHITE);
+    this.anchor.getChildren().add(lineaDivisora);
+}
+
 
      return this.anchor;
     }
