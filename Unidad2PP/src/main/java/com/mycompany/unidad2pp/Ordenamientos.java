@@ -42,9 +42,7 @@ public class Ordenamientos {
         Scene scena = new Scene (anchor,1920,1080); 
         scena.setFill(Color.web("#AABDD8")); 
         stage.setMaximized(true); 
-        
-     
-        
+            
         // apartir de aca OJO
         ArrayList <Integer> arreglo = new ArrayList();
         Almacen almacen = new Almacen(0,0);
@@ -1318,10 +1316,12 @@ public class Ordenamientos {
         //INTERCAMBIO DE VAGONES
 
         //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
-            TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(10000),locomotoraDer);
-            movLocDer1.setToX(-coordenadasX.get(coordenadasX.size()-1));
-            System.out.println("AAAAAAAAAAAAAAAAAAAAA:  "+coordenadasX.get(coordenadasX.size()-1)+(1500/numerodevagones));
-            seqLocDer.getChildren().add(movLocDer1);
+            //MOVIMIENTOS A REALIZAR
+                TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(1000),locomotoraDer);
+                movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(850/coordenadasX.size()));
+                seqLocDer.getChildren().add(movLocDer1);
+            
+            //MOVIMIENTOS VACIOS NECESARIOS
         //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
 
         //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
