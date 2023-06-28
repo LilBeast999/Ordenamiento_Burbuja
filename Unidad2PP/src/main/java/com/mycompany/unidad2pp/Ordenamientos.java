@@ -3,6 +3,7 @@ package com.mycompany.unidad2pp;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
@@ -1286,13 +1287,13 @@ public class Ordenamientos {
         */
         
         //Creación de las locomotoras
-        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 1850, 492); 
+        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 1800, 492); 
         AnchorPane locomotoraIzq = lapiz.dibujarLocomotora(anchor, -100, 492);
         locomotoraIzq.setRotate(180);
         AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
         locomotoraAux.setRotate(-27);
         
-        int duracion = 1000;
+        int duracion = 5000;
         
         SequentialTransition seqVagones = new SequentialTransition();
         SequentialTransition seqLocIzq = new SequentialTransition();
@@ -1338,11 +1339,21 @@ public class Ordenamientos {
             //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
                 //MOVIMIENTOS A REALIZAR
                     TranslateTransition movLocDer2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                    movLocDer2.setToX(1850-locomotoraDer.getLayoutX());
+                    movLocDer2.setToX(1800-locomotoraDer.getLayoutX());
                     seqLocDer.getChildren().add(movLocDer2);
-
-
+                    
+                    ParallelTransition movVagonesDer1 = new ParallelTransition();
+                    for (int k = arreglo.size()-1, ind = 0; k > minIndex; k--, ind++){
+                        TranslateTransition movVagonDer = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
+                        movVagonDer.setByX(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind));
+                        movVagonesDer1.getChildren().add(movVagonDer);
+                    }
+                    seqVagones.getChildren().add(movVagonesDer1);
+                    
                 //MOVIMIENTOS VACIOS NECESARIOS
+                    TranslateTransition movVacio2 = new TranslateTransition(Duration.millis(duracion));
+                    seqLocIzq.getChildren().add(movVacio2);
+                    seqLocAux.getChildren().add(movVacio2);
 
             //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
 
