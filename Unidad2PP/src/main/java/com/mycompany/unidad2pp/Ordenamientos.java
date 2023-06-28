@@ -1274,13 +1274,30 @@ public class Ordenamientos {
     }
     
     public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX){
-        
+  
         Lapiz lapiz = new Lapiz(0,0);
-        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 1800, 492);
-        AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
-        locomotoraAux.setRotate(-27);
+        
+        /*DESCRIPCIÓN DE OBJETOS DE LAS ANIMACIONES
+            locomotoraIzq: locomotora que esta a la izquierda en la vía principal
+            locomotoraDer: locomotora que esta a la derecha en la vía principal
+            locomotoraAux: locomotora auxiliar que esta en la vía auxiliar
+            vagonI: vagón a intercambiar que se encuentra a la izquierda al incio del intercambio
+            vagonR: vagón a intercambiar que se encuentre a la derecha al incio del intercambio (el vagón de menor número que se encontró)
+        */
+        
+        //Creación de las locomotoras
+        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 1850, 492); 
         AnchorPane locomotoraIzq = lapiz.dibujarLocomotora(anchor, -100, 492);
         locomotoraIzq.setRotate(180);
+        AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
+        locomotoraAux.setRotate(-27);
+        
+        int duracion = 1000;
+        
+        SequentialTransition seqVagones = new SequentialTransition();
+        SequentialTransition seqLocIzq = new SequentialTransition();
+        SequentialTransition seqLocDer = new SequentialTransition();
+        SequentialTransition seqLocAux = new SequentialTransition();
         
         System.out.println("Arreglo sin ordenar: " + arreglo);
         for (int i = 0; i < arreglo.size() - 1; i++) {
@@ -1294,67 +1311,76 @@ public class Ordenamientos {
             }
 
             // Intercambia el elemento mínimo con el elemento actual
+            
+            System.out.println("VAGONES A INTERCAMBIAR: "+arreglo.get(i)+" Y "+arreglo.get(minIndex));
             int temp = arreglo.get(i);
             arreglo.set(i, arreglo.get(minIndex));
             arreglo.set(minIndex, temp);
+            
+            //INTERCAMBIO DE VAGONES
+            AnchorPane vagonR = vagonesAnchor.get(minIndex);
+            AnchorPane vagonI = vagonesAnchor.get(i);
+            
+           
+            //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
+                //MOVIMIENTOS A REALIZAR
+                    TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                    movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(850/coordenadasX.size()));
+                    seqLocDer.getChildren().add(movLocDer1);
+
+                //MOVIMIENTOS VACIOS NECESARIOS
+                    TranslateTransition movVacio1 = new TranslateTransition(Duration.millis(duracion));
+                    seqVagones.getChildren().add(movVacio1);
+                    seqLocIzq.getChildren().add(movVacio1);
+                    seqLocAux.getChildren().add(movVacio1);
+
+
+            //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
+                //MOVIMIENTOS A REALIZAR
+                    TranslateTransition movLocDer2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                    movLocDer2.setToX(1850-locomotoraDer.getLayoutX());
+                    seqLocDer.getChildren().add(movLocDer2);
+
+
+                //MOVIMIENTOS VACIOS NECESARIOS
+
+            //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
+
+            //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
+
+            //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
+
+            //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
+
+            //7.- locomotoraAux trae de vuelta a vagonR hasta la primera posición(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
+
+            //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
+
+            //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
+
+            //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
+
+            //11.-locomotoraAux viene a buscar a vagonI(locomotoraAux se mueve en curva descendiente a la izquierda, nada más se mueve)
+
+            //12.-locomotoraAux se lleva a vagonI(locomotoraAux junto con vagon I se mueven en curva ascendente a la derecha)
+
+            //13.-locomotoraDer trae de vuelta a todos los vagones(se mueve a la izquierda locomotoraDer junto con todos los vagones que tenga en ese momento(excluye a vagonI y vagonR))
+
+            //14.-locomotoraDer se devuelve a su posición junto con los vagones que estuvieran a la derecha de vagonR al principio del intercambio(se mueve a la derecha locomotoraDer junto con los vagones mencionados)
+
+            //15.-locomotorAux viene a dejar a vagonI en la poscicion donde estaba vagonR en un principio(locomotoraAux se mueve en curva descendente a la izquierda junto con vagonI)
+
+            //16.-locomotoraAux se devuelve a su posición(locomotoraAux se mueve en curva ascendente a la derecha, nada más se mueve)
+
+            //17.-locomotoraDer trae de vuelta a los vagones que tenía hasta ese momento(se mueve a la izquierda junto con los vagones que estaban a la derecha de vagonR en un principio)
+
+            //18.-locomotoraDer se devuelve a su posición incial (locomotoraDer se mueve a la derecha, nada mas se mueve)
+            
         }
         PseudocodigoSeleccion(anchor, arreglo);
 
         System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
         
-        SequentialTransition seqVagones = new SequentialTransition();
-        SequentialTransition seqLocIzq = new SequentialTransition();
-        SequentialTransition seqLocDer = new SequentialTransition();
-        SequentialTransition seqLocAux = new SequentialTransition();
-        /*DESCRIPCIÓN DE OBJETOS DE LAS ANIMACIONES
-            locomotoraIzq: locomotora que esta a la izquierda en la vía principal
-            locomotoraDer: locomotora que esta a la derecha en la vía principal
-            locomotoraAux: locomotora auxiliar que esta en la vía auxiliar
-            vagonI: vagón a intercambiar que se encuentra a la izquierda (o primera posición) al incio del intercambio
-            vagonR: vagón a intercambiar que se encuentre a la derecha al incio del intercambio (el vagón de menor número que se encontró)
-        */
-        //INTERCAMBIO DE VAGONES
-
-        //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
-            //MOVIMIENTOS A REALIZAR
-                TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(1000),locomotoraDer);
-                movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(850/coordenadasX.size()));
-                seqLocDer.getChildren().add(movLocDer1);
-            
-            //MOVIMIENTOS VACIOS NECESARIOS
-        //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
-
-        //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
-
-        //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
-
-        //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
-
-        //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
-
-        //7.- locomotoraAux trae de vuelta a vagonR hasta la primera posición(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
-
-        //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
-
-        //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
-
-        //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
-
-        //11.-locomotoraAux viene a buscar a vagonI(locomotoraAux se mueve en curva descendiente a la izquierda, nada más se mueve)
-
-        //12.-locomotoraAux se lleva a vagonI(locomotoraAux junto con vagon I se mueven en curva ascendente a la derecha)
-
-        //13.-locomotoraDer trae de vuelta a todos los vagones(se mueve a la izquierda locomotoraDer junto con todos los vagones que tenga en ese momento(excluye a vagonI y vagonR))
-
-        //14.-locomotoraDer se devuelve a su posición junto con los vagones que estuvieran a la derecha de vagonR al principio del intercambio(se mueve a la derecha locomotoraDer junto con los vagones mencionados)
-
-        //15.-locomotorAux viene a dejar a vagonI en la poscicion donde estaba vagonR en un principio(locomotoraAux se mueve en curva descendente a la izquierda junto con vagonI)
-
-        //16.-locomotoraAux se devuelve a su posición(locomotoraAux se mueve en curva ascendente a la derecha, nada más se mueve)
-
-        //17.-locomotoraDer trae de vuelta a los vagones que tenía hasta ese momento(se mueve a la izquierda junto con los vagones que estaban a la derecha de vagonR en un principio)
-
-        //18.-locomotoraDer se devuelve a su posición incial (locomotoraDer se mueve a la derecha, nada mas se mueve)
         
         seqVagones.play();
         seqLocIzq.play();
