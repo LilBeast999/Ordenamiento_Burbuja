@@ -1335,8 +1335,8 @@ public class Ordenamientos {
                     seqLocIzq.getChildren().add(movVacio1);
                     seqLocAux.getChildren().add(movVacio1);
 
-
-            //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
+            //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)        
+            if(minIndex!= arreglo.size()-1){
                 //MOVIMIENTOS A REALIZAR
                     TranslateTransition movLocDer2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
                     movLocDer2.setToX(1800-locomotoraDer.getLayoutX());
@@ -1354,6 +1354,7 @@ public class Ordenamientos {
                     TranslateTransition movVacio2 = new TranslateTransition(Duration.millis(duracion));
                     seqLocIzq.getChildren().add(movVacio2);
                     seqLocAux.getChildren().add(movVacio2);
+            }
 
             //3.- locomotoraAux va a buscar a vagonR (se mueve en curva descendiente a la izquierda)
 
