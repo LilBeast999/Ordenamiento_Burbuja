@@ -852,13 +852,13 @@ public class Lapiz {
         
  
      //rail principal
-     Rectangle rectangulo1= new Rectangle(-5000,500,10000,15); //sujeta a formula
+     Rectangle rectangulo1= new Rectangle(-5000,502.5,10000,15); //sujeta a formula
      rectangulo1.setFill(Color.web("#8A6012"));
      rectangulo1.setStroke(Color.BLACK);
      rectangulo1.setStrokeWidth(1);
      
      //rail auxiliar
-     Rectangle rectangulo2= new Rectangle(400,-1612,10000,15); //sujeta a formula
+     Rectangle rectangulo2= new Rectangle(402.5,-1612,10000,15); //sujeta a formula
      rectangulo2.setFill(Color.web("#8A6012"));
      rectangulo2.setStroke(Color.BLACK);
      rectangulo2.setStrokeWidth(1);
@@ -1737,7 +1737,7 @@ public class Lapiz {
     locomotora.setLayoutY(y);
     
     
-    
+    locomotora.setRotate(180);
     anchor.getChildren().add(locomotora);
     
     return anchor;
