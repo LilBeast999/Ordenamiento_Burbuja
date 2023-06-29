@@ -20,7 +20,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
@@ -1298,7 +1297,7 @@ public class Ordenamientos {
         AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
         locomotoraAux.setRotate(-27);
         
-        int duracion = 2000;
+        int duracion = 1000;
         
         SequentialTransition seqVagones = new SequentialTransition();
         SequentialTransition seqLocIzq = new SequentialTransition();
@@ -1326,7 +1325,6 @@ public class Ordenamientos {
             //INTERCAMBIO DE VAGONES
             AnchorPane vagonR = vagonesAnchor.get(minIndex);
             AnchorPane vagonI = vagonesAnchor.get(i);
-            
             
            if(minIndex!= arreglo.size()-1){
                 //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
@@ -1361,22 +1359,32 @@ public class Ordenamientos {
                         seqLocAux.getChildren().add(movVacio2);
             }
            
-            //3.- locomotoraAux va a buscar a VagonR (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
+            //3.- locomotoraAux se mueve hasta la intersección (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
                 //MOVIMIENTOS A REALIZAR
                     Path path = new Path();
-                    path.getElements().add(new MoveTo(20, 20));
-                    path.getElements().add(new CubicCurveTo(-100, 500, -150, 475, -800, 475));
-                    path.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));                  
+                    path.getElements().add(new MoveTo(0, 0));
+                    path.getElements().add(new CubicCurveTo(0, 0, 200, 799, -400,500));
                     PathTransition pathLocAux = new PathTransition(Duration.millis(duracion), path, locomotoraAux);
                     pathLocAux.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                    seqLocAux.getChildren().add(pathLocAux);
+                    
+                    seqLocIzq.getChildren().add(pathLocAux);
                     
                 //MOVIMIENTOS VACIOS NECESARIOS
-                    TranslateTransition movVacio3 = new TranslateTransition(Duration.millis(duracion));
-                    seqLocDer.getChildren().add(movVacio3);
-                    seqLocIzq.getChildren().add(movVacio3);
-                    seqVagones.getChildren().add(movVacio3);
+                TranslateTransition movVacio3 = new TranslateTransition(Duration.millis(duracion));
+                seqLocDer.getChildren().add(movVacio3);
+                seqLocIzq.getChildren().add(movVacio3);
+                seqVagones.getChildren().add(movVacio3);
 
+            //4.- locomotoraAux va a buscar a vagonR (locomotoraAux se mueve a la izquierda, nada más se mueve)
+                //MOVIMIENTOS A REALIZAR
+                
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+                TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
+                seqLocDer.getChildren().add(movVacio4);
+                seqLocIzq.getChildren().add(movVacio4);
+                seqVagones.getChildren().add(movVacio4);
+            
                 
             
             //DE AQUÍ PARA ABAJO REVISAR
