@@ -844,11 +844,25 @@ public class Lapiz {
     }
     
     public AnchorPane dibujarfondo2(){
-    // Rail principal
-    Rectangle rectangulo1 = new Rectangle(-5000, 500, 10000, 20);
-    rectangulo1.setFill(Color.GRAY);
-    rectangulo1.setStroke(Color.BLACK);
-    rectangulo1.setStrokeWidth(1);
+        
+ 
+     //rail principal
+     Rectangle rectangulo1= new Rectangle(-5000,502.5,10000,15); //sujeta a formula
+     rectangulo1.setFill(Color.web("#8A6012"));
+     rectangulo1.setStroke(Color.BLACK);
+     rectangulo1.setStrokeWidth(1);
+     
+     //rail auxiliar
+     Rectangle rectangulo2= new Rectangle(402.5,-1612,10000,15); //sujeta a formula
+     rectangulo2.setFill(Color.web("#8A6012"));
+     rectangulo2.setStroke(Color.BLACK);
+     rectangulo2.setStrokeWidth(1);
+     rectangulo2.setRotate(-25);
+     
+     
+     Rectangle rectangulo3= new Rectangle(-5000,-5000,10000,10000);
+     rectangulo3.setFill(Color.GREEN);
+     
 
     // Rail auxiliar
     Rectangle rectangulo2 = new Rectangle(500, -1612, 10000, 20);
@@ -1249,6 +1263,272 @@ public class Lapiz {
        return numeros;
     } 
      
+    public ArrayList<Group> AlmacenarNumeros2(){
+        ArrayList <Group> numeros= new ArrayList();
+        
+        Rectangle cero1 = new Rectangle(5, 0, 40, 10); 
+        cero1.setFill(Color.WHITE); 
+        Rectangle cero2 = new Rectangle(5, 0, 10, 60); 
+        cero2.setFill(Color.WHITE); 
+        Rectangle cero3 = new Rectangle(5, 50, 40, 10); 
+        cero3.setFill(Color.WHITE); 
+        Rectangle cero4 = new Rectangle(45, 0, 10, 60); 
+        cero4.setFill(Color.WHITE); 
+        Group grupo0= new Group(cero1,cero2,cero3,cero4);
+        grupo0.setScaleX(0.5);
+        grupo0.setScaleY(0.5);
+        
+       
+        Rectangle uno1 = new Rectangle(15, 0, 30, 60); 
+        uno1.setFill(Color.WHITE);
+        uno1.setScaleX(0.5);
+        uno1.setScaleY(0.5);
+        Group grupo1= new Group(uno1);
+        
+        Rectangle dos1 = new Rectangle(10, 0, 40, 10); 
+        dos1.setFill(Color.WHITE); 
+        Rectangle dos2 = new Rectangle(40, 0, 10, 30); 
+        dos2.setFill(Color.WHITE); 
+        Rectangle dos3 = new Rectangle(10, 30, 40, 10); 
+        dos3.setFill(Color.WHITE); 
+        Rectangle dos4 = new Rectangle(10, 30, 10, 30); 
+        dos4.setFill(Color.WHITE); 
+        Rectangle dos5 = new Rectangle(10, 50, 40, 10); 
+        dos5.setFill(Color.WHITE); 
+        Group grupo2= new Group(dos1,dos2,dos3,dos4,dos5);
+        grupo2.setScaleX(0.5);
+        grupo2.setScaleY(0.5);
+        
+        Rectangle tres1 = new Rectangle(10, 0, 40, 10); 
+        tres1.setFill(Color.WHITE); 
+        Rectangle tres2 = new Rectangle(40, 10, 10, 30); 
+        tres2.setFill(Color.WHITE); 
+        Rectangle tres3 = new Rectangle(10, 30, 40, 10); 
+        tres3.setFill(Color.WHITE); 
+        Rectangle tres4 = new Rectangle(40, 30, 10, 30); 
+        tres4.setFill(Color.WHITE); 
+        Rectangle tres5 = new Rectangle(10, 50, 40, 10); 
+        tres5.setFill(Color.WHITE); 
+        Group grupo3= new Group(tres1,tres2,tres3,tres4,tres5);
+        grupo3.setScaleX(0.5);
+        grupo3.setScaleY(0.5);
+        
+        Rectangle cuatro1 = new Rectangle(10, 0, 10, 30); 
+        cuatro1.setFill(Color.WHITE); 
+        Rectangle cuatro2 = new Rectangle(40, 0, 10, 60); 
+        cuatro2.setFill(Color.WHITE); 
+        Rectangle cuatro3 = new Rectangle(10, 30, 40, 10); 
+        cuatro3.setFill(Color.WHITE); 
+        Group grupo4= new Group(cuatro1,cuatro2,cuatro3);
+        grupo4.setScaleX(0.5);
+        grupo4.setScaleY(0.5);
+        
+        Rectangle cinco1 = new Rectangle(10, 0, 40, 10); 
+        cinco1.setFill(Color.WHITE); 
+        Rectangle cinco2 = new Rectangle(10, 10, 10, 30); 
+        cinco2.setFill(Color.WHITE); 
+        Rectangle cinco3 = new Rectangle(10, 30, 40, 10); 
+        cinco3.setFill(Color.WHITE); 
+        Rectangle cinco4 = new Rectangle(40, 30, 10, 30); 
+        cinco4.setFill(Color.WHITE); 
+        Rectangle cinco5 = new Rectangle(10, 50, 40, 10); 
+        cinco5.setFill(Color.WHITE); 
+        Group grupo5= new Group(cinco1,cinco2,cinco3,cinco4,cinco5);
+        grupo5.setScaleX(0.5);
+        grupo5.setScaleY(0.5);
+        
+        Rectangle seis1 = new Rectangle(10, 0, 30, 10); 
+        seis1.setFill(Color.WHITE); 
+        Rectangle seis2 = new Rectangle(10, 0, 10, 60); 
+        seis2.setFill(Color.WHITE); 
+        Rectangle seis3 = new Rectangle(10, 30, 40, 10); 
+        seis3.setFill(Color.WHITE); 
+        Rectangle seis4 = new Rectangle(40, 30, 10, 30); 
+        seis4.setFill(Color.WHITE); 
+        Rectangle seis5 = new Rectangle(10, 50, 40, 10); 
+        seis5.setFill(Color.WHITE);
+        Group grupo6= new Group(seis1,seis2,seis3,seis4,seis5);
+        grupo6.setScaleX(0.5);
+        grupo6.setScaleY(0.5);
+        
+        Rectangle siete1 = new Rectangle(15, 0, 30, 10); 
+        siete1.setFill(Color.WHITE); 
+        Rectangle siete2 = new Rectangle(35, 0, 10, 60); 
+        siete2.setFill(Color.WHITE); 
+        Group grupo7= new Group(siete1,siete2);
+        grupo7.setScaleX(0.5);
+        grupo7.setScaleY(0.5);
+    
+         Rectangle ocho1 = new Rectangle(10, 0, 40, 10); 
+        ocho1.setFill(Color.WHITE); 
+        Rectangle ocho2 = new Rectangle(10, 0, 10, 60); 
+        ocho2.setFill(Color.WHITE); 
+        Rectangle ocho3 = new Rectangle(10, 30, 40, 10); 
+        ocho3.setFill(Color.WHITE); 
+        Rectangle ocho4 = new Rectangle(10, 50, 40, 10); 
+        ocho4.setFill(Color.WHITE); 
+        Rectangle ocho5 = new Rectangle(40, 0, 10, 60); 
+        ocho5.setFill(Color.WHITE); 
+        Group grupo8= new Group(ocho1,ocho2,ocho3,ocho4,ocho5);
+        grupo8.setScaleX(0.5);
+        grupo8.setScaleY(0.5);
+        
+        Rectangle nueve1 = new Rectangle(10, 0, 40, 10); 
+        nueve1.setFill(Color.WHITE); 
+        Rectangle nueve2 = new Rectangle(10, 0, 10, 40); 
+        nueve2.setFill(Color.WHITE); 
+        Rectangle nueve3 = new Rectangle(10, 30, 40, 10); 
+        nueve3.setFill(Color.WHITE); 
+        Rectangle nueve4 = new Rectangle(40, 0, 10, 60); 
+        nueve4.setFill(Color.WHITE); 
+        Group grupo9= new Group(nueve1,nueve2,nueve3,nueve4);
+        grupo9.setScaleX(0.5);
+        grupo9.setScaleY(0.5);
+        
+        Rectangle cero11 = new Rectangle(5, 0, 40, 10); 
+        cero1.setFill(Color.WHITE); 
+        Rectangle cero22 = new Rectangle(5, 0, 10, 60); 
+        cero2.setFill(Color.WHITE); 
+        Rectangle cero33 = new Rectangle(5, 50, 40, 10); 
+        cero3.setFill(Color.WHITE); 
+        Rectangle cero44 = new Rectangle(45, 0, 10, 60); 
+        cero4.setFill(Color.WHITE); 
+        Group grupo00= new Group(cero11,cero22,cero33,cero44);
+        grupo00.setScaleX(0.5);
+        grupo00.setScaleY(0.5);
+        
+       
+        Rectangle uno11 = new Rectangle(15, 0, 30, 60); 
+        uno11.setFill(Color.WHITE);
+        uno11.setScaleX(0.5);
+        uno11.setScaleY(0.5);
+        Group grupo11= new Group(uno11);
+        
+        Rectangle dos11 = new Rectangle(10, 0, 40, 10); 
+        dos11.setFill(Color.WHITE); 
+        Rectangle dos22 = new Rectangle(40, 0, 10, 30); 
+        dos22.setFill(Color.WHITE); 
+        Rectangle dos33 = new Rectangle(10, 30, 40, 10); 
+        dos33.setFill(Color.WHITE); 
+        Rectangle dos44 = new Rectangle(10, 30, 10, 30); 
+        dos44.setFill(Color.WHITE); 
+        Rectangle dos55 = new Rectangle(10, 50, 40, 10); 
+        dos55.setFill(Color.WHITE); 
+        Group grupo22= new Group(dos11,dos22,dos33,dos44,dos55);
+        grupo22.setScaleX(0.5);
+        grupo22.setScaleY(0.5);
+        
+        Rectangle tres11 = new Rectangle(10, 0, 40, 10); 
+        tres11.setFill(Color.WHITE); 
+        Rectangle tres22 = new Rectangle(40, 10, 10, 30); 
+        tres22.setFill(Color.WHITE); 
+        Rectangle tres33 = new Rectangle(10, 30, 40, 10); 
+        tres33.setFill(Color.WHITE); 
+        Rectangle tres44 = new Rectangle(40, 30, 10, 30); 
+        tres44.setFill(Color.WHITE); 
+        Rectangle tres55 = new Rectangle(10, 50, 40, 10); 
+        tres55.setFill(Color.WHITE); 
+        Group grupo33= new Group(tres11,tres22,tres33,tres44,tres55);
+        grupo33.setScaleX(0.5);
+        grupo33.setScaleY(0.5);
+        
+        Rectangle cuatro11 = new Rectangle(10, 0, 10, 30); 
+        cuatro11.setFill(Color.WHITE); 
+        Rectangle cuatro22 = new Rectangle(40, 0, 10, 60); 
+        cuatro22.setFill(Color.WHITE); 
+        Rectangle cuatro33 = new Rectangle(10, 30, 40, 10); 
+        cuatro33.setFill(Color.WHITE); 
+        Group grupo44= new Group(cuatro11,cuatro22,cuatro33);
+        grupo44.setScaleX(0.5);
+        grupo44.setScaleY(0.5);
+        
+        Rectangle cinco11 = new Rectangle(10, 0, 40, 10); 
+        cinco11.setFill(Color.WHITE); 
+        Rectangle cinco22 = new Rectangle(10, 10, 10, 30); 
+        cinco22.setFill(Color.WHITE); 
+        Rectangle cinco33 = new Rectangle(10, 30, 40, 10); 
+        cinco33.setFill(Color.WHITE); 
+        Rectangle cinco44 = new Rectangle(40, 30, 10, 30); 
+        cinco44.setFill(Color.WHITE); 
+        Rectangle cinco55 = new Rectangle(10, 50, 40, 10); 
+        cinco55.setFill(Color.WHITE); 
+        Group grupo55= new Group(cinco11,cinco22,cinco33,cinco44,cinco55);
+        grupo55.setScaleX(0.5);
+        grupo55.setScaleY(0.5);
+        
+        Rectangle seis11 = new Rectangle(10, 0, 30, 10); 
+        seis11.setFill(Color.WHITE); 
+        Rectangle seis22 = new Rectangle(10, 0, 10, 60); 
+        seis22.setFill(Color.WHITE); 
+        Rectangle seis33 = new Rectangle(10, 30, 40, 10); 
+        seis33.setFill(Color.WHITE); 
+        Rectangle seis44 = new Rectangle(40, 30, 10, 30); 
+        seis44.setFill(Color.WHITE); 
+        Rectangle seis55 = new Rectangle(10, 50, 40, 10); 
+        seis55.setFill(Color.WHITE);
+        Group grupo66= new Group(seis11,seis22,seis33,seis44,seis55);
+        grupo66.setScaleX(0.5);
+        grupo66.setScaleY(0.5);
+        
+        Rectangle siete11 = new Rectangle(15, 0, 30, 10); 
+        siete11.setFill(Color.WHITE); 
+        Rectangle siete22 = new Rectangle(35, 0, 10, 60); 
+        siete22.setFill(Color.WHITE); 
+        Group grupo77= new Group(siete11,siete22);
+        grupo77.setScaleX(0.5);
+        grupo77.setScaleY(0.5);
+    
+         Rectangle ocho11 = new Rectangle(10, 0, 40, 10); 
+        ocho11.setFill(Color.WHITE); 
+        Rectangle ocho22 = new Rectangle(10, 0, 10, 60); 
+        ocho22.setFill(Color.WHITE); 
+        Rectangle ocho33 = new Rectangle(10, 30, 40, 10); 
+        ocho33.setFill(Color.WHITE); 
+        Rectangle ocho44 = new Rectangle(10, 50, 40, 10); 
+        ocho44.setFill(Color.WHITE); 
+        Rectangle ocho55= new Rectangle(40, 0, 10, 60); 
+        ocho55.setFill(Color.WHITE); 
+        Group grupo88= new Group(ocho11,ocho22,ocho33,ocho44,ocho55);
+        grupo88.setScaleX(0.5);
+        grupo88.setScaleY(0.5);
+        
+        Rectangle nueve11 = new Rectangle(10, 0, 40, 10); 
+        nueve11.setFill(Color.WHITE); 
+        Rectangle nueve22 = new Rectangle(10, 0, 10, 40); 
+        nueve22.setFill(Color.WHITE); 
+        Rectangle nueve33 = new Rectangle(10, 30, 40, 10); 
+        nueve33.setFill(Color.WHITE); 
+        Rectangle nueve44 = new Rectangle(40, 0, 10, 60); 
+        nueve44.setFill(Color.WHITE); 
+        Group grupo99= new Group(nueve11,nueve22,nueve33,nueve44);
+        grupo99.setScaleX(0.5);
+        grupo99.setScaleY(0.5);
+        
+        numeros.add(grupo0);
+        numeros.add(grupo1);
+        numeros.add(grupo2);
+        numeros.add(grupo3);
+        numeros.add(grupo4);
+        numeros.add(grupo5);
+        numeros.add(grupo6);
+        numeros.add(grupo7);
+        numeros.add(grupo8);
+        numeros.add(grupo9); 
+        numeros.add(grupo00);
+        numeros.add(grupo11);
+        numeros.add(grupo22);
+        numeros.add(grupo33);
+        numeros.add(grupo44);
+        numeros.add(grupo55);
+        numeros.add(grupo66);
+        numeros.add(grupo77);
+        numeros.add(grupo88);
+        numeros.add(grupo99); 
+        
+
+       return numeros;
+    } 
+    
     public AnchorPane DibujarNumeros(AnchorPane caja, int numero, ArrayList <Group> numeros){
         
         if (numero>9){
@@ -1293,29 +1573,29 @@ public class Lapiz {
             //agregar excepcion cuando los numeros sean iguales
             if ((numero/10) == (numero%10)){
                 
-                if (numero/10==1){
+                if (numero/10==1){ // en caso de que el numero sea 11
                     
-                    numeros.get(numero/10).setLayoutX(-20);
-                    numeros.get(numero/10).setLayoutY(-10);
-                    numeros.get(numero/10).setScaleX(0.4);
-                    numeros.get(numero/10).setScaleY(0.9);
+                    numeros.get(numero/10).setLayoutX(-10);
+                    numeros.get(numero/10).setLayoutY(0);
+                    numeros.get(numero/10).setScaleX(0.6);
+                    numeros.get(numero/10).setScaleY(1.2);
                     caja.getChildren().add(numeros.get(numero/10));
-                    numeros.get((numero%10)+10).setLayoutX(0);
-                    numeros.get((numero%10)+10).setLayoutY(-10);
-                    numeros.get((numero%10)+10).setScaleX(0.4);
-                    numeros.get((numero%10)+10).setScaleY(0.9);
+                    numeros.get((numero%10)+10).setLayoutX(10);
+                    numeros.get((numero%10)+10).setLayoutY(0);
+                    numeros.get((numero%10)+10).setScaleX(0.6);
+                    numeros.get((numero%10)+10).setScaleY(1.2);
                     caja.getChildren().add(numeros.get((numero%10)+10));                
                 }
-                else{
-                   numeros.get(numero/10).setLayoutX(-20);
-                   numeros.get(numero/10).setLayoutY(-10);
-                   numeros.get(numero/10).setScaleX(0.4);
-                   numeros.get(numero/10).setScaleY(0.45);
+                else{  //en caso de que sean 2 numeros iguales distintos a 11
+                   numeros.get(numero/10).setLayoutX(-12);
+                   numeros.get(numero/10).setLayoutY(0);
+                   numeros.get(numero/10).setScaleX(0.45);
+                   numeros.get(numero/10).setScaleY(0.65);
                    caja.getChildren().add(numeros.get(numero/10));
-                   numeros.get((numero%10)+10).setLayoutX(0);
-                   numeros.get((numero%10)+10).setLayoutY(-10);
-                   numeros.get((numero%10)+10).setScaleX(0.5);
-                   numeros.get((numero%10)+10).setScaleY(0.45);
+                   numeros.get((numero%10)+10).setLayoutX(12);
+                   numeros.get((numero%10)+10).setLayoutY(0);
+                   numeros.get((numero%10)+10).setScaleX(0.45);
+                   numeros.get((numero%10)+10).setScaleY(0.65);
                   caja.getChildren().add(numeros.get((numero%10)+10));
 
                 }
@@ -1323,28 +1603,63 @@ public class Lapiz {
   
                 
             }else{
-                numeros.get(numero/10).setLayoutX(-20);
-                numeros.get(numero/10).setScaleX(0.4);
-                 numeros.get(numero/10).setLayoutY(-10);
+                
+                if((numero/10)==1){
+                numeros.get(numero/10).setLayoutX(-12);
+                numeros.get(numero/10).setScaleX(0.45);
+                numeros.get(numero/10).setScaleY(1.3);
+                 numeros.get(numero/10).setLayoutY(0);
                 caja.getChildren().add(numeros.get(numero/10));
-                numeros.get(numero%10).setLayoutX(0);
-                numeros.get((numero%10)).setLayoutY(-10);
-                numeros.get(numero%10).setScaleX(0.4);
-                caja.getChildren().add(numeros.get(numero%10));       
+                numeros.get(numero%10).setLayoutX(12);
+                numeros.get((numero%10)).setLayoutY(0);
+                numeros.get(numero%10).setScaleX(0.45);
+                numeros.get(numero%10).setScaleY(0.65);
+                caja.getChildren().add(numeros.get(numero%10));  
+                }
+                else if((numero%10)==1){
+                numeros.get(numero/10).setLayoutX(-12);
+                numeros.get(numero/10).setScaleX(0.45);
+                numeros.get(numero/10).setScaleY(0.65);
+                 numeros.get(numero/10).setLayoutY(0);
+                caja.getChildren().add(numeros.get(numero/10));
+                numeros.get(numero%10).setLayoutX(12);
+                numeros.get((numero%10)).setLayoutY(0);
+                numeros.get(numero%10).setScaleX(0.45);
+                numeros.get(numero%10).setScaleY(1.3);
+                caja.getChildren().add(numeros.get(numero%10));  
+                }
+                
+                else{
+                numeros.get(numero/10).setLayoutX(-12);
+                numeros.get(numero/10).setScaleX(0.45);
+                numeros.get(numero/10).setScaleY(0.65);
+                numeros.get(numero/10).setLayoutY(0);
+                caja.getChildren().add(numeros.get(numero/10));
+                numeros.get(numero%10).setLayoutX(12);
+                numeros.get((numero%10)).setLayoutY(0);
+                numeros.get(numero%10).setScaleX(0.45);
+                numeros.get(numero%10).setScaleY(0.65);
+                caja.getChildren().add(numeros.get(numero%10));
+                
+                
+                }
+                
+ 
             } 
             
         }else{
              
             if (numero==1){
                 numeros.get(numero).setScaleX(0.5);             
-                numeros.get(numero).setLayoutX(-10); 
-                numeros.get(numero).setLayoutY(-10); 
+                numeros.get(numero).setLayoutX(0); 
+                numeros.get(numero).setLayoutY(0); 
                 caja.getChildren().add(numeros.get(numero));
             }
             else{
-                numeros.get(numero).setLayoutX(-10);
-                numeros.get(numero).setLayoutY(-10);
-                numeros.get(numero).setScaleY(0.5);
+                numeros.get(numero).setLayoutX(0);
+                numeros.get(numero).setLayoutY(0);
+                numeros.get(numero).setScaleY(0.65);
+                numeros.get(numero).setScaleX(0.7);
                 caja.getChildren().add(numeros.get(numero));
                 
             }
@@ -1356,83 +1671,66 @@ public class Lapiz {
     public AnchorPane dibujarLocomotora(AnchorPane anchor, int x, int y){
         AnchorPane locomotora = new AnchorPane();
 
-        Rectangle rectangulo1 = new Rectangle(0,0,80,35);
-        rectangulo1.setFill(Color.web("#FEF300"));
-        rectangulo1.setStroke(Color.BLACK);
-
-        Rectangle rectangulo2 = new Rectangle(0,0,5,25);
-        rectangulo2.setFill(Color.web("#C9F5F0"));
-        rectangulo2.setStroke(Color.BLACK);
-        rectangulo2.setLayoutX(75);
-        rectangulo2.setLayoutY(5);
-
-        Line linea1= new Line();
-        linea1.setStartX(80);
-        linea1.setStartY(0);
-        linea1.setEndX(90);
-        linea1.setEndY(17.5);
-         linea1.setStrokeWidth(3);
-
-        Line linea2= new Line();
-        linea2.setStartX(90);
-        linea2.setStartY(17.5);
-        linea2.setEndX(80);
-        linea2.setEndY(35);
-        linea2.setStrokeWidth(3); 
-
-        Line linea3= new Line();
-        linea3.setStartX(81);
-        linea3.setStartY(11.5);
-        linea3.setEndX(84);
-        linea3.setEndY(11.5);
-        linea3.setStrokeWidth(3); 
-
-        Line linea4= new Line();
-        linea4.setStartX(81);
-        linea4.setStartY(23);
-        linea4.setEndX(84);
-        linea4.setEndY(23);
-        linea4.setStrokeWidth(3); 
-
-        Line linea5= new Line();
-        linea5.setStartX(81);
-        linea5.setStartY(17.5);
-        linea5.setEndX(88);
-        linea5.setEndY(17.5);
-        linea5.setStrokeWidth(3); 
-
-        Circle circulo= new Circle(20,17.5,10);
-        circulo.setFill(Color.web("#5C5D5D"));
-
-        Circle circulo2= new Circle(20,17.5,5);
-        circulo2.setFill(Color.BLACK);
-
-        Circle circulo4= new Circle(50,17.5,10);
-        circulo4.setFill(Color.web("#5C5D5D"));
-
-        Circle circulo5= new Circle(50,17.5,5);
-        circulo5.setFill(Color.BLACK);
-
-
-        locomotora.getChildren().add(rectangulo1);
-        locomotora.getChildren().add(rectangulo2);
-        locomotora.getChildren().add(linea1);
-        locomotora.getChildren().add(linea2);
-        locomotora.getChildren().add(linea3);
-        locomotora.getChildren().add(linea4);
-        locomotora.getChildren().add(linea5);
-        locomotora.getChildren().add(circulo);
-        locomotora.getChildren().add(circulo2);
-        locomotora.getChildren().add(circulo4);
-        locomotora.getChildren().add(circulo5);
-        locomotora.setLayoutX(x);
-        locomotora.setLayoutY(y);
-
-
-
-        anchor.getChildren().add(locomotora);
-
-        return locomotora;
+    Line linea2= new Line();
+    linea2.setStartX(90);
+    linea2.setStartY(17.5);
+    linea2.setEndX(80);
+    linea2.setEndY(35);
+    linea2.setStrokeWidth(3); 
+    
+    Line linea3= new Line();
+    linea3.setStartX(81);
+    linea3.setStartY(11.5);
+    linea3.setEndX(84);
+    linea3.setEndY(11.5);
+    linea3.setStrokeWidth(3); 
+    
+    Line linea4= new Line();
+    linea4.setStartX(81);
+    linea4.setStartY(23);
+    linea4.setEndX(84);
+    linea4.setEndY(23);
+    linea4.setStrokeWidth(3); 
+    
+    Line linea5= new Line();
+    linea5.setStartX(81);
+    linea5.setStartY(17.5);
+    linea5.setEndX(88);
+    linea5.setEndY(17.5);
+    linea5.setStrokeWidth(3); 
+     
+    Circle circulo= new Circle(20,17.5,10);
+    circulo.setFill(Color.web("#5C5D5D"));
+    
+    Circle circulo2= new Circle(20,17.5,5);
+    circulo2.setFill(Color.BLACK);
+    
+    Circle circulo4= new Circle(50,17.5,10);
+    circulo4.setFill(Color.web("#5C5D5D"));
+    
+    Circle circulo5= new Circle(50,17.5,5);
+    circulo5.setFill(Color.BLACK);
+    
+    
+    locomotora.getChildren().add(rectangulo1);
+    locomotora.getChildren().add(rectangulo2);
+    locomotora.getChildren().add(linea1);
+    locomotora.getChildren().add(linea2);
+    locomotora.getChildren().add(linea3);
+    locomotora.getChildren().add(linea4);
+    locomotora.getChildren().add(linea5);
+    locomotora.getChildren().add(circulo);
+    locomotora.getChildren().add(circulo2);
+    locomotora.getChildren().add(circulo4);
+    locomotora.getChildren().add(circulo5);
+    locomotora.setLayoutX(x);
+    locomotora.setLayoutY(y);
+    
+    
+    locomotora.setRotate(180);
+    anchor.getChildren().add(locomotora);
+    
+    return anchor;
     } 
     
     public AnchorPane dibujargancho(AnchorPane anchor, int posx, int posy){
