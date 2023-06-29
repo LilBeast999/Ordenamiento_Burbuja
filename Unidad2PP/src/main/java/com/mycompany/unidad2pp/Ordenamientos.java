@@ -1362,34 +1362,35 @@ public class Ordenamientos {
             //3.- locomotoraAux se mueve hasta la intersección (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
                 //MOVIMIENTOS A REALIZAR
                     Path path = new Path();
-                    path.getElements().add(new MoveTo(0, 0));
-                    path.getElements().add(new CubicCurveTo(0, 0, 200, 799, -400,500));
+                    path.getElements().add(new MoveTo(20, 20));
+                    path.getElements().add(new CubicCurveTo(-100, 500, -250, 475, -800, 475));
+                    path.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));                  
                     PathTransition pathLocAux = new PathTransition(Duration.millis(duracion), path, locomotoraAux);
                     pathLocAux.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                     
                     seqLocIzq.getChildren().add(pathLocAux);
                     
                 //MOVIMIENTOS VACIOS NECESARIOS
-                TranslateTransition movVacio3 = new TranslateTransition(Duration.millis(duracion));
-                seqLocDer.getChildren().add(movVacio3);
-                seqLocIzq.getChildren().add(movVacio3);
-                seqVagones.getChildren().add(movVacio3);
-
-            //4.- locomotoraAux va a buscar a vagonR (locomotoraAux se mueve a la izquierda, nada más se mueve)
+                    TranslateTransition movVacio3 = new TranslateTransition(Duration.millis(duracion));
+                    seqLocDer.getChildren().add(movVacio3);
+                    seqLocIzq.getChildren().add(movVacio3);
+                    seqVagones.getChildren().add(movVacio3);
+                
+            //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
                 //MOVIMIENTOS A REALIZAR
+                Path pathReversa = new Path();
+                pathReversa.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2), 475));
+                pathReversa.getElements().add(new LineTo(-800,475));
+                pathReversa.getElements().add(new CubicCurveTo(-800, 475, -150, 475, -100, 500));                
+                PathTransition pathLocAuxRev = new PathTransition(Duration.millis(duracion), pathReversa, locomotoraAux);
+                pathLocAuxRev.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                seqLocAux.getChildren().add(pathLocAuxRev);
                 
                 
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio4);
                 seqLocIzq.getChildren().add(movVacio4);
-                seqVagones.getChildren().add(movVacio4);
-            
-                
-            
-            //DE AQUÍ PARA ABAJO REVISAR
-                
-            //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
 
             //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
 
