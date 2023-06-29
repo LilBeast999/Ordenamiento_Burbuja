@@ -1704,7 +1704,9 @@ public class Lapiz {
     circulo5.setFill(Color.BLACK);
     
     
-
+    locomotora.getChildren().add(rectangulo1);
+    locomotora.getChildren().add(rectangulo2);
+    locomotora.getChildren().add(linea1);
     locomotora.getChildren().add(linea2);
     locomotora.getChildren().add(linea3);
     locomotora.getChildren().add(linea4);
@@ -1720,7 +1722,7 @@ public class Lapiz {
     locomotora.setRotate(180);
     anchor.getChildren().add(locomotora);
     
-    return locomotora;
+    return anchor;
     } 
     
     public AnchorPane dibujargancho(AnchorPane anchor, int posx, int posy){
