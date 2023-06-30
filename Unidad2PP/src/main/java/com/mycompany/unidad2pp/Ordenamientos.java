@@ -1369,7 +1369,7 @@ public class Ordenamientos {
                     PathTransition pathLocAux = new PathTransition(Duration.millis(duracion), path, locomotoraAux);
                     pathLocAux.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                     
-                    seqLocIzq.getChildren().add(pathLocAux);
+                    seqLocAux.getChildren().add(pathLocAux);
                     
                 //MOVIMIENTOS VACIOS NECESARIOS
                     TranslateTransition movVacio3 = new TranslateTransition(Duration.millis(duracion));
@@ -1382,10 +1382,19 @@ public class Ordenamientos {
                 Path pathReversa = new Path();
                 pathReversa.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2), 475));
                 pathReversa.getElements().add(new LineTo(-800,475));
-                pathReversa.getElements().add(new CubicCurveTo(-800, 475, -150, 475, -100, 500));                
+                pathReversa.getElements().add(new CubicCurveTo(-800, 475, 200, 475, 20, 40));                
                 PathTransition pathLocAuxRev = new PathTransition(Duration.millis(duracion), pathReversa, locomotoraAux);
                 pathLocAuxRev.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                 seqLocAux.getChildren().add(pathLocAuxRev);
+                
+                Path pathVagonR = new Path();
+                pathVagonR.getElements().add(new MoveTo((vagonR.getLayoutX()-1800), 475));
+                pathVagonR.getElements().add(new LineTo(-800-(850/coordenadasX.size()*2),475));
+                pathVagonR.getElements().add(new CubicCurveTo(-800-(850/coordenadasX.size()*2), 475, 200, 475, 20, 40));                
+                PathTransition pathTransVagR = new PathTransition(Duration.millis(duracion), pathVagonR, vagonR);
+                pathTransVagR.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                seqVagones.getChildren().add(pathTransVagR);
+                
                 
                 
                 //MOVIMIENTOS VACIOS NECESARIOS
