@@ -1327,6 +1327,7 @@ public class Ordenamientos {
             AnchorPane vagonR = vagonesAnchor.get(minIndex);
             AnchorPane vagonI = vagonesAnchor.get(i);
             
+            //Solo si vagonR NO es el último de los vagones, se mueven los vagones a su derecha,ya que en caso contrario, no hay vagones a la derecha de vagonR que mover
             if(minIndex!= arreglo.size()-1){
                 //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
                     //MOVIMIENTOS A REALIZAR
@@ -1428,7 +1429,23 @@ public class Ordenamientos {
                
 
             //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
+                //MOVIMIENTOS NECESARIOS
+                    TranslateTransition movLocDer4 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                    movLocDer4.setToX(1800-locomotoraDer.getLayoutX());
+                    seqLocDer.getChildren().add(movLocDer4);
 
+                    ParallelTransition movVagonesIzq2 = new ParallelTransition();
+                    for (int k = arreglo.size()-1, ind = 0; k > i; k--, ind++){
+                        if(k!=minIndex){
+                            TranslateTransition movVagonDer = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
+                            movVagonDer.setByX(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind));
+                            movVagonesIzq2.getChildren().add(movVagonDer);
+                        }
+                    }
+                    seqVagones.getChildren().add(movVagonesIzq2);        
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+           
             //7.- locomotoraAux trae de vuelta a vagonR hasta la primera posición(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
 
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
