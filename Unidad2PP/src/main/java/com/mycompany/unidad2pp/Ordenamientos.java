@@ -1327,7 +1327,7 @@ public class Ordenamientos {
             AnchorPane vagonR = vagonesAnchor.get(minIndex);
             AnchorPane vagonI = vagonesAnchor.get(i);
             
-           if(minIndex!= arreglo.size()-1){
+            if(minIndex!= arreglo.size()-1){
                 //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
                     //MOVIMIENTOS A REALIZAR
                         TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
@@ -1364,7 +1364,7 @@ public class Ordenamientos {
                 //MOVIMIENTOS A REALIZAR
                     Path path = new Path();
                     path.getElements().add(new MoveTo(20, 20));
-                    path.getElements().add(new CubicCurveTo(-100, 500, -250, 475, -800, 475));
+                    path.getElements().add(new CubicCurveTo(-100, 500, -300, 475, -800, 475));
                     path.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));                  
                     PathTransition pathLocAux = new PathTransition(Duration.millis(duracion), path, locomotoraAux);
                     pathLocAux.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -1379,30 +1379,53 @@ public class Ordenamientos {
                 
             //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
                 //MOVIMIENTOS A REALIZAR
+                /*
                 Path pathReversa = new Path();
                 pathReversa.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2), 475));
                 pathReversa.getElements().add(new LineTo(-800,475));
-                pathReversa.getElements().add(new CubicCurveTo(-800, 475, 200, 475, 20, 40));                
+                pathReversa.getElements().add(new CubicCurveTo(-800, 475, 0, 475, 20, 40));                
                 PathTransition pathLocAuxRev = new PathTransition(Duration.millis(duracion), pathReversa, locomotoraAux);
                 pathLocAuxRev.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                seqLocAux.getChildren().add(pathLocAuxRev);
+                */
                 
+                
+                seqLocAux.getChildren().add(pt_recta_curva((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
+                /*
                 Path pathVagonR = new Path();
                 pathVagonR.getElements().add(new MoveTo((vagonR.getLayoutX()-1800), 475));
                 pathVagonR.getElements().add(new LineTo(-800-(850/coordenadasX.size()*2),475));
                 pathVagonR.getElements().add(new CubicCurveTo(-800-(850/coordenadasX.size()*2), 475, 200, 475, 20, 40));                
                 PathTransition pathTransVagR = new PathTransition(Duration.millis(duracion), pathVagonR, vagonR);
                 pathTransVagR.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                seqVagones.getChildren().add(pathTransVagR);
+                */
                 
-                
-                
+                //fun_PathTransition(double XmoveTo,double YmoveTo,double XlineTo,double YlineTo,double X1cubicCurve,double Y1cubicCurve,double X2cubicCurve,double Y2cubicCurve,double X3cubicCurve,double Y3cubicCurve,AnchorPane nodo, int duracion)
+                seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,1800-coordenadasX.get(minIndex),-100,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
+     
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio4);
                 seqLocIzq.getChildren().add(movVacio4);
 
             //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
+                //MOVIMIENTOS A REALIZAR
+                TranslateTransition movLocDer3 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                movLocDer3.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX()));
+                seqLocDer.getChildren().add(movLocDer3);
+
+                ParallelTransition movVagonesIzq1 = new ParallelTransition();
+                for (int k = arreglo.size()-1, ind = 0; k > minIndex; k--, ind++){
+                    TranslateTransition movVagonIzq = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
+                    movVagonIzq.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)+(850/numerodevagones)));
+                    movVagonesIzq1.getChildren().add(movVagonIzq);
+                }
+                seqVagones.getChildren().add(movVagonesIzq1);
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+                 TranslateTransition movVacio5 = new TranslateTransition(Duration.millis(duracion));
+                 seqLocIzq.getChildren().add(movVacio5);
+                 seqLocAux.getChildren().add(movVacio5);
+               
 
             //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
 
@@ -1441,6 +1464,18 @@ public class Ordenamientos {
         seqLocDer.play();
         seqLocAux.play();
     
+    }
+    
+    //Funcion que retorna un PathTransition, donde el Path es una recta y luego una curva
+    private PathTransition pt_recta_curva(double XmoveTo,double YmoveTo,double XlineTo,double YlineTo,double X1cubicCurve,double Y1cubicCurve,double X2cubicCurve,double Y2cubicCurve,double X3cubicCurve,double Y3cubicCurve,AnchorPane nodo, int duracion){
+        Path path = new Path();
+        path.getElements().add(new MoveTo(XmoveTo, YmoveTo));
+        path.getElements().add(new LineTo(XlineTo,YlineTo));
+        path.getElements().add(new CubicCurveTo(X1cubicCurve, Y1cubicCurve, X2cubicCurve, Y2cubicCurve, X3cubicCurve, Y3cubicCurve));                
+        PathTransition pathTransition = new PathTransition(Duration.millis(duracion), path, nodo);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        
+        return pathTransition;
     }
     
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
