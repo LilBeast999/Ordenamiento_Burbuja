@@ -1447,7 +1447,7 @@ public class Ordenamientos {
                 vagonR.setRotate(180);
                 Path rotationPath = new Path();
                 rotationPath.getElements().add(new MoveTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20));
-                rotationPath.getElements().add(new CubicCurveTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20, -(coordenadasX.get(minIndex)-coordenadasX.get(i))+20, 20, -(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20));
+                rotationPath.getElements().add(new LineTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i))+0.0001, 20));
 
                 
                 PathTransition rotacion = new PathTransition();
@@ -1457,10 +1457,6 @@ public class Ordenamientos {
                 rotacion.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                 seqVagones.getChildren().add(rotacion);
                 
-                TranslateTransition movVacio75 = new TranslateTransition(Duration.ONE);
-                seqLocDer.getChildren().add(movVacio75);
-                seqLocIzq.getChildren().add(movVacio75);
-                seqLocAux.getChildren().add(movVacio75);
                 
                 
                 
