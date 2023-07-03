@@ -1301,7 +1301,7 @@ public class Ordenamientos {
         AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
         locomotoraAux.setRotate(-27);
         
-        int duracion = 500;
+        int duracion = 1000;
         
         SequentialTransition seqVagones = new SequentialTransition();
         SequentialTransition seqLocIzq = new SequentialTransition();
@@ -1330,9 +1330,12 @@ public class Ordenamientos {
             AnchorPane vagonR = vagonesAnchor.get(minIndex);
             AnchorPane vagonI = vagonesAnchor.get(i);
             
+            
+            
             //Solo si vagonR NO es el último de los vagones, se mueven los vagones a su derecha,ya que en caso contrario, no hay vagones a la derecha de vagonR que mover
             if(minIndex!= arreglo.size()-1){
                 //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
+                System.out.println("1.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                     //MOVIMIENTOS A REALIZAR
                         TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
                         movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(850/coordenadasX.size()));
@@ -1344,7 +1347,8 @@ public class Ordenamientos {
                         seqLocIzq.getChildren().add(movVacio1);
                         seqLocAux.getChildren().add(movVacio1);
 
-                //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)        
+                //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
+                System.out.println("2.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                     //MOVIMIENTOS A REALIZAR
                         TranslateTransition movLocDer2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
                         movLocDer2.setToX(1800-locomotoraDer.getLayoutX());
@@ -1365,6 +1369,7 @@ public class Ordenamientos {
             }
            
             //3.- locomotoraAux se mueve hasta la derecha de vagonR (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
+            System.out.println("3.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                     Path path = new Path();
                     path.getElements().add(new MoveTo(20, 20));
@@ -1382,10 +1387,11 @@ public class Ordenamientos {
                     seqVagones.getChildren().add(movVacio3);
                 
             //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
+            System.out.println("4.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                 seqLocAux.getChildren().add(pt_recta_curva((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
                
-                seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,0,1800-coordenadasX.get(minIndex),100,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
+                seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,0,1800-coordenadasX.get(minIndex),0,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
      
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
@@ -1393,6 +1399,7 @@ public class Ordenamientos {
                 seqLocIzq.getChildren().add(movVacio4);
 
             //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
+            System.out.println("5.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                 TranslateTransition movLocDer3 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
                 movLocDer3.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX()));
@@ -1413,6 +1420,7 @@ public class Ordenamientos {
                
 
             //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
+            System.out.println("6.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS NECESARIOS
                     TranslateTransition movLocDer4 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
                     movLocDer4.setToX(1800-locomotoraDer.getLayoutX());
@@ -1435,6 +1443,7 @@ public class Ordenamientos {
 
            
             //7.- locomotoraAux trae de vuelta a vagonR hasta donde estaba vagonI(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
+            System.out.println("7.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                 seqLocAux.getChildren().add(pt_curva_recta(20,20,-100,500,-300,475,-800,475,(vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,locomotoraAux,duracion));
                 
@@ -1457,6 +1466,7 @@ public class Ordenamientos {
                 seqVagones.getChildren().add(rotacion);
 
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
+            System.out.println("8.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                 seqLocAux.getChildren().add(pt_recta_curva((vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
 
@@ -1467,6 +1477,7 @@ public class Ordenamientos {
                 seqVagones.getChildren().add(movVacio8);
                 
             //9.- locomotoraIzq, junto con los vagones que ya estan ordenados y vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
+            System.out.println("9.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
                 TranslateTransition movLocIzq1 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
                 movLocIzq1.setByX(1820-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)-(850/coordenadasX.size())*2);
@@ -1498,6 +1509,40 @@ public class Ordenamientos {
             
 
             //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
+            System.out.println("10.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
+                //MOVIMIENTOS A REALIZAR
+                TranslateTransition movLocIzq2 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
+                movLocIzq2.setByX(-(1820-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)-(850/coordenadasX.size())*2));
+                seqLocIzq.getChildren().add(movLocIzq2);
+                if(i!=0){
+                    ParallelTransition movVagonesIzq = new ParallelTransition();
+                    for (int k = i,ind = i ; k >= 0; k--,ind++) {
+                        TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
+                        movVagon.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
+                        movVagonesIzq.getChildren().add(movVagon);
+                    }
+                    TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
+                    movVagonR.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
+                    movVagonesIzq.getChildren().add(movVagonR);
+                    
+                    seqVagones.getChildren().add(movVagonesIzq);
+                }else{
+                    ParallelTransition movVagonesIzq = new ParallelTransition();
+                    TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
+                    movVagonR.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
+                    TranslateTransition movVagonI = new TranslateTransition (Duration.millis(duracion),vagonI);
+                    movVagonR.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
+                    seqLocDer.getChildren().add(movVagonI);
+                    
+                    seqVagones.getChildren().add(movVagonR);
+                    
+                    
+                    
+                }
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+                TranslateTransition MovVacio10 = new TranslateTransition(Duration.millis(duracion));
+                seqLocAux.getChildren().add(MovVacio10);
 
             //11.-locomotoraAux viene a buscar a vagonI(locomotoraAux se mueve en curva descendiente a la izquierda, nada más se mueve)
 
