@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
@@ -19,6 +20,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
@@ -26,6 +28,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -1441,12 +1444,27 @@ public class Ordenamientos {
                 seqLocDer.getChildren().add(movVacio7);
                 seqLocIzq.getChildren().add(movVacio7);
                 
+                vagonR.setRotate(180);
+                Circle pathRotacion = new Circle(100);
+                PathTransition rotacion = new PathTransition();
+                rotacion.setDuration(Duration.ONE);
+                rotacion.setPath(pathRotacion);
+                rotacion.setNode(vagonR);
+                //rotacion.setOrientation(PathTransition.OrientationType.);
+                //seqVagones.getChildren().add(rotacion);
+                
+                TranslateTransition movVacio75 = new TranslateTransition(Duration.ONE);
+                seqLocDer.getChildren().add(movVacio75);
+                seqLocIzq.getChildren().add(movVacio75);
+                seqLocAux.getChildren().add(movVacio75);
+                
+                
+                
 
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
                 //MOVIMIENTOS A REALIZAR
                 seqLocAux.getChildren().add(pt_recta_curva((vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
 
-                
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio8 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio8);
@@ -1454,6 +1472,16 @@ public class Ordenamientos {
                 seqVagones.getChildren().add(movVacio8);
                 
             //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
+                //MOVIMIENTOS A REALIZAR
+                for (int j = 0; j < 10; j++) {
+                
+                }
+
+                //MOVIMIENTOS VACIOS NECESARIOS
+                TranslateTransition movVacio9 = new TranslateTransition(Duration.millis(duracion));
+                seqLocDer.getChildren().add(movVacio9);
+                seqLocAux.getChildren().add(movVacio9);
+            
 
             //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
 
