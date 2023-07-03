@@ -1380,27 +1380,8 @@ public class Ordenamientos {
                 
             //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
                 //MOVIMIENTOS A REALIZAR
-                /*
-                Path pathReversa = new Path();
-                pathReversa.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2), 475));
-                pathReversa.getElements().add(new LineTo(-800,475));
-                pathReversa.getElements().add(new CubicCurveTo(-800, 475, 0, 475, 20, 40));                
-                PathTransition pathLocAuxRev = new PathTransition(Duration.millis(duracion), pathReversa, locomotoraAux);
-                pathLocAuxRev.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                */
-                
-                
                 seqLocAux.getChildren().add(pt_recta_curva((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
-                /*
-                Path pathVagonR = new Path();
-                pathVagonR.getElements().add(new MoveTo((vagonR.getLayoutX()-1800), 475));
-                pathVagonR.getElements().add(new LineTo(-800-(850/coordenadasX.size()*2),475));
-                pathVagonR.getElements().add(new CubicCurveTo(-800-(850/coordenadasX.size()*2), 475, 200, 475, 20, 40));                
-                PathTransition pathTransVagR = new PathTransition(Duration.millis(duracion), pathVagonR, vagonR);
-                pathTransVagR.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                */
-                
-                //fun_PathTransition(double XmoveTo,double YmoveTo,double XlineTo,double YlineTo,double X1cubicCurve,double Y1cubicCurve,double X2cubicCurve,double Y2cubicCurve,double X3cubicCurve,double Y3cubicCurve,AnchorPane nodo, int duracion)
+               
                 seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,1800-coordenadasX.get(minIndex),-100,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
      
                 //MOVIMIENTOS VACIOS NECESARIOS
@@ -1452,27 +1433,26 @@ public class Ordenamientos {
            
             //7.- locomotoraAux trae de vuelta a vagonR hasta donde estaba vagonI(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
                 //MOVIMIENTOS A REALIZAR
-                /*
-                Path path = new Path();
-                path.getElements().add(new MoveTo(20, 20));
-                path.getElements().add(new CubicCurveTo(-100, 500, -300, 475, -800, 475));
-                path.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));                  
-                PathTransition pathLocAux = new PathTransition(Duration.millis(duracion), path, locomotoraAux);
-                pathLocAux.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                */
-                //private PathTransition pt_curva_recta(double XmoveTo,double YmoveTo,double X1cubicCurve,double Y1cubicCurve,double X2cubicCurve,double Y2cubicCurve,double X3cubicCurve,double Y3cubicCurve,double XlineTo,double YlineTo,AnchorPane nodo, int duracion)
                 seqLocAux.getChildren().add(pt_curva_recta(20,20,-100,500,-300,475,-800,475,(vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,locomotoraAux,duracion));
                 
-                //seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,1800-coordenadasX.get(minIndex),-100,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
                 seqVagones.getChildren().add(pt_curva_recta(1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-100,((850/numerodevagones)*(vagonesAnchor.size()-i)+200)+20,20,-(coordenadasX.get(minIndex)-coordenadasX.get(i)),20,vagonR,duracion));
-                //MOVIMIENTOS VACIOS NECESARIOS
+                
                 TranslateTransition movVacio7 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio7);
                 seqLocIzq.getChildren().add(movVacio7);
                 
 
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
+                //MOVIMIENTOS A REALIZAR
+                seqLocAux.getChildren().add(pt_recta_curva((vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
 
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+                TranslateTransition movVacio8 = new TranslateTransition(Duration.millis(duracion));
+                seqLocDer.getChildren().add(movVacio8);
+                seqLocIzq.getChildren().add(movVacio8);
+                seqVagones.getChildren().add(movVacio8);
+                
             //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
 
             //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
