@@ -1448,18 +1448,13 @@ public class Ordenamientos {
                 Path rotationPath = new Path();
                 rotationPath.getElements().add(new MoveTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20));
                 rotationPath.getElements().add(new LineTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i))+0.0001, 20));
-
-                
+ 
                 PathTransition rotacion = new PathTransition();
                 rotacion.setDuration(Duration.ONE);
                 rotacion.setPath(rotationPath);
                 rotacion.setNode(vagonR);
                 rotacion.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                 seqVagones.getChildren().add(rotacion);
-                
-                
-                
-                
 
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
                 //MOVIMIENTOS A REALIZAR
@@ -1473,6 +1468,9 @@ public class Ordenamientos {
                 
             //9.- locomotoraIzq, junto con vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
                 //MOVIMIENTOS A REALIZAR
+                TranslateTransition movLocIzq1 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
+                movLocIzq1.setByX(1820-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)-(850/coordenadasX.size()));
+                seqLocIzq.getChildren().add(movLocIzq1);
                 for (int j = 0; j < 10; j++) {
                 
                 }
