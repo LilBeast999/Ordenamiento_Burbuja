@@ -1445,13 +1445,17 @@ public class Ordenamientos {
                 seqLocIzq.getChildren().add(movVacio7);
                 
                 vagonR.setRotate(180);
-                Circle pathRotacion = new Circle(100);
+                Path rotationPath = new Path();
+                rotationPath.getElements().add(new MoveTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20));
+                rotationPath.getElements().add(new CubicCurveTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20, -(coordenadasX.get(minIndex)-coordenadasX.get(i))+20, 20, -(coordenadasX.get(minIndex)-coordenadasX.get(i)), 20));
+
+                
                 PathTransition rotacion = new PathTransition();
                 rotacion.setDuration(Duration.ONE);
-                rotacion.setPath(pathRotacion);
+                rotacion.setPath(rotationPath);
                 rotacion.setNode(vagonR);
-                //rotacion.setOrientation(PathTransition.OrientationType.);
-                //seqVagones.getChildren().add(rotacion);
+                rotacion.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                seqVagones.getChildren().add(rotacion);
                 
                 TranslateTransition movVacio75 = new TranslateTransition(Duration.ONE);
                 seqLocDer.getChildren().add(movVacio75);
