@@ -1301,7 +1301,7 @@ public class Ordenamientos {
         AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
         locomotoraAux.setRotate(-27);
         
-        int duracion = 2000;
+        int duracion = 1000;
         
         SequentialTransition seqVagones = new SequentialTransition();
         SequentialTransition seqLocIzq = new SequentialTransition();
@@ -1373,7 +1373,7 @@ public class Ordenamientos {
                 //MOVIMIENTOS A REALIZAR
                     Path path1 = new Path();
                     path1.getElements().add(new MoveTo(20, 20));
-                    path1.getElements().add(new LineTo(-800, 475));
+                    path1.getElements().add(new LineTo(-910, 475));
                     path1.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));                  
                     PathTransition pathLocAux1 = new PathTransition(Duration.millis(duracion), path1, locomotoraAux);
                     pathLocAux1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -1391,13 +1391,21 @@ public class Ordenamientos {
                 //MOVIMIENTOS A REALIZAR
                     Path path2 = new Path();
                     path2.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));
-                    path2.getElements().add(new LineTo(-800, 475));
-                    path2.getElements().add(new LineTo(-500,300));
-                    path2.getElements().add(new LineTo(-40,300));
+                    path2.getElements().add(new LineTo(-920, 475));
+                    path2.getElements().add(new LineTo(20,20));
                     PathTransition pathLocAux2 = new PathTransition(Duration.millis(duracion), path2, locomotoraAux);
                     pathLocAux2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-                    seqLocAux.getChildren().add(pathLocAux2);               
-                seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,0,1800-coordenadasX.get(minIndex),0,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
+                    seqLocAux.getChildren().add(pathLocAux2);
+                    
+                    Path path = new Path();
+                    path.getElements().add(new MoveTo(0, 0));
+                    path.getElements().add(new LineTo(((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+80)+20,20));
+                    path.getElements().add(new LineTo(((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+900)+20,-400));                
+                    PathTransition pathTransition = new PathTransition(Duration.millis(duracion), path, vagonR);
+                    pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                    
+                    seqVagones.getChildren().add(pathTransition);
+                    //seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,0,1800-coordenadasX.get(minIndex),0,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
      
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
