@@ -894,14 +894,40 @@ public class Lapiz {
     this.anchor.getChildren().add(estacion);
     
     // Agregar plataforma de embarque
-    Rectangle plataforma = new Rectangle(150, 410, 200, 10);
+    Rectangle plataforma = new Rectangle(150, 380, 200, 14);
     plataforma.setFill(Color.DARKGRAY); // Color de la plataforma
     plataforma.setStroke(Color.BLACK); // Color del borde
     plataforma.setStrokeWidth(1); // Grosor del borde
     this.anchor.getChildren().add(plataforma);
     
-    return this.anchor;
+     Rectangle autopista = new Rectangle(-5000, 700, 10000, 80);
+autopista.setFill(Color.DARKGRAY); // Color de la autopista
+this.anchor.getChildren().add(autopista);
+
+// Añadir líneas divisoras de la autopista
+for (int i = 0; i < 100; i++) {
+    Rectangle lineaDivisora = new Rectangle(-5000 + (100 * i), 735, 60, 5);
+    lineaDivisora.setFill(Color.WHITE);
+    this.anchor.getChildren().add(lineaDivisora);
+}
+Rectangle autopista2 = new Rectangle(-5000, 855, 20000, 80);
+autopista2.setFill(Color.DARKGRAY); // Color de la autopista
+this.anchor.getChildren().add(autopista2);
+
+// Añadir líneas divisoras de la autopista 2
+for (int i = 0; i < 200; i++) {
+    Rectangle lineaDivisora = new Rectangle(-5000 + (100 * i), 890, 60, 5);
+    lineaDivisora.setFill(Color.WHITE);
+    this.anchor.getChildren().add(lineaDivisora);
+}
+
+// Añadir árboles entre las autopistas
+
+
+     return this.anchor;
     }
+    
+ 
         
     public AnchorPane dibujargrua(){
 
