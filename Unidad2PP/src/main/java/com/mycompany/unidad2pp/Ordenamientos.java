@@ -1616,9 +1616,27 @@ public class Ordenamientos {
                     seqLocDer.getChildren().add(MovVacio12);
                     seqLocIzq.getChildren().add(MovVacio12);
                     
-            
-
             //13.-locomotoraDer trae de vuelta a todos los vagones(se mueve a la izquierda locomotoraDer junto con todos los vagones que tenga en ese momento(excluye a vagonI y vagonR))
+                //MOVIMIENTOS A REALIZAR
+                
+                TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(850/coordenadasX.size()));
+                
+                
+                ParallelTransition movVagonesIzq3 = new ParallelTransition();
+                for (int k = coordenadasX.size()-1, ind=0; k >= 0; k--,ind++) {
+                    if(k!=i && k!=minIndex){
+                        TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
+                        movVagon.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
+                        movVagonesIzq3.getChildren().add(movVagon);
+                    }
+                }
+                seqVagones.getChildren().add(movVagonesIzq3);
+                
+                //MOVIMIENTOS VACIOS NECESARIOS
+                    TranslateTransition MovVacio13 = new TranslateTransition(Duration.millis(duracion));
+                    seqLocAux.getChildren().add(MovVacio13);
+                    seqLocIzq.getChildren().add(MovVacio13);
                 
             //14.-locomotoraDer se devuelve a su posición junto con los vagones que estuvieran a la derecha de vagonR al principio del intercambio(se mueve a la derecha locomotoraDer junto con los vagones mencionados)
 
