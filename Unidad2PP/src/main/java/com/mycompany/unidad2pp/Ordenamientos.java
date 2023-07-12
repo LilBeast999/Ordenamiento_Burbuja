@@ -1405,7 +1405,6 @@ public class Ordenamientos {
                     pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                     
                     seqVagones.getChildren().add(pathTransition);
-                    //seqVagones.getChildren().add(pt_recta_curva(0,0,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,20,((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+200)+20,0,1800-coordenadasX.get(minIndex),0,1800-coordenadasX.get(minIndex),-340,vagonR, duracion));
      
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
@@ -1459,9 +1458,22 @@ public class Ordenamientos {
             //7.- locomotoraAux trae de vuelta a vagonR hasta donde estaba vagonI(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
             System.out.println("7.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
-                seqLocAux.getChildren().add(pt_curva_recta(20,20,-100,500,-300,475,-800,475,(vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,locomotoraAux,duracion));
+                    Path path3 = new Path();
+                    path3.getElements().add(new MoveTo(20, 20));
+                    path3.getElements().add(new LineTo(-910,475));
+                    path3.getElements().add(new LineTo((vagonI.getLayoutX()-1800),475));               
+                    PathTransition pathTransition1 = new PathTransition(Duration.millis(duracion), path3, locomotoraAux);
+                    pathTransition1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                    seqLocAux.getChildren().add(pathTransition1);
                 
-                seqVagones.getChildren().add(pt_curva_recta(1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-100,((850/numerodevagones)*(vagonesAnchor.size()-i)+200)+20,20,-(coordenadasX.get(minIndex)-(coordenadasX.get(i)+50)),20,vagonR,duracion));
+                    Path path4 = new Path();
+                    path4.getElements().add(new MoveTo(1800-coordenadasX.get(minIndex), -340));
+                    path4.getElements().add(new LineTo(((850/numerodevagones)*(vagonesAnchor.size()-minIndex)+80)+20,20));
+                    path4.getElements().add(new LineTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)),20));               
+                    PathTransition pathTransition2 = new PathTransition(Duration.millis(duracion), path4, vagonR);
+                    pathTransition2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); 
+                    seqVagones.getChildren().add(pathTransition2);
+                //seqVagones.getChildren().add(pt_curva_recta(1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-340,1800-coordenadasX.get(minIndex),-100,((850/numerodevagones)*(vagonesAnchor.size()-i)+200)+20,20,-(coordenadasX.get(minIndex)-(coordenadasX.get(i)+50)),20,vagonR,duracion));
                 
                 TranslateTransition movVacio7 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio7);
@@ -1482,8 +1494,13 @@ public class Ordenamientos {
             //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
             System.out.println("8.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                 //MOVIMIENTOS A REALIZAR
-                seqLocAux.getChildren().add(pt_recta_curva((vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475,-800,475,-800,475,50,475,20,40,locomotoraAux,duracion));
-
+                    Path path5 = new Path();
+                    path5.getElements().add(new MoveTo((vagonI.getLayoutX()-1800)+(850/coordenadasX.size()*2),475));
+                    path5.getElements().add(new LineTo(-920, 475));
+                    path5.getElements().add(new LineTo(20,20));
+                    PathTransition pathLocAux3 = new PathTransition(Duration.millis(duracion), path5, locomotoraAux);
+                    pathLocAux3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+                    seqLocAux.getChildren().add(pathLocAux3);
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio8 = new TranslateTransition(Duration.millis(duracion));
                 seqLocDer.getChildren().add(movVacio8);
