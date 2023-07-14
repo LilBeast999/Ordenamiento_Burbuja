@@ -1308,6 +1308,14 @@ public class Ordenamientos {
         SequentialTransition seqLocDer = new SequentialTransition();
         SequentialTransition seqLocAux = new SequentialTransition();
         
+        anchor.setScaleX(0.4);
+        anchor.setScaleY(0.4);
+        
+        TranslateTransition movAnchor = new TranslateTransition(Duration.ONE, anchor);
+        movAnchor.setByX(-100);
+        movAnchor.setByY(-100);
+        
+        
         System.out.println("Arreglo sin ordenar: " + arreglo);
         for (int i = 0; i < arreglo.size() - 1; i++) {
             int minIndex = i;
@@ -1337,7 +1345,7 @@ public class Ordenamientos {
             
             
             //Solo si vagonR NO es el último de los vagones, se mueven los vagones a su derecha,ya que en caso contrario, no hay vagones a la derecha de vagonR que mover
-            
+            if(minIndex!=arreglo.size()-1){
                 //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
                 System.out.println("1.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
                     //MOVIMIENTOS A REALIZAR
@@ -1370,7 +1378,7 @@ public class Ordenamientos {
                         TranslateTransition movVacio2 = new TranslateTransition(Duration.millis(duracion));
                         seqLocIzq.getChildren().add(movVacio2);
                         seqLocAux.getChildren().add(movVacio2);
-            
+            }
            
             //3.- locomotoraAux se mueve hasta la derecha de vagonR (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
             System.out.println("3.- VALOR DE i Y DE minIndex: "+i+", "+minIndex);
@@ -1510,9 +1518,9 @@ public class Ordenamientos {
                 seqLocIzq.getChildren().add(movLocIzq1);
                 if(i!=0){
                     ParallelTransition movVagonesDer = new ParallelTransition();
-                    for (int k = i-1,ind = i-1 ; k >= 0; k--,ind++) {
+                    for (int k = i-1,ind = i ; k >= 0; k--,ind++) {
                         TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                        movVagon.setByX(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind));
+                        movVagon.setByX((1720-coordenadasX.get(k)-((850/coordenadasX.size())*(ind+20))));
                         movVagonesDer.getChildren().add(movVagon);
                     }
                     
@@ -1552,10 +1560,9 @@ public class Ordenamientos {
                 movVagonesIzq.getChildren().add(movVagonR);
                 
                 if(i!=0){
-                    System.out.println("HOLAAAAAAAAAAAA");
                     for (int k = i,ind = i ; k >= 0; k--,ind++) {
                         TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                        movVagon.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
+                        movVagon.setByX((1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
                         movVagonesIzq.getChildren().add(movVagon);
                     }
                 }
@@ -1724,6 +1731,10 @@ public class Ordenamientos {
                     seqLocAux.getChildren().add(movVacio18);
                     seqLocIzq.getChildren().add(movVacio18);
             
+            AnchorPane aux = new AnchorPane();
+            aux = vagonesAnchor.get(minIndex);
+            vagonesAnchor.set(minIndex, vagonesAnchor.get(i));
+            vagonesAnchor.set(i, aux);             
         }
         PseudocodigoSeleccion(anchor, arreglo);
 
