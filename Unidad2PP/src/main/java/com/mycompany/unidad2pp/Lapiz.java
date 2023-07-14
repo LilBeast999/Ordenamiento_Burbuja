@@ -844,7 +844,7 @@ public class Lapiz {
     }
     
     public AnchorPane dibujarfondo2(){
-        
+         
  
      
      //rail principal

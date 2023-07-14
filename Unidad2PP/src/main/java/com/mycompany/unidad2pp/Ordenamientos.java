@@ -1745,6 +1745,31 @@ public class Ordenamientos {
         seqLocIzq.play();
         seqLocDer.play();
         seqLocAux.play();
+        
+        Button masvelocidad = new Button ("+ velocidad");
+        Button menosvelocidad = new Button ("- velocidad");
+        masvelocidad.setOnAction(e -> {
+            aumentarRate();
+            seqVagones.setRate(this.rate);
+            seqLocIzq.setRate(this.rate);
+            seqLocDer.setRate(this.rate);
+            seqLocAux.setRate(this.rate);
+        });
+        menosvelocidad.setOnAction(e -> {
+            disminuirRate();
+            seqVagones.setRate(this.rate);
+            seqLocIzq.setRate(this.rate);
+            seqLocDer.setRate(this.rate);
+            seqLocAux.setRate(this.rate);
+        });
+        anchor.getChildren().add(masvelocidad);
+        menosvelocidad.setLayoutX(1180);
+        masvelocidad.setLayoutX(1270);
+        menosvelocidad.setLayoutY(20);
+        masvelocidad.setLayoutY(20);
+        masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+        anchor.getChildren().add(menosvelocidad);
     
     }
     
