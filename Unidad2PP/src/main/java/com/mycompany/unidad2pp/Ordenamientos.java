@@ -1308,13 +1308,14 @@ public class Ordenamientos {
         SequentialTransition seqLocDer = new SequentialTransition();
         SequentialTransition seqLocAux = new SequentialTransition();
         
-        anchor.setScaleX(0.4);
-        anchor.setScaleY(0.4);
+        anchor.setScaleX(0.6);
+        anchor.setScaleY(0.6);
         
         TranslateTransition movAnchor = new TranslateTransition(Duration.ONE, anchor);
         movAnchor.setByX(-100);
         movAnchor.setByY(-100);
         
+        int a=1;
         
         System.out.println("Arreglo sin ordenar: " + arreglo);
         for (int i = 0; i < arreglo.size() - 1; i++) {
@@ -1516,25 +1517,20 @@ public class Ordenamientos {
                 TranslateTransition movLocIzq1 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
                 movLocIzq1.setByX(1820-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)-(850/coordenadasX.size())*2);
                 seqLocIzq.getChildren().add(movLocIzq1);
+                
+                ParallelTransition movVagonesDer = new ParallelTransition();
+                TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
+                movVagonR.setByX(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones));
+                movVagonesDer.getChildren().add(movVagonR);
+               
                 if(i!=0){
-                    ParallelTransition movVagonesDer = new ParallelTransition();
                     for (int k = i-1,ind = i ; k >= 0; k--,ind++) {
                         TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                        movVagon.setByX((1720-coordenadasX.get(k)-((850/coordenadasX.size())*(ind+20))));
+                        movVagon.setByX((1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
                         movVagonesDer.getChildren().add(movVagon);
                     }
-                    
-                    TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
-                    movVagonR.setByX(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones));
-                    movVagonesDer.getChildren().add(movVagonR);
-                    
-                    seqVagones.getChildren().add(movVagonesDer);
-                }else{
-                    TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
-                    movVagonR.setByX(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones));
-                    seqVagones.getChildren().add(movVagonR);
                 }
-                
+                seqVagones.getChildren().add(movVagonesDer);
 
                 //MOVIMIENTOS VACIOS NECESARIOS
                 TranslateTransition movVacio9 = new TranslateTransition(Duration.millis(duracion));
@@ -1555,14 +1551,16 @@ public class Ordenamientos {
                 movVagonI2.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
                 movVagonesIzq.getChildren().add(movVagonI2);
                 
-                TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
-                movVagonR.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
-                movVagonesIzq.getChildren().add(movVagonR);
+                TranslateTransition movVagonR1 = new TranslateTransition (Duration.millis(duracion),vagonR);
+                movVagonR1.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
+                movVagonesIzq.getChildren().add(movVagonR1);
                 
                 if(i!=0){
+                    System.out.println("Iteración "+a+" VALOR DE i: "+i );
+                    a++;
                     for (int k = i,ind = i ; k >= 0; k--,ind++) {
                         TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                        movVagon.setByX((1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
+                        movVagon.setByX(-(1720-coordenadasX.get(0)-((850/coordenadasX.size())*numerodevagones)));
                         movVagonesIzq.getChildren().add(movVagon);
                     }
                 }
@@ -1622,7 +1620,7 @@ public class Ordenamientos {
                 seqLocDer.getChildren().add(movLocDer1);
                 
                 ParallelTransition movVagonesIzq3 = new ParallelTransition();
-                for (int k = coordenadasX.size()-1, ind=0; k >= 0; k--,ind++) {
+                for (int k = coordenadasX.size()-1, ind=0; k > i; k--,ind++) {
                     if(k!=i && k!=minIndex){
                         TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
                         movVagon.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
@@ -1642,15 +1640,15 @@ public class Ordenamientos {
                     movLocDer2.setByX(1720-coordenadasX.get(coordenadasX.size()-1));
                     seqLocDer.getChildren().add(movLocDer2);
                     
-                    ParallelTransition movVagonesDer = new ParallelTransition();
+                    ParallelTransition movVagonesDer1 = new ParallelTransition();
                     for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
                         if(k!=i && k!=minIndex){
                             TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
                             movVagon.setByX((1720-coordenadasX.get(k)-((850/coordenadasX.size())*ind)));
-                            movVagonesDer.getChildren().add(movVagon);
+                            movVagonesDer1.getChildren().add(movVagon);
                         }
                     }
-                    seqVagones.getChildren().add(movVagonesDer);
+                    seqVagones.getChildren().add(movVagonesDer1);
                 
                 //MOVIMIENTS VACIOS NECESARIOS
                     TranslateTransition movVacio14 = new TranslateTransition(Duration.millis(duracion));
@@ -1704,15 +1702,15 @@ public class Ordenamientos {
                     movLocDer5.setByX(-(1720-coordenadasX.get(coordenadasX.size()-1)));
                     seqLocDer.getChildren().add(movLocDer5);
                     
-                    ParallelTransition movVagonesDer1 = new ParallelTransition();
+                    ParallelTransition movVagonesDer2 = new ParallelTransition();
                     for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
                         if(k!=i && k!=minIndex){
                             TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
                             movVagon.setByX(-(1720-coordenadasX.get(k)-((850/coordenadasX.size())*(ind+1))));
-                            movVagonesDer1.getChildren().add(movVagon);
+                            movVagonesDer2.getChildren().add(movVagon);
                         }
                     }
-                    seqVagones.getChildren().add(movVagonesDer1);
+                    seqVagones.getChildren().add(movVagonesDer2);
                 
                 //MOVIMIENTOS VACIOS NECESARIOS
                     TranslateTransition movVacio17 = new TranslateTransition(Duration.millis(duracion));
