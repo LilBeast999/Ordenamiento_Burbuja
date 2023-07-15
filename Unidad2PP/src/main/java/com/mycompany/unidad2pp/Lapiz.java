@@ -853,6 +853,7 @@ public class Lapiz {
      rectangulo1.setStroke(Color.BLACK);
      rectangulo1.setStrokeWidth(1);
      
+     
      //rail auxiliar
      Rectangle rectangulo2= new Rectangle(402.5,-1612,10000,15); //sujeta a formula
      rectangulo2.setFill(Color.web("#8A6012"));
@@ -875,7 +876,7 @@ public class Lapiz {
      this.anchor.getChildren().add(rectangulo3);
      this.anchor.getChildren().add(Railes);
      for (int i = 0; i < 10000; i++) {
-            Rectangle rectangulo = new Rectangle(-5000+(20*(i+1)),485,10,50); // sujeto a formula o a usar un scale por que funciona la wea
+            Rectangle rectangulo = new Rectangle(-5000+(20*(i+1)),485,10,50); // sujeto a formula o a usar un scale por que funciona 
             rectangulo.setFill(Color.web("#6A4502"));
             rectangulo.setStroke(Color.BLACK);
             rectangulo2.setStrokeWidth(1);
@@ -885,7 +886,7 @@ public class Lapiz {
         }
      
      for (int i = 0; i < 5000; i++) {
-            Rectangle rectangulo = new Rectangle(877.5+(20*(i+1)),470-(i*9.33),10,50); // sujeto a formula o a usar un scale por que funciona la wea
+            Rectangle rectangulo = new Rectangle(877.5+(20*(i+1)),470-(i*9.33),10,50); // sujeto a formula o a usar un scale por que funciona
             rectangulo.setRotate(-25);
             rectangulo.setFill(Color.web("#6A4502"));
             rectangulo.setStroke(Color.BLACK);

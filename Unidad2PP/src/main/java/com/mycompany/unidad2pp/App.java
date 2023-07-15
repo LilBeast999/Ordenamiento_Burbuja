@@ -44,14 +44,14 @@ public class App extends Application {
          
         });
        
-        retroceder.setOnAction(e -> {
+        retroceder.setOnAction(e -> { //disminuye el numero de cajas
          if (ordenamientos.getAux()>17){  
          ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          ordenamientos.disminuir();
          }
         });
         
-        avanzar.setOnAction(e -> {
+        avanzar.setOnAction(e -> { //aumenta el numero de cajas
         
             
          if (ordenamientos.getAux()<=63){   

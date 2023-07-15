@@ -10,6 +10,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -101,39 +102,119 @@ public class Ordenamientos {
             }
         }
        
-        
-       
 
-        
-        
         //Obtiene los números generados previamente para que los valores calcen con los del arreglo que se muestra en consola
         for (int i=0; i<numerodecajas; i++){ 
             arreglo.add( almacen.cajas.get(i).peso);
             System.out.print(arreglo.get(i)+ " ");
         }
-        
-        anchor.setScaleX(1);
-        anchor.setScaleY(1);
-        
+   
+   
         switch (opcion) {
             //ORDENAMIENTO POR INSERCION
             case 1:
                 Insercion(numerodecajas,arreglo,cajasAnchor,anchor);
+                anchor.getChildren().add(boton);
+                boton.setLayoutX(830);
+                boton2.setLayoutX(900);
+                boton3.setLayoutX(1010);
+                boton4.setLayoutX(1120);
+                boton.setLayoutY(20);
+                boton2.setLayoutY(20);
+                boton3.setLayoutY(20);
+                boton4.setLayoutY(20);
+                anchor.getChildren().add(boton3);
+                anchor.getChildren().add(boton2);
+                anchor.getChildren().add(boton4);
+
+                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                stage.setScene(scena);
+                stage.show();
                 break;
                 
             //ORDENAMIENTO POR BURBUJA
             case 2: 
                 Burbuja(arreglo,numerodecajas,cajasAnchor,anchor,coordenadasX);
+                anchor.getChildren().add(boton);
+                boton.setLayoutX(830);
+                boton2.setLayoutX(900);
+                boton3.setLayoutX(1010);
+                boton4.setLayoutX(1120);
+                boton.setLayoutY(20);
+                boton2.setLayoutY(20);
+                boton3.setLayoutY(20);
+                boton4.setLayoutY(20);
+                anchor.getChildren().add(boton3);
+                anchor.getChildren().add(boton2);
+                anchor.getChildren().add(boton4);
+
+                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                stage.setScene(scena);
+                stage.show();                
                 break;
             
             //ORDENAMIENTO POR BURBUJA COCKTAIL    
             case 3:
                 Cocktail(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX);
+                anchor.getChildren().add(boton);
+                boton.setLayoutX(830);
+                boton2.setLayoutX(900);
+                boton3.setLayoutX(1010);
+                boton4.setLayoutX(1120);
+                boton.setLayoutY(20);
+                boton2.setLayoutY(20);
+                boton3.setLayoutY(20);
+                boton4.setLayoutY(20);
+                anchor.getChildren().add(boton3);
+                anchor.getChildren().add(boton2);
+                anchor.getChildren().add(boton4);
+
+                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                stage.setScene(scena);
+                stage.show();                
                 break;
                 
             case 4:
                 System.out.println(" ----- EN DESARROLLO ----");
-                Seleccion(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX);
+                AnchorPane interfaz = new AnchorPane ();
+                interfaz.setPrefSize(1920, 1080);
+                Scene SelectionScene = new Scene(interfaz,1920,1080);
+  
+                SelectionScene.setFill(Color.web("#AABDD8")); 
+                scena.setFill(Color.TRANSPARENT);
+                anchor.setPrefSize(1920, 1080);
+                Seleccion(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX,interfaz);
+                interfaz.getChildren().add(boton);
+                boton.setLayoutX(830);
+                boton2.setLayoutX(900);
+                boton3.setLayoutX(1010);
+                boton4.setLayoutX(1120);
+                boton.setLayoutY(20);
+                boton2.setLayoutY(20);
+                boton3.setLayoutY(20);
+                boton4.setLayoutY(20);
+                interfaz.getChildren().add(boton3);
+                interfaz.getChildren().add(boton2);
+                interfaz.getChildren().add(boton4);
+
+                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                stage.setScene(SelectionScene);
+                
+            
+  
+                stage.show(); 
                 break;
              
             default:
@@ -143,25 +224,7 @@ public class Ordenamientos {
        
         
         
-        anchor.getChildren().add(boton);
-        boton.setLayoutX(830);
-        boton2.setLayoutX(900);
-        boton3.setLayoutX(1010);
-        boton4.setLayoutX(1120);
-        boton.setLayoutY(20);
-        boton2.setLayoutY(20);
-        boton3.setLayoutY(20);
-        boton4.setLayoutY(20);
-        anchor.getChildren().add(boton3);
-        anchor.getChildren().add(boton2);
-        anchor.getChildren().add(boton4);
-        
-        boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        stage.setScene(scena);
-        stage.show();
+   
     
     
     
@@ -1268,21 +1331,19 @@ public class Ordenamientos {
             movCuerda.setRate(this.rate);
             movGancho.setRate(this.rate);
         });
-        anchor.getChildren().add(masvelocidad);
         menosvelocidad.setLayoutX(1180);
         masvelocidad.setLayoutX(1270);
         menosvelocidad.setLayoutY(20);
         masvelocidad.setLayoutY(20);
         masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        anchor.getChildren().add(menosvelocidad);
         
         
         System.out.println("ARREGLO ORDENADO:");
         imprimeArreglo(arreglo);
     }
     
-    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX){
+    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX,AnchorPane interfaz){
         
         Lapiz lapiz = new Lapiz(0,0);
         
@@ -1725,7 +1786,7 @@ public class Ordenamientos {
                     seqLocIzq.getChildren().add(movVacio18);
             
         }
-        PseudocodigoSeleccion(anchor, arreglo);
+        
 
         System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
         
@@ -1735,6 +1796,7 @@ public class Ordenamientos {
         seqLocDer.play();
         seqLocAux.play();
         
+
         Button masvelocidad = new Button ("+ velocidad");
         Button menosvelocidad = new Button ("- velocidad");
         masvelocidad.setOnAction(e -> {
@@ -1751,15 +1813,26 @@ public class Ordenamientos {
             seqLocDer.setRate(this.rate);
             seqLocAux.setRate(this.rate);
         });
-        anchor.getChildren().add(masvelocidad);
+        
         menosvelocidad.setLayoutX(1180);
         masvelocidad.setLayoutX(1270);
         menosvelocidad.setLayoutY(20);
         masvelocidad.setLayoutY(20);
         masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-        anchor.getChildren().add(menosvelocidad);
-    
+     
+
+      
+        interfaz.getChildren().add(anchor);
+        interfaz.setScaleX(0.8);
+        interfaz.setScaleY(0.8);
+
+  
+
+
+        interfaz.getChildren().add(menosvelocidad);
+        interfaz.getChildren().add(masvelocidad);
+        PseudocodigoSeleccion(interfaz, arreglo);
     }
     
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
