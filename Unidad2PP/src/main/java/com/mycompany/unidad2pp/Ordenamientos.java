@@ -45,7 +45,7 @@ public class Ordenamientos {
     
     
     
-    public void miCodigo(Stage stage, Button boton, Button boton2, Button boton3,Button boton4,int aux,int opcion){
+    public void miCodigo(Stage stage, Button reiniciar, Button disminuir, Button aumentar,Button menu,int aux,int opcion){
         this.rate=1;
         this.TIEMPO_ESPERA=200;
         AnchorPane anchor = new AnchorPane(); 
@@ -114,23 +114,23 @@ public class Ordenamientos {
             //ORDENAMIENTO POR INSERCION
             case 1:
                 Insercion(numerodecajas,arreglo,cajasAnchor,anchor);
-                anchor.getChildren().add(boton);
-                boton.setLayoutX(830);
-                boton2.setLayoutX(900);
-                boton3.setLayoutX(1010);
-                boton4.setLayoutX(1120);
-                boton.setLayoutY(20);
-                boton2.setLayoutY(20);
-                boton3.setLayoutY(20);
-                boton4.setLayoutY(20);
-                anchor.getChildren().add(boton3);
-                anchor.getChildren().add(boton2);
-                anchor.getChildren().add(boton4);
+                anchor.getChildren().add(reiniciar);
+                reiniciar.setLayoutX(830);
+                disminuir.setLayoutX(900);
+                aumentar.setLayoutX(1010);
+                menu.setLayoutX(1120);
+                reiniciar.setLayoutY(20);
+                disminuir.setLayoutY(20);
+                aumentar.setLayoutY(20);
+                menu.setLayoutY(20);
+                anchor.getChildren().add(aumentar);
+                anchor.getChildren().add(disminuir);
+                anchor.getChildren().add(menu);
 
-                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                reiniciar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                disminuir.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                aumentar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                menu.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
                 stage.setScene(scena);
                 stage.show();
                 break;
@@ -138,23 +138,23 @@ public class Ordenamientos {
             //ORDENAMIENTO POR BURBUJA
             case 2: 
                 Burbuja(arreglo,numerodecajas,cajasAnchor,anchor,coordenadasX);
-                anchor.getChildren().add(boton);
-                boton.setLayoutX(830);
-                boton2.setLayoutX(900);
-                boton3.setLayoutX(1010);
-                boton4.setLayoutX(1120);
-                boton.setLayoutY(20);
-                boton2.setLayoutY(20);
-                boton3.setLayoutY(20);
-                boton4.setLayoutY(20);
-                anchor.getChildren().add(boton3);
-                anchor.getChildren().add(boton2);
-                anchor.getChildren().add(boton4);
+                anchor.getChildren().add(reiniciar);
+                reiniciar.setLayoutX(830);
+                disminuir.setLayoutX(900);
+                aumentar.setLayoutX(1010);
+                menu.setLayoutX(1120);
+                reiniciar.setLayoutY(20);
+                disminuir.setLayoutY(20);
+                aumentar.setLayoutY(20);
+                menu.setLayoutY(20);
+                anchor.getChildren().add(aumentar);
+                anchor.getChildren().add(disminuir);
+                anchor.getChildren().add(menu);
 
-                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                reiniciar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                disminuir.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                aumentar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                menu.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
                 stage.setScene(scena);
                 stage.show();                
                 break;
@@ -162,29 +162,30 @@ public class Ordenamientos {
             //ORDENAMIENTO POR BURBUJA COCKTAIL    
             case 3:
                 Cocktail(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX);
-                anchor.getChildren().add(boton);
-                boton.setLayoutX(830);
-                boton2.setLayoutX(900);
-                boton3.setLayoutX(1010);
-                boton4.setLayoutX(1120);
-                boton.setLayoutY(20);
-                boton2.setLayoutY(20);
-                boton3.setLayoutY(20);
-                boton4.setLayoutY(20);
-                anchor.getChildren().add(boton3);
-                anchor.getChildren().add(boton2);
-                anchor.getChildren().add(boton4);
+                anchor.getChildren().add(reiniciar);
+                reiniciar.setLayoutX(830);
+                disminuir.setLayoutX(900);
+                aumentar.setLayoutX(1010);
+                menu.setLayoutX(1120);
+                reiniciar.setLayoutY(20);
+                disminuir.setLayoutY(20);
+                aumentar.setLayoutY(20);
+                menu.setLayoutY(20);
+                anchor.getChildren().add(aumentar);
+                anchor.getChildren().add(disminuir);
+                anchor.getChildren().add(menu);
 
-                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                reiniciar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                disminuir.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                aumentar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                menu.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
                 stage.setScene(scena);
                 stage.show();                
                 break;
                 
             case 4:
                 System.out.println(" ----- EN DESARROLLO ----");
+                double scale=0.5;
                 AnchorPane interfaz = new AnchorPane ();
                 interfaz.setPrefSize(1920, 1080);
                 Scene SelectionScene = new Scene(interfaz,1920,1080);
@@ -192,24 +193,183 @@ public class Ordenamientos {
                 SelectionScene.setFill(Color.web("#AABDD8")); 
                 scena.setFill(Color.TRANSPARENT);
                 anchor.setPrefSize(1920, 1080);
-                Seleccion(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX,interfaz);
-                interfaz.getChildren().add(boton);
-                boton.setLayoutX(830);
-                boton2.setLayoutX(900);
-                boton3.setLayoutX(1010);
-                boton4.setLayoutX(1120);
-                boton.setLayoutY(20);
-                boton2.setLayoutY(20);
-                boton3.setLayoutY(20);
-                boton4.setLayoutY(20);
-                interfaz.getChildren().add(boton3);
-                interfaz.getChildren().add(boton2);
-                interfaz.getChildren().add(boton4);
+                Seleccion(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX,interfaz,scale);
+                
+                
+                if(scale==1){
+                    
+                    reiniciar.setLayoutX(830);
+                    reiniciar.setLayoutY(20);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900);
+                    disminuir.setLayoutY(20);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010);
+                    aumentar.setLayoutY(20);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1120);
+                    menu.setLayoutY(20);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);
+                
+                }
+                else if(scale==0.9){
+                    
+                   
+           
+                    reiniciar.setLayoutX(830-70);
+                    reiniciar.setLayoutY(0);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900-50);
+                    disminuir.setLayoutY(0);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010-30);
+                    aumentar.setLayoutY(0);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1120-20);
+                    menu.setLayoutY(0);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);
+                
+                
+                
+                
+                
+                }
+                else if(scale==0.8){
+                    reiniciar.setLayoutX(830-100);
+                    reiniciar.setLayoutY(-60);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900-70);
+                    disminuir.setLayoutY(-60);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010-40);
+                    aumentar.setLayoutY(-60);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1120-20);
+                    menu.setLayoutY(-60);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);
+                
+                
+                
+                
+                
+                
+                }
+                else if(scale==0.7){
+                    reiniciar.setLayoutX(830-110);
+                    reiniciar.setLayoutY(-120);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900-70);
+                    disminuir.setLayoutY(-120);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010-20);
+                    aumentar.setLayoutY(-120);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1130);
+                    menu.setLayoutY(-120);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);
+                
+                
+                
+                
+                
+                
+                }
+                else if(scale==0.6){
+                    reiniciar.setLayoutX(830-160);
+                    reiniciar.setLayoutY(-240);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900-100);
+                    disminuir.setLayoutY(-240);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010-20);
+                    aumentar.setLayoutY(-240);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1130+20);
+                    menu.setLayoutY(-240);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);               
+                
+                
+                
+                
+                
+                }
+                else if(scale==0.5){
+                    reiniciar.setLayoutX(830-240);
+                    reiniciar.setLayoutY(-400);
+                    reiniciar.setScaleX(1/scale);
+                    reiniciar.setScaleY(1/scale);
+                    disminuir.setLayoutX(900-140);
+                    disminuir.setLayoutY(-400);
+                    disminuir.setScaleX(1/scale);
+                    disminuir.setScaleY(1/scale);
+                    aumentar.setLayoutX(1010-30);
+                    aumentar.setLayoutY(-400);
+                    aumentar.setScaleX(1/scale);
+                    aumentar.setScaleY(1/scale);
+                    menu.setLayoutX(1130+40);
+                    menu.setLayoutY(-400);
+                    menu.setScaleX(1/scale);
+                    menu.setScaleY(1/scale);
+                    interfaz.getChildren().add(reiniciar);
+                    interfaz.getChildren().add(aumentar);
+                    interfaz.getChildren().add(disminuir);
+                    interfaz.getChildren().add(menu);                       
+                
+                
+                
+                
+                
+                }
+               
+                
+                
+                
+               
 
-                boton.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton2.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton3.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-                boton4.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                reiniciar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                disminuir.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                aumentar.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
+                menu.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
                 stage.setScene(SelectionScene);
                 
             
@@ -1343,7 +1503,7 @@ public class Ordenamientos {
         imprimeArreglo(arreglo);
     }
     
-    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX,AnchorPane interfaz){
+    public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX,AnchorPane interfaz,double scale){
         
         Lapiz lapiz = new Lapiz(0,0);
         
@@ -1790,7 +1950,7 @@ public class Ordenamientos {
 
         System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
         
-        
+
         seqVagones.play();
         seqLocIzq.play();
         seqLocDer.play();
@@ -1814,25 +1974,116 @@ public class Ordenamientos {
             seqLocAux.setRate(this.rate);
         });
         
-        menosvelocidad.setLayoutX(1180);
-        masvelocidad.setLayoutX(1270);
-        menosvelocidad.setLayoutY(20);
-        masvelocidad.setLayoutY(20);
         masvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
         menosvelocidad.setStyle("-fx-border-color: black; -fx-border-width: 2px;");
-     
+            
 
       
-        interfaz.getChildren().add(anchor);
-        interfaz.setScaleX(0.8);
-        interfaz.setScaleY(0.8);
-
-  
+        if (scale==1){
+        
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270);
+            masvelocidad.setLayoutY(20);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180);
+            menosvelocidad.setLayoutY(20);
+        }
+        
+        else if(scale==0.9){
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270);
+            masvelocidad.setLayoutY(0);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180-10);
+            menosvelocidad.setLayoutY(0);
+        
+        
+        
+        
+        }
+        else if(scale==0.8){
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270+20);
+            masvelocidad.setLayoutY(-60);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180);
+            menosvelocidad.setLayoutY(-60);
+        
+        
+        
+        
+        }
+        else if(scale==0.7){
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270+70);
+            masvelocidad.setLayoutY(-120);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180+40);
+            menosvelocidad.setLayoutY(-120);
+        
+        
+        
+        
+        }
+        else if(scale==0.6){
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270+140);
+            masvelocidad.setLayoutY(-240);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180+80);
+            menosvelocidad.setLayoutY(-240);
+        
+        
+        
+        
+        }
+        else if(scale==0.5){
+            interfaz.getChildren().add(anchor);
+            interfaz.setScaleX(scale);
+            interfaz.setScaleY(scale);
+            masvelocidad.setScaleX(1/scale);
+            masvelocidad.setScaleY(1/scale);
+            masvelocidad.setLayoutX(1270+200);
+            masvelocidad.setLayoutY(-400);
+            menosvelocidad.setScaleX(1/scale);
+            menosvelocidad.setScaleY(1/scale);
+            menosvelocidad.setLayoutX(1180+120);
+            menosvelocidad.setLayoutY(-400);
+        
+        
+        
+        
+        }
 
 
         interfaz.getChildren().add(menosvelocidad);
         interfaz.getChildren().add(masvelocidad);
-        PseudocodigoSeleccion(interfaz, arreglo);
+        PseudocodigoSeleccion(interfaz, arreglo,scale);
     }
     
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
@@ -2130,7 +2381,7 @@ public class Ordenamientos {
         return Anchor; 
     }
     
-    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo){
+    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo, double scale){
     
     Text[] etiquetasCodigo = {
         new Text("1. Para i = 0 hasta n-1 hacer:"),
@@ -2204,6 +2455,8 @@ public class Ordenamientos {
 
     // Establecer el borde en el VBox
     root.setBorder(border);
+    root.setScaleX(1/scale);
+    root.setScaleY(1/scale);
 
     Anchor.getChildren().add(root);
     return Anchor;

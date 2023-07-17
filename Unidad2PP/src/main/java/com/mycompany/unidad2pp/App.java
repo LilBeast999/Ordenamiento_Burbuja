@@ -28,9 +28,9 @@ public class App extends Application {
        Ordenamientos ordenamientos = new Ordenamientos();
        Text titulo= new Text("¡Bienvenido!");
        
-       Button boton = new Button("Reiniciar");
-       Button retroceder = new Button("Disminuye cajas");
-       Button avanzar = new Button("Aumenta cajas");
+       Button reiniciar = new Button("Reiniciar");
+       Button disminuir = new Button("Disminuye cajas");
+       Button aumentar = new Button("Aumenta cajas");
        Button Insercion = new Button ("Ordenamiento por insercion");
        Button Menu = new Button("Menu");
        Button Burbuja = new Button("Ordenamiento Burbuja");
@@ -38,24 +38,24 @@ public class App extends Application {
        Button Selection = new Button("Ordenamiento por seleccion");
    
        
-       boton.setOnAction(e -> {
+       reiniciar.setOnAction(e -> {
         
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          
         });
        
-        retroceder.setOnAction(e -> { //disminuye el numero de cajas
+        disminuir.setOnAction(e -> { //disminuye el numero de cajas
          if (ordenamientos.getAux()>17){  
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          ordenamientos.disminuir();
          }
         });
         
-        avanzar.setOnAction(e -> { //aumenta el numero de cajas
+        aumentar.setOnAction(e -> { //aumenta el numero de cajas
         
             
          if (ordenamientos.getAux()<=63){   
-         ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
+         ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());
          ordenamientos.aumentar();
          }
         });
@@ -73,7 +73,7 @@ public class App extends Application {
            
             stage1.hide();
             ordenamientos.insercion();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -82,7 +82,7 @@ public class App extends Application {
            
             stage1.hide();
             ordenamientos.burbuja();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -91,7 +91,7 @@ public class App extends Application {
            
             stage1.hide();
             ordenamientos.cocktail();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
@@ -100,7 +100,7 @@ public class App extends Application {
            
             stage1.hide();
             ordenamientos.selection();
-            ordenamientos.miCodigo(stage,boton,retroceder,avanzar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
+            ordenamientos.miCodigo(stage,reiniciar,disminuir,aumentar,Menu,ordenamientos.getAux(),ordenamientos.getOpcion());  
             
    
         });
