@@ -3,6 +3,9 @@ package com.mycompany.unidad2pp;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
@@ -95,8 +98,8 @@ public class Ordenamientos {
             for(int i=0;i<numerodecajas;i++){       
                 Caja caja1 = new Caja((int)Math.floor(Math.random()*(99-1+1)+1));
                 almacen.cajas.add(caja1);
-                xAux = ((800/numerodecajas)*i);
-                cajasAnchor.add(almacen.dibujarvagon(((850/numerodecajas)*i),490, anchor,i,escalas.get(numerodecajas-16)));
+                xAux = ((1100/numerodecajas)*i);
+                cajasAnchor.add(almacen.dibujarvagon(((1100/numerodecajas)*i)-200,490, anchor,i,escalas.get(numerodecajas-16)));
                 coordenadasX.add(xAux);          
             }
         }
@@ -132,7 +135,6 @@ public class Ordenamientos {
                 break;
                 
             case 4:
-                System.out.println(" ----- EN DESARROLLO ----");
                 Seleccion(arreglo, numerodecajas, cajasAnchor, anchor,coordenadasX);
                 break;
              
@@ -430,8 +432,7 @@ public class Ordenamientos {
         }
     
     public void Burbuja (ArrayList<Integer> arreglo, int numerodecajas, ArrayList<AnchorPane> cajasAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX){
-        
-        
+                
         double cordX = 1625;
         Rectangle repisa = new Rectangle(cordX,745,100,25);
         repisa.setFill(Color.ORANGE);
@@ -1282,7 +1283,16 @@ public class Ordenamientos {
         imprimeArreglo(arreglo);
     }
     
+    private Set<AnchorPane> vagonesUtilizados;
     public void Seleccion (ArrayList<Integer> arreglo, int numerodevagones, ArrayList<AnchorPane> vagonesAnchor,AnchorPane anchor, ArrayList<Double> coordenadasX){
+        Rectangle pintalinea = new Rectangle(0,0,450,20);
+        pintalinea.setFill(Color.ORANGE);
+        anchor=PseudocodigoSeleccion(anchor, arreglo,pintalinea);
+        
+        ArrayList<Integer> alturasLineas = new ArrayList();
+        for (int i = 1; i <= 3; i++) {
+            alturasLineas.add((i*25)-15);
+        }
         
         Lapiz lapiz = new Lapiz(0,0);
         
@@ -1295,35 +1305,51 @@ public class Ordenamientos {
         */
         
         //Creación de las locomotoras
-        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 1800, 492); 
-        AnchorPane locomotoraIzq = lapiz.dibujarLocomotora(anchor, -100, 492);
+        AnchorPane locomotoraDer = lapiz.dibujarLocomotora(anchor, 2100, 492); 
+        AnchorPane locomotoraIzq = lapiz.dibujarLocomotora(anchor, -290, 492);
         locomotoraIzq.setRotate(180);
-        AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1800, 35);
+        AnchorPane locomotoraAux = lapiz.dibujarLocomotora(anchor, 1740, 35);
         locomotoraAux.setRotate(-27);
         
         int duracion = 1000;
         
+        SequentialTransition seqPintaLinea = new SequentialTransition();
         SequentialTransition seqVagones = new SequentialTransition();
         SequentialTransition seqLocIzq = new SequentialTransition();
         SequentialTransition seqLocDer = new SequentialTransition();
         SequentialTransition seqLocAux = new SequentialTransition();
         
         
-        anchor.setScaleX(0.9);
-        anchor.setScaleY(0.9);
+        anchor.setScaleX(0.8);
+        anchor.setScaleY(0.8);
         
         
         
-        double separacion = 850;
+        double separacion = 1100;
         
         double ayuda;
         int num_iteracion = 0;
         
-        ArrayList <Integer> numeros_usados = new ArrayList();
+        ArrayList <Double> coordenadas_usadas = new ArrayList();
+        ArrayList <AnchorPane> vagones_usados = new ArrayList();
         AnchorPane vagonAux;
-        System.out.println("Arreglo sin ordenar: " + arreglo);
+        vagonesUtilizados = new HashSet<>();
+        double agregado = 0;
+        int indice = 0;
+        //System.out.println("Arreglo sin ordenar: " + arreglo);
         for (int i = 0; i < arreglo.size() - 1; i++) {
             int minIndex = i;
+            //REINICIO PINTALINEA
+            TranslateTransition movPinta1 = new TranslateTransition(Duration.millis(duracion), pintalinea);
+            movPinta1.setToY(alturasLineas.get(1));
+            seqPintaLinea.getChildren().add(movPinta1);
+            
+            //MOVIMIENTOS VACIOS NECESARIOS
+                TranslateTransition movVacio0 = new TranslateTransition(Duration.millis(duracion));
+                seqVagones.getChildren().add(movVacio0);
+                seqLocIzq.getChildren().add(movVacio0);
+                seqLocDer.getChildren().add(movVacio0);
+                seqLocAux.getChildren().add(movVacio0);
 
             // Encuentra el índice del elemento mínimo en el subarreglo restante
             for (int j = i + 1; j < arreglo.size(); j++) {
@@ -1334,15 +1360,35 @@ public class Ordenamientos {
 
             // Intercambia el elemento mínimo con el elemento actual
             if(minIndex!=i){
-                numeros_usados.add(i);
-                System.out.println("VAGONES A INTERCAMBIAR: "+arreglo.get(i)+" Y "+arreglo.get(minIndex));
+                //REINICIO PINTALINEA
+                    TranslateTransition movPinta2 = new TranslateTransition(Duration.millis(duracion), pintalinea);
+                    movPinta2.setToY(alturasLineas.get(2));
+                    seqPintaLinea.getChildren().add(movPinta2);
+            
+                //MOVIMIENTOS VACIOS NECESARIOS
+                    TranslateTransition movVacio01 = new TranslateTransition(Duration.millis(duracion));
+                    seqVagones.getChildren().add(movVacio01);
+                    seqLocIzq.getChildren().add(movVacio01);
+                    seqLocDer.getChildren().add(movVacio01);
+                    seqLocAux.getChildren().add(movVacio01);
+                
+                
+                
+                
+                
+                
+                AnchorPane vagonR = vagonesAnchor.get(minIndex);
+                AnchorPane vagonI = vagonesAnchor.get(i);
+                if(vagonesUtilizados.contains(vagonR)){
+                        System.out.println("");
+                        System.out.println("USADO ANTES: "+arreglo.get(minIndex)+" ("+num_iteracion+")");
+                }
+                //System.out.println("VAGONES A INTERCAMBIAR: "+arreglo.get(i)+" Y "+arreglo.get(minIndex));
                 int temp = arreglo.get(i);
                 arreglo.set(i, arreglo.get(minIndex));
                 arreglo.set(minIndex, temp);
 
                 //INTERCAMBIO DE VAGONES
-                AnchorPane vagonR = vagonesAnchor.get(minIndex);
-                AnchorPane vagonI = vagonesAnchor.get(i);
                 /*
                 TranslateTransition movPrueba = new TranslateTransition(Duration.millis(duracion),vagonI);
                 movPrueba.setByY(100);
@@ -1355,7 +1401,7 @@ public class Ordenamientos {
                     //1.- locomotoraDer se mueve hasta la derecha del último vagón (se mueve a la izquierda, nada más se mueve)
                         //MOVIMIENTOS A REALIZAR
                             TranslateTransition movLocDerecha = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                            movLocDerecha.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(separacion/coordenadasX.size()));
+                            movLocDerecha.setByX(-(2250-coordenadasX.get(coordenadasX.size()-1)));
                             seqLocDer.getChildren().add(movLocDerecha);
 
                         //MOVIMIENTOS VACIOS NECESARIOS
@@ -1363,17 +1409,18 @@ public class Ordenamientos {
                             seqVagones.getChildren().add(movVacio1); 
                             seqLocIzq.getChildren().add(movVacio1);
                             seqLocAux.getChildren().add(movVacio1);
+                            seqPintaLinea.getChildren().add(movVacio1);
 
                     //2.- locomotoraDer se lleva a los vagones a la derecha de vagonR (se mueve a al derecha junto con los vagones mencionados)
                         //MOVIMIENTOS A REALIZAR
                             TranslateTransition movLocDerecha2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                            movLocDerecha2.setToX(1800-locomotoraDer.getLayoutX());
+                            movLocDerecha2.setToX(-20);
                             seqLocDer.getChildren().add(movLocDerecha2);
 
                             ParallelTransition movVagonesDerecha = new ParallelTransition();
                             for (int k = arreglo.size()-1, ind = 0; k > minIndex; k--, ind++){
                                 TranslateTransition movVagonDer = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
-                                movVagonDer.setByX(1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind));
+                                movVagonDer.setByX(2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind));
                                 movVagonesDerecha.getChildren().add(movVagonDer);
                             }
                             seqVagones.getChildren().add(movVagonesDerecha);
@@ -1382,14 +1429,19 @@ public class Ordenamientos {
                             TranslateTransition movVacio2 = new TranslateTransition(Duration.millis(duracion));
                             seqLocIzq.getChildren().add(movVacio2);
                             seqLocAux.getChildren().add(movVacio2);
+                            seqPintaLinea.getChildren().add(movVacio2);
                 }
+                if(vagonesUtilizados.contains(vagonR)){
+                        agregado = coordenadas_usadas.get(vagones_usados.indexOf(vagonR)) ;
+                        indice++;
+                }else{ agregado = 0;}
 
                 //3.- locomotoraAux se mueve hasta la derecha de vagonR (locomotoraAux se mueve en curva descendente a la izquierda, nada más se mueve)
                     //MOVIMIENTOS A REALIZAR
                         Path path1 = new Path();
-                        path1.getElements().add(new MoveTo(20, 20));
-                        path1.getElements().add(new LineTo(-910, 495));
-                        path1.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(separacion/coordenadasX.size()*2),475));                  
+                        path1.getElements().add(new MoveTo(30, 30));
+                        path1.getElements().add(new LineTo(-880, 475));
+                        path1.getElements().add(new LineTo((vagonR.getLayoutX()-1700)+(separacion/coordenadasX.size())+agregado,475));                  
                         PathTransition pathLocAux1 = new PathTransition(Duration.millis(duracion), path1, locomotoraAux);
                         pathLocAux1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 
@@ -1400,95 +1452,101 @@ public class Ordenamientos {
                         seqLocDer.getChildren().add(movVacio3);
                         seqLocIzq.getChildren().add(movVacio3);
                         seqVagones.getChildren().add(movVacio3);
+                        seqPintaLinea.getChildren().add(movVacio3);
                 
                 //SE COMPORTA DIFERENTE CUANDO vagonR FUE USADO ANTES COMO vagonI
                 //4.- locomotoraAux se lleva a vagonR (se mueve en curva ascendente a la derecha junto con vagonR)
+                
                     //MOVIMIENTOS A REALIZAR
                         Path path2 = new Path();
-                        path2.getElements().add(new MoveTo((coordenadasX.get(minIndex)-1800)+(separacion/coordenadasX.size()*2),475));
-                        path2.getElements().add(new LineTo(-920, 495));
-                        path2.getElements().add(new LineTo(20,20));
+                        path2.getElements().add(new MoveTo((vagonR.getLayoutX()-1700)+(separacion/coordenadasX.size())+agregado,475));
+                        path2.getElements().add(new LineTo(-880, 475));
+                        path2.getElements().add(new LineTo(50,50));
                         PathTransition pathLocAux2 = new PathTransition(Duration.millis(duracion), path2, locomotoraAux);
                         pathLocAux2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathLocAux2);
 
                         Path path = new Path();
-                        path.getElements().add(new MoveTo(0, 0));
-                        path.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+80)+20,0));
-                        path.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+900)+20,-400));                
+                        path.getElements().add(new MoveTo(0+agregado, 0));
+                        path.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+20)+agregado,0));
+                        path.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+825)+agregado,-380));                
                         PathTransition pathTransition = new PathTransition(Duration.millis(duracion), path, vagonR);
                         pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 
                         seqVagones.getChildren().add(pathTransition);
                         
-                        //double ayuda1 = ((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+80)+20;
-                        //double ayuda2 = ((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+900)+20;
-            
-                        //System.out.println("ITERACION "+num_iteracion);
-                        //System.out.println("primera coordenada X: "+ayuda1);
-                        //System.out.println("segunda coordenada X"+ayuda2);
+
                         num_iteracion++;
                     //MOVIMIENTOS VACIOS NECESARIOS
                     TranslateTransition movVacio4 = new TranslateTransition(Duration.millis(duracion));
                     seqLocDer.getChildren().add(movVacio4);
                     seqLocIzq.getChildren().add(movVacio4);
-
-                //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
-                    //MOVIMIENTOS A REALIZAR
-                    TranslateTransition movLocDer3 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                    movLocDer3.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX()));
-                    seqLocDer.getChildren().add(movLocDer3);
-
-                    ParallelTransition movVagonesIzq1 = new ParallelTransition();
-                    for (int k = arreglo.size()-1, ind = 0; k > minIndex; k--, ind++){
-                        TranslateTransition movVagonIzq = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
-                        movVagonIzq.setByX(-(1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)+(separacion/numerodevagones)));
-                        movVagonesIzq1.getChildren().add(movVagonIzq);
-                    }
-                    seqVagones.getChildren().add(movVagonesIzq1);
-
-                    //MOVIMIENTOS VACIOS NECESARIOS
-                     TranslateTransition movVacio5 = new TranslateTransition(Duration.millis(duracion));
-                     seqLocIzq.getChildren().add(movVacio5);
-                     seqLocAux.getChildren().add(movVacio5);
-
-
-                //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
-                    //MOVIMIENTOS NECESARIOS
-                        TranslateTransition movLocDer4 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                        movLocDer4.setToX(1800-locomotoraDer.getLayoutX());
-                        seqLocDer.getChildren().add(movLocDer4);
-
-                        ParallelTransition movVagonesIzq2 = new ParallelTransition();
-                        for (int k = arreglo.size()-1, ind = 0; k >= i; k--, ind++){
-                            if(k!=minIndex){
-                                TranslateTransition movVagonDer = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
-                                movVagonDer.setByX(1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind));
-                                movVagonesIzq2.getChildren().add(movVagonDer);
+                    seqPintaLinea.getChildren().add(movVacio4);
+                    
+                
+                    //5.- locomotoraDer se mueve junto con los vagones que tenga, hasta donde estaba vagonR(se mueve a la izquierda junto con los vagones que tenga en ese momento)
+                        //MOVIMIENTOS A REALIZAR
+                        TranslateTransition movLocDer3 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                        movLocDer3.setByX(-(2250-coordenadasX.get(coordenadasX.size()-1)));
+                        seqLocDer.getChildren().add(movLocDer3);
+                        if(minIndex!=arreglo.size()-1){
+                            ParallelTransition movVagonesIzq1 = new ParallelTransition();
+                            for (int k = arreglo.size()-1, ind = 0; k > minIndex; k--, ind++){
+                                TranslateTransition movVagonIzq = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
+                                movVagonIzq.setByX(-(2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)+(separacion/numerodevagones)));
+                                movVagonesIzq1.getChildren().add(movVagonIzq);
                             }
+                                seqVagones.getChildren().add(movVagonesIzq1);
+                        }else{
+                            TranslateTransition movVacio05 = new TranslateTransition(Duration.millis(duracion));
+                            seqVagones.getChildren().add(movVacio05);
                         }
-                        seqVagones.getChildren().add(movVagonesIzq2);        
 
-                    //MOVIMIENTOS VACIOS NECESARIOS
-                    TranslateTransition movVacio6 = new TranslateTransition(Duration.millis(duracion));
-                    seqLocIzq.getChildren().add(movVacio6);
-                    seqLocAux.getChildren().add(movVacio6);
+                        //MOVIMIENTOS VACIOS NECESARIOS
+                         TranslateTransition movVacio5 = new TranslateTransition(Duration.millis(duracion));
+                         seqLocIzq.getChildren().add(movVacio5);
+                         seqLocAux.getChildren().add(movVacio5);
+                         seqPintaLinea.getChildren().add(movVacio5);
+                
+
+                    //6.- locomotoraDer se lleva a todos los vagones, incluido vagonI(se mueve a la derecha junto con todos los vagones menos vagonR (ciclo con condicional que excluya a vagonR))
+                        //MOVIMIENTOS NECESARIOS
+                            TranslateTransition movLocDer4 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                            movLocDer4.setByX(2250-coordenadasX.get(coordenadasX.size()-1));
+                            seqLocDer.getChildren().add(movLocDer4);
+
+                            ParallelTransition movVagonesIzq2 = new ParallelTransition();
+                            for (int k = arreglo.size()-1, ind = 0; k >= i; k--, ind++){
+                                if(k!=minIndex){
+                                    TranslateTransition movVagonDer = new TranslateTransition (Duration.millis(duracion),vagonesAnchor.get(k));
+                                    movVagonDer.setByX(2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind));
+                                    movVagonesIzq2.getChildren().add(movVagonDer);
+                                }
+                            }
+                            seqVagones.getChildren().add(movVagonesIzq2);        
+
+                        //MOVIMIENTOS VACIOS NECESARIOS
+                        TranslateTransition movVacio6 = new TranslateTransition(Duration.millis(duracion));
+                        seqLocIzq.getChildren().add(movVacio6);
+                        seqLocAux.getChildren().add(movVacio6);
+                        seqPintaLinea.getChildren().add(movVacio6);
+                
 
                 //SE COMPORTA DIFERENTE CUANDO vagonR FUE USADO ANTES COMO vagonI
                 //7.- locomotoraAux trae de vuelta a vagonR hasta donde estaba vagonI(se mueve locomotoraAux junto con vagonR en curva descendente a la izquierda)
                     //MOVIMIENTOS A REALIZAR
                         Path path3 = new Path();
-                        path3.getElements().add(new MoveTo(20, 20));
-                        path3.getElements().add(new LineTo(-910,475));
-                        path3.getElements().add(new LineTo((vagonI.getLayoutX()-1800),495));               
+                        path3.getElements().add(new MoveTo(40, 40));
+                        path3.getElements().add(new LineTo(-880,475));
+                        path3.getElements().add(new LineTo((vagonI.getLayoutX()-1740)+((separacion/numerodevagones)*2)+agregado,475));               
                         PathTransition pathTransition1 = new PathTransition(Duration.millis(duracion), path3, locomotoraAux);
                         pathTransition1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathTransition1);
 
                         Path path4 = new Path();
-                        path4.getElements().add(new MoveTo(1800-coordenadasX.get(minIndex), -340));
-                        path4.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+80)+20,30));
-                        path4.getElements().add(new LineTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i)),30));               
+                        path4.getElements().add(new MoveTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+825)+agregado,-380));
+                        path4.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-minIndex)+20)+agregado,30));
+                        path4.getElements().add(new LineTo(-(coordenadasX.get(minIndex)-coordenadasX.get(i))+((separacion/numerodevagones)/2)+agregado,30));               
                         PathTransition pathTransition2 = new PathTransition(Duration.millis(duracion), path4, vagonR);
                         pathTransition2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); 
                         seqVagones.getChildren().add(pathTransition2);
@@ -1496,6 +1554,7 @@ public class Ordenamientos {
                         TranslateTransition movVacio7 = new TranslateTransition(Duration.millis(duracion));
                         seqLocDer.getChildren().add(movVacio7);
                         seqLocIzq.getChildren().add(movVacio7);
+                        seqPintaLinea.getChildren().add(movVacio7);
 
                         RotateTransition rotateTransition0 = new RotateTransition(Duration.ONE, vagonR);
                         rotateTransition0.setByAngle(180);
@@ -1504,9 +1563,9 @@ public class Ordenamientos {
                 //8.- locomotoraAux se devuelve a su poscisión original(se mueve en curva ascendente a la derecha)
                     //MOVIMIENTOS A REALIZAR
                         Path path5 = new Path();
-                        path5.getElements().add(new MoveTo((vagonI.getLayoutX()-1800)+(separacion/coordenadasX.size()*2),495));
-                        path5.getElements().add(new LineTo(-920, 495));
-                        path5.getElements().add(new LineTo(20,20));
+                        path5.getElements().add(new MoveTo((vagonI.getLayoutX()-1740)+(separacion/coordenadasX.size()*2),475));
+                        path5.getElements().add(new LineTo(-880, 475));
+                        path5.getElements().add(new LineTo(40,40));
                         PathTransition pathLocAux3 = new PathTransition(Duration.millis(duracion), path5, locomotoraAux);
                         pathLocAux3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathLocAux3);
@@ -1515,22 +1574,23 @@ public class Ordenamientos {
                     seqLocDer.getChildren().add(movVacio8);
                     seqLocIzq.getChildren().add(movVacio8);
                     seqVagones.getChildren().add(movVacio8);
+                    seqPintaLinea.getChildren().add(movVacio8);
 
                 //9.- locomotoraIzq, junto con los vagones que ya estan ordenados y vagonR, se mueve hasta donde están todos los vagones(se mueve locomotoraIzq a la derecha junto con vagonR)
                     //MOVIMIENTOS A REALIZAR
                     TranslateTransition movLocIzq1 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
-                    movLocIzq1.setByX(1820-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)-(separacion/coordenadasX.size())*2);
+                    movLocIzq1.setByX(2310-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)-(separacion/coordenadasX.size())*2);
                     seqLocIzq.getChildren().add(movLocIzq1);
 
                     ParallelTransition movVagonesDer = new ParallelTransition();
                     TranslateTransition movVagonR = new TranslateTransition (Duration.millis(duracion),vagonR);
-                    movVagonR.setByX(1720-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones));
+                    movVagonR.setByX(2210-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones));
                     movVagonesDer.getChildren().add(movVagonR);
 
                     if(i!=0){
                         for (int k = i-1,ind = i ; k >= 0; k--,ind++) {
                             TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                            movVagon.setByX((1720-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
+                            movVagon.setByX((2210-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
                             movVagonesDer.getChildren().add(movVagon);
                         }
                     }
@@ -1540,28 +1600,29 @@ public class Ordenamientos {
                     TranslateTransition movVacio9 = new TranslateTransition(Duration.millis(duracion));
                     seqLocDer.getChildren().add(movVacio9);
                     seqLocAux.getChildren().add(movVacio9);
+                    seqPintaLinea.getChildren().add(movVacio9);
 
 
                 //10.-locomotoraIzq se devuelve junto con vagonR y vagonI(se mueve locomotoraIzq a la izquierda junto con vagonR y vagonI)
                     //MOVIMIENTOS A REALIZAR
                     TranslateTransition movLocIzq2 = new TranslateTransition(Duration.millis(duracion), locomotoraIzq);
-                    movLocIzq2.setByX(-(1820-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)-(separacion/coordenadasX.size())*2));
+                    movLocIzq2.setByX(-(2310-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)-(separacion/coordenadasX.size())*2));
                     seqLocIzq.getChildren().add(movLocIzq2);
 
                     ParallelTransition movVagonesIzq = new ParallelTransition();
 
                     TranslateTransition movVagonI2 = new TranslateTransition (Duration.millis(duracion),vagonI);
-                    movVagonI2.setByX(-(1720-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
+                    movVagonI2.setByX(-(2210-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
                     movVagonesIzq.getChildren().add(movVagonI2);
 
                     TranslateTransition movVagonR1 = new TranslateTransition (Duration.millis(duracion),vagonR);
-                    movVagonR1.setByX(-(1720-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
+                    movVagonR1.setByX(-(2210-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
                     movVagonesIzq.getChildren().add(movVagonR1);
 
                     if(i!=0){
                         for (int k = i,ind = i ; k >= 0; k--,ind++) {
                             TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                            movVagon.setByX(-(1720-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
+                            movVagon.setByX(-(2210-coordenadasX.get(0)-((separacion/coordenadasX.size())*numerodevagones)));
                             movVagonesIzq.getChildren().add(movVagon);
                         }
                     }
@@ -1571,13 +1632,14 @@ public class Ordenamientos {
                     TranslateTransition movVacio10 = new TranslateTransition(Duration.millis(duracion));
                     seqLocAux.getChildren().add(movVacio10);
                     seqLocDer.getChildren().add(movVacio10);
+                    seqPintaLinea.getChildren().add(movVacio10);
 
                 //11.-locomotoraAux viene a buscar a vagonI(locomotoraAux se mueve en curva descendiente a la izquierda, nada más se mueve)
                     //MOVIMIENTOS A REALIZAR
                         Path path6 = new Path();
                         path6.getElements().add(new MoveTo(20, 20));
-                        path6.getElements().add(new LineTo(-910,495));
-                        path6.getElements().add(new LineTo((vagonI.getLayoutX()-1800)+((separacion/numerodevagones)*(i+3)),495));               
+                        path6.getElements().add(new LineTo(-880,475));
+                        path6.getElements().add(new LineTo((vagonI.getLayoutX()-1740)+((separacion/numerodevagones)*2),475));               
                         PathTransition pathTransition3 = new PathTransition(Duration.millis(duracion), path6, locomotoraAux);
                         pathTransition3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathTransition3);
@@ -1587,22 +1649,23 @@ public class Ordenamientos {
                         seqLocIzq.getChildren().add(movVacio11);
                         seqLocDer.getChildren().add(movVacio11);
                         seqVagones.getChildren().add(movVacio11);
+                        seqPintaLinea.getChildren().add(movVacio11);
 
 
                 //12.-locomotoraAux se lleva a vagonI(locomotoraAux junto con vagon I se mueven en curva ascendente a la derecha)
                     //MOVIMIENTOS A REALIZAR
                         Path path7 = new Path();
-                        path7.getElements().add(new MoveTo((vagonI.getLayoutX()-1800)+((separacion/numerodevagones)*(i+3)),475));
-                        path7.getElements().add(new LineTo(-920, 495));
-                        path7.getElements().add(new LineTo(20,20));
+                        path7.getElements().add(new MoveTo((vagonI.getLayoutX()-1740)+((separacion/numerodevagones)*2),475));
+                        path7.getElements().add(new LineTo(-880, 475));
+                        path7.getElements().add(new LineTo(40,40));
                         PathTransition pathLocAux4 = new PathTransition(Duration.millis(duracion), path7, locomotoraAux);
                         pathLocAux4.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathLocAux4);
 
                         Path path8 = new Path();
                         path8.getElements().add(new MoveTo(0, 0));
-                        path8.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i)+80)+20,0));
-                        path8.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i)+900)+20,-400));                
+                        path8.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i))+20,0));
+                        path8.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i)+825),-380));                
                         PathTransition pathTransition4 = new PathTransition(Duration.millis(duracion), path8, vagonI);
                         pathTransition4.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqVagones.getChildren().add(pathTransition4);
@@ -1612,19 +1675,20 @@ public class Ordenamientos {
                         TranslateTransition movVacio12 = new TranslateTransition(Duration.millis(duracion));
                         seqLocDer.getChildren().add(movVacio12);
                         seqLocIzq.getChildren().add(movVacio12);
+                        seqPintaLinea.getChildren().add(movVacio12);
 
                 //13.-locomotoraDer trae de vuelta a todos los vagones(se mueve a la izquierda locomotoraDer junto con todos los vagones que tenga en ese momento(excluye a vagonI y vagonR))
                     //MOVIMIENTOS A REALIZAR
 
                     TranslateTransition movLocDer1 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                    movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(separacion/coordenadasX.size()));
+                    movLocDer1.setToX((vagonesAnchor.get(vagonesAnchor.size()-1).getLayoutX()-locomotoraDer.getLayoutX())+(separacion/coordenadasX.size())-50);
                     seqLocDer.getChildren().add(movLocDer1);
 
                     ParallelTransition movVagonesIzq3 = new ParallelTransition();
                     for (int k = coordenadasX.size()-1, ind=0; k > i; k--,ind++) {
                         if(k!=i && k!=minIndex){
                             TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                            movVagon.setByX(-(1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)));
+                            movVagon.setByX(-(2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)));
                             movVagonesIzq3.getChildren().add(movVagon);
                         }
                     }
@@ -1634,41 +1698,51 @@ public class Ordenamientos {
                         TranslateTransition movVacio13 = new TranslateTransition(Duration.millis(duracion));
                         seqLocAux.getChildren().add(movVacio13);
                         seqLocIzq.getChildren().add(movVacio13);
+                        seqPintaLinea.getChildren().add(movVacio13);
 
                 //14.-locomotoraDer se devuelve a su posición junto con los vagones que estuvieran a la derecha de vagonR al principio del intercambio(se mueve a la derecha locomotoraDer junto con los vagones mencionados)
                     //MOVIMIENTOS A RELIZAR
                         TranslateTransition movLocDer2 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                        movLocDer2.setByX(1720-coordenadasX.get(coordenadasX.size()-1));
+                        movLocDer2.setByX(2190-coordenadasX.get(coordenadasX.size()-1));
                         seqLocDer.getChildren().add(movLocDer2);
-
-                        ParallelTransition movVagonesDer1 = new ParallelTransition();
-                        for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
-                            if(k!=i && k!=minIndex){
-                                TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                                movVagon.setByX((1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)));
-                                movVagonesDer1.getChildren().add(movVagon);
+                        if(minIndex!=arreglo.size()-1){
+                            ParallelTransition movVagonesDer1 = new ParallelTransition();
+                            for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
+                                if(k!=i && k!=minIndex){
+                                    TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
+                                    movVagon.setByX((2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*ind)));
+                                    movVagonesDer1.getChildren().add(movVagon);
+                                }
                             }
+                            seqVagones.getChildren().add(movVagonesDer1);
+                        }else{
+                            TranslateTransition movVacio14 = new TranslateTransition(Duration.millis(duracion));
+                            seqVagones.getChildren().add(movVacio14);
                         }
-                        seqVagones.getChildren().add(movVagonesDer1);
 
                     //MOVIMIENTS VACIOS NECESARIOS
                         TranslateTransition movVacio14 = new TranslateTransition(Duration.millis(duracion));
                         seqLocAux.getChildren().add(movVacio14);
                         seqLocIzq.getChildren().add(movVacio14);
-                //15.-locomotorAux viene a dejar a vagonI en la poscicion donde estaba vagonR en un principio(locomotoraAux se mueve en curva descendente a la izquierda junto con vagonI)
+                        seqPintaLinea.getChildren().add(movVacio14);
+                        
+                        
+                //15.-locomotoraAux viene a dejar a vagonI en la poscicion donde estaba vagonR en un principio(locomotoraAux se mueve en curva descendente a la izquierda junto con vagonI)
                     //MOVIMIENTOS A REALIZAR
+                         
+                        
                         Path path9 = new Path();
                         path9.getElements().add(new MoveTo(20, 20));
-                        path9.getElements().add(new LineTo(-910, 495));
-                        path9.getElements().add(new LineTo((vagonR.getLayoutX()-1800)+(separacion/coordenadasX.size()*2),475));                  
+                        path9.getElements().add(new LineTo(-880, 475));
+                        path9.getElements().add(new LineTo((vagonR.getLayoutX()-1740)+(separacion/coordenadasX.size()*2),475));                  
                         PathTransition pathLocAux5 = new PathTransition(Duration.millis(duracion), path9, locomotoraAux);
                         pathLocAux5.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathLocAux5);
 
                         Path path10 = new Path();
-                        path10.getElements().add(new MoveTo(1800-coordenadasX.get(i), -340));
-                        path10.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i)+80)+20+((separacion/numerodevagones)*2),30));
-                        path10.getElements().add(new LineTo(-(coordenadasX.get(i)-coordenadasX.get(minIndex))+(separacion/numerodevagones)*(3/2),30));               
+                        path10.getElements().add(new MoveTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i)+825),-380));
+                        path10.getElements().add(new LineTo(((separacion/numerodevagones)*(vagonesAnchor.size()-i))+20,30));
+                        path10.getElements().add(new LineTo(-(coordenadasX.get(i)-coordenadasX.get(minIndex))+(separacion/numerodevagones)/2,30));               
                         PathTransition pathTransition5 = new PathTransition(Duration.millis(duracion), path10, vagonI);
                         pathTransition5.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); 
                         seqVagones.getChildren().add(pathTransition5);
@@ -1683,12 +1757,13 @@ public class Ordenamientos {
                         TranslateTransition movVacio15 = new TranslateTransition(Duration.millis(duracion));
                         seqLocDer.getChildren().add(movVacio15);
                         seqLocIzq.getChildren().add(movVacio15);
+                        seqPintaLinea.getChildren().add(movVacio15);
                 //16.-locomotoraAux se devuelve a su posición(locomotoraAux se mueve en curva ascendente a la derecha, nada más se mueve)
                     //MOVIMIENTOS A REALIZAR
                         Path path11 = new Path();
-                        path11.getElements().add(new MoveTo((vagonR.getLayoutX()-1800)+(separacion/coordenadasX.size()*2),475));
-                        path11.getElements().add(new LineTo(-920, 495));
-                        path11.getElements().add(new LineTo(20,20));
+                        path11.getElements().add(new MoveTo((vagonR.getLayoutX()-1740)+(separacion/coordenadasX.size()*2),475));
+                        path11.getElements().add(new LineTo(-920, 475));
+                        path11.getElements().add(new LineTo(40,40));
                         PathTransition pathLocAux6 = new PathTransition(Duration.millis(duracion), path11, locomotoraAux);
                         pathLocAux6.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
                         seqLocAux.getChildren().add(pathLocAux6);
@@ -1698,54 +1773,61 @@ public class Ordenamientos {
                         seqVagones.getChildren().add(movVacio16);
                         seqLocDer.getChildren().add(movVacio16);
                         seqLocIzq.getChildren().add(movVacio16);
+                        seqPintaLinea.getChildren().add(movVacio16);
+                
+                if(minIndex!=arreglo.size()-1){
+                    //17.-locomotoraDer trae de vuelta a los vagones que tenía hasta ese momento(se mueve a la izquierda junto con los vagones que estaban a la derecha de vagonR en un principio)
+                        //MOVMIENTOS A REALIZAR
+                            TranslateTransition movLocDer5 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                            movLocDer5.setByX(-(2190-coordenadasX.get(coordenadasX.size()-1)));
+                            seqLocDer.getChildren().add(movLocDer5);
 
-                //17.-locomotoraDer trae de vuelta a los vagones que tenía hasta ese momento(se mueve a la izquierda junto con los vagones que estaban a la derecha de vagonR en un principio)
-                    //MOVMIENTOS A REALIZAR
-                        TranslateTransition movLocDer5 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                        movLocDer5.setByX(-(1720-coordenadasX.get(coordenadasX.size()-1)));
-                        seqLocDer.getChildren().add(movLocDer5);
-
-                        ParallelTransition movVagonesDer2 = new ParallelTransition();
-                        for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
-                            if(k!=i && k!=minIndex){
-                                TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
-                                movVagon.setByX(-(1720-coordenadasX.get(k)-((separacion/coordenadasX.size())*(ind+1))));
-                                movVagonesDer2.getChildren().add(movVagon);
+                            ParallelTransition movVagonesDer2 = new ParallelTransition();
+                            for (int k = coordenadasX.size()-1, ind=0; k > minIndex ; k--,ind++) {
+                                if(k!=i && k!=minIndex){
+                                    TranslateTransition movVagon = new TranslateTransition(Duration.millis(duracion),vagonesAnchor.get(k));
+                                    movVagon.setByX(-(2210-coordenadasX.get(k)-((separacion/coordenadasX.size())*(ind+1))));
+                                    movVagonesDer2.getChildren().add(movVagon);
+                                }
                             }
-                        }
-                        seqVagones.getChildren().add(movVagonesDer2);
+                            seqVagones.getChildren().add(movVagonesDer2);
 
-                    //MOVIMIENTOS VACIOS NECESARIOS
-                        TranslateTransition movVacio17 = new TranslateTransition(Duration.millis(duracion));
-                        seqLocIzq.getChildren().add(movVacio17);
-                        seqLocAux.getChildren().add(movVacio17);
+                        //MOVIMIENTOS VACIOS NECESARIOS
+                            TranslateTransition movVacio17 = new TranslateTransition(Duration.millis(duracion));
+                            seqLocIzq.getChildren().add(movVacio17);
+                            seqLocAux.getChildren().add(movVacio17);
+                            seqPintaLinea.getChildren().add(movVacio17);
 
-                //18.-locomotoraDer se devuelve a su posición incial (locomotoraDer se mueve a la derecha, nada mas se mueve)
-                    //MOVIMIENTOS A REALIZAR
-                        TranslateTransition movLocDer6 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
-                        movLocDer6.setByX(1720-coordenadasX.get(coordenadasX.size()-1));
-                        seqLocDer.getChildren().add(movLocDer6);
+                    //18.-locomotoraDer se devuelve a su posición incial (locomotoraDer se mueve a la derecha, nada mas se mueve)
+                        //MOVIMIENTOS A REALIZAR
+                            TranslateTransition movLocDer6 = new TranslateTransition(Duration.millis(duracion),locomotoraDer);
+                            movLocDer6.setByX(2210-coordenadasX.get(coordenadasX.size()-1));
+                            seqLocDer.getChildren().add(movLocDer6);
 
-                    //MOVIMIENTOS VACIOS NECESARIOS
-                        TranslateTransition movVacio18 = new TranslateTransition(Duration.millis(duracion));
-                        seqVagones.getChildren().add(movVacio18);
-                        seqLocAux.getChildren().add(movVacio18);
-                        seqLocIzq.getChildren().add(movVacio18);
+                        //MOVIMIENTOS VACIOS NECESARIOS
+                            TranslateTransition movVacio18 = new TranslateTransition(Duration.millis(duracion));
+                            seqVagones.getChildren().add(movVacio18);
+                            seqLocAux.getChildren().add(movVacio18);
+                            seqLocIzq.getChildren().add(movVacio18);
+                            seqPintaLinea.getChildren().add(movVacio18);
+                }
                 
+                vagones_usados.add(vagonI);
+                vagonesUtilizados.add(vagonI);
+                coordenadas_usadas.add(coordenadasX.get(minIndex)-coordenadasX.get(i));
                 
-
                 vagonAux = vagonesAnchor.get(minIndex);
                 vagonesAnchor.set(minIndex, vagonesAnchor.get(i));
                 vagonesAnchor.set(i, vagonAux);
                 
                 
+                
             }    
         }
-        PseudocodigoSeleccion(anchor, arreglo);
 
-        System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
+        //System.out.println("Arreglo ordenado: " + arreglo);  // Para testear si está bien implementado
         
-        
+        seqPintaLinea.play();
         seqVagones.play();
         seqLocIzq.play();
         seqLocDer.play();
@@ -1755,6 +1837,7 @@ public class Ordenamientos {
         Button menosvelocidad = new Button ("- velocidad");
         masvelocidad.setOnAction(e -> {
             aumentarRate();
+            seqPintaLinea.setRate(this.rate);
             seqVagones.setRate(this.rate);
             seqLocIzq.setRate(this.rate);
             seqLocDer.setRate(this.rate);
@@ -1762,6 +1845,7 @@ public class Ordenamientos {
         });
         menosvelocidad.setOnAction(e -> {
             disminuirRate();
+            seqPintaLinea.setRate(this.rate);
             seqVagones.setRate(this.rate);
             seqLocIzq.setRate(this.rate);
             seqLocDer.setRate(this.rate);
@@ -1777,19 +1861,11 @@ public class Ordenamientos {
         anchor.getChildren().add(menosvelocidad);
     
     }
-    
-    private boolean existe_o_no(ArrayList<Integer> numeros_usados, Integer numero){
-        boolean existe = false;
-        for (int i = 0; i < numeros_usados.size(); i++) {
-            if(numeros_usados.get(i) == numero){ existe = true;}
-        }
-        return existe;
-    }
-    
+      
     private void resaltarLineaCodigo(Text[] etiquetasCodigo, int indiceLinea) {
         for (int i = 0; i < etiquetasCodigo.length; i++) {
             if (i == indiceLinea) {
-                etiquetasCodigo[i].setFill(Color.RED);
+                etiquetasCodigo[i].setFill(Color.BLACK);
             } else {
                 etiquetasCodigo[i].setFill(Color.BLACK);
             }
@@ -1904,8 +1980,7 @@ public class Ordenamientos {
         for(int i=0;i<caja.size();i++){ 
             arreglo.add(caja.get(i));
         }
-        
-        
+      
         Text[] etiquetasCodigo = {
         new Text(" Para i = 0 hasta n-1 hacer:"),
         new Text("     Para j = 0 hasta n-i-1 hacer:"),
@@ -2081,24 +2156,34 @@ public class Ordenamientos {
         return Anchor; 
     }
     
-    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo){
+    public AnchorPane PseudocodigoSeleccion(AnchorPane Anchor, ArrayList <Integer> arreglo, Rectangle pintalineas){
     
+    AnchorPane root = new AnchorPane();
+    root.getChildren().add(pintalineas);
+        
     Text[] etiquetasCodigo = {
-        new Text("1. Para i = 0 hasta n-1 hacer:"),
-        new Text("2.     Encontrar el índice del mínimo elemento en el subarreglo no ordenado"),
-        new Text("3.     Intercambiar el elemento mínimo con el elemento en la posición i"),
+        new Text("Para i = 0 hasta n-1 hacer:"),
+        new Text("   Encontrar el índice del mínimo elemento en el subarreglo no ordenado"),
+        new Text("   Intercambiar el elemento mínimo con el elemento en la posición i"),
     };
 
     Font font = new Font(15); // Crear un objeto Font con tamaño de fuente 18
     for (Text t : etiquetasCodigo) {
         t.setFont(font); // Establecer la fuente en cada instancia de Text
     }
+    
+
+    for (int i = 1; i <= 3; i++) {
+            etiquetasCodigo[i-1].setLayoutY(i*25);
+
+    }
 
     Text etiquetaArreglo = new Text(arreglo.toString());
+    etiquetaArreglo.setLayoutY(100);
 
-    VBox root = new VBox(10);
     root.getChildren().addAll(etiquetasCodigo);
     root.getChildren().add(etiquetaArreglo);
+    
 
     Task<Void> task = new Task<Void>() {
         @Override
@@ -2107,27 +2192,26 @@ public class Ordenamientos {
 
             for (int i = 0; i < n - 1; i++) {
                 int minIndex = i;
-
-                resaltarLineaCodigo(etiquetasCodigo, 1);
+                resaltarLineaCodigo(etiquetasCodigo,1);
                 Thread.sleep(TIEMPO_ESPERA);
-
+                
                 for (int j = i + 1; j < n; j++) {
                     if (arreglo.get(j) < arreglo.get(minIndex)) {
                         minIndex = j;
                     }
                 }
-
-                resaltarLineaCodigo(etiquetasCodigo, 2);
+                
+                resaltarLineaCodigo(etiquetasCodigo,2);
                 Thread.sleep(TIEMPO_ESPERA);
-
+                
                 if (minIndex != i) {
                     int temp = arreglo.get(i);
                     arreglo.set(i, arreglo.get(minIndex));
                     arreglo.set(minIndex, temp);
-
-                    resaltarLineaCodigo(etiquetasCodigo, 3);
+                    
+                    resaltarLineaCodigo(etiquetasCodigo,3);
                     Thread.sleep(TIEMPO_ESPERA);
-
+                    
                     etiquetaArreglo.setText(arreglo.toString());
                 }
             }
@@ -2155,16 +2239,15 @@ public class Ordenamientos {
 
     // Establecer el borde en el VBox
     root.setBorder(border);
-
+    root.setScaleX(1.5);
+    root.setScaleY(1.5);
     Anchor.getChildren().add(root);
     return Anchor;
     } 
     
     public void imprimeArreglo(ArrayList <Integer> arreglo){
         System.out.print("[ ");
-        for (int i = 0; i < arreglo.size(); i++) {
-            System.out.print(arreglo.get(i)+" "); 
-        }
+        for (int i = 0; i < arreglo.size(); i++) {System.out.print(arreglo.get(i)+" ");}
         System.out.println("]");
     }
 
